@@ -2,7 +2,7 @@ name: TV Channels Auto Scraper
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
+    - cron: '0 */12 * * *' # تحديث كل 12 ساعة
   workflow_dispatch:
 
 permissions:
@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,12 +20,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # تم إزالة سطر الـ cache لحل المشكلة
 
-      - name: Install NPM Dependencies
+      - name: Install Dependencies
         run: |
           npm init -y
-          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth axios cheerio sharp
+          npm install puppeteer-extra puppeteer-extra-plugin-stealth puppeteer axios sharp cheerio
 
       - name: Run Scraper
         run: node scraper.js
@@ -34,5 +35,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add channels.json image/*.jpg
-          git commit -m "Auto-update: Channels checked $(date)" || echo "No changes to commit"
+          git commit -m "Auto-update channels: $(date)" || echo "No changes to commit"
           git push
