@@ -8,15 +8,16 @@ const ffmpeg = require('fluent-ffmpeg');
 const IMAGE_DIR = './image';
 const JSON_FILE = 'channels.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
+const BASE_URL = 'http://www.azrotv.com';
 
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
 /**
- * فحص دفق الفيديو باستخدام ffprobe
+ * فحص دفق الفيديو باستخدام ffprobe مع مهلة زمنية قصيرة للسرعة
  */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
-        ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "5"], (err, metadata) => {
+        ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "3", "-timeout", "3000000"], (err, metadata) => {
             if (err) resolve(false);
             else {
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
@@ -27,37 +28,58 @@ async function verifyVideo(streamUrl) {
 }
 
 /**
- * استخراج رابط m3u8 المباشر
+ * استخراج رابط m3u8 من صفحة القناة مع دعم الـ iframes المتعددة
  */
 async function getStreamUrl(pageUrl) {
     try {
         const { data } = await axios.get(pageUrl, { 
-            timeout: 10000, 
-            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } 
+            timeout: 8000, 
+            headers: { 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)' } 
         });
 
         const $ = cheerio.load(data);
-        const scripts = $('script').text();
-        
-        // محاولة استخراج m3u8 من السكريبتات
-        const m3u8Match = scripts.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)/);
-        if (m3u8Match) return m3u8Match[1].replace(/\\/g, '');
+        let m3u8Links = [];
 
-        // البحث داخل iframe
-        const iframeSrc = $('iframe[src*="player"], iframe[src*="stream"], iframe#iframe').attr('src');
-        if (iframeSrc) {
-            const finalIframeUrl = iframeSrc.startsWith('//') ? 'https:' + iframeSrc : iframeSrc;
-            const iframeContent = await axios.get(finalIframeUrl, { timeout: 7000, headers: { 'User-Agent': 'Mozilla/5.0' } });
-            const m3u8InIframe = iframeContent.data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
-            if (m3u8InIframe) return m3u8InIframe[1].replace(/\\/g, '');
+        // 1. البحث عن روابط m3u8 مباشرة في السكريبتات
+        const scripts = $('script').text();
+        const m3u8Matches = scripts.match(/https?:\/\/[^"']+\.m3u8[^"']*/g);
+        if (m3u8Matches) m3u8Links.push(...m3u8Matches);
+
+        // 2. البحث داخل جميع الـ iframes الموجودة (لأنك قلت قد تجد سيرفرين)
+        const iframes = $('iframe').toArray();
+        for (const iframe of iframes) {
+            let src = $(iframe).attr('src');
+            if (src) {
+                // معالجة الروابط التي تبدأ بـ /
+                if (src.startsWith('/')) src = BASE_URL + src;
+                
+                // إذا كان الرابط يحتوي على id=http... (كما في مثالك)
+                if (src.includes('id=')) {
+                    const potentialUrl = src.split('id=')[1].split('&')[0];
+                    if (potentialUrl.includes('.m3u8')) m3u8Links.push(potentialUrl);
+                }
+
+                // محاولة جلب محتوى الـ iframe إذا لم نجد الرابط في العنوان
+                try {
+                    const iframeRes = await axios.get(src, { timeout: 5000, headers: { 'User-Agent': 'Mozilla/5.0' } });
+                    const innerMatches = iframeRes.data.match(/https?:\/\/[^"']+\.m3u8[^"']*/g);
+                    if (innerMatches) m3u8Links.push(...innerMatches);
+                } catch (e) {}
+            }
         }
+
+        // تنظيف الروابط وتكرارها
+        const uniqueLinks = [...new Set(m3u8Links)].map(l => l.replace(/\\/g, ''));
+        
+        // فحص الروابط المستخرجة واختيار أول واحد يعمل
+        for (const link of uniqueLinks) {
+            if (await verifyVideo(link)) return link;
+        }
+        
         return null;
     } catch { return null; }
 }
 
-/**
- * معالجة وحفظ الصورة محلياً
- */
 async function processImage(imgUrl, channelName) {
     if (!imgUrl) return "";
     try {
@@ -65,85 +87,86 @@ async function processImage(imgUrl, channelName) {
         const fileName = `${safeName}.jpg`;
         const filePath = path.join(IMAGE_DIR, fileName);
 
-        const response = await axios({ url: imgUrl, responseType: 'arraybuffer', timeout: 5000 });
+        let finalImgUrl = imgUrl.startsWith('..') ? imgUrl.replace('..', BASE_URL) : imgUrl;
+        if (finalImgUrl.startsWith('/')) finalImgUrl = BASE_URL + finalImgUrl;
+
+        const response = await axios({ url: finalImgUrl, responseType: 'arraybuffer', timeout: 5000 });
         await sharp(response.data)
             .resize(400, 225)
             .jpeg({ quality: 85 })
             .toFile(filePath);
 
         return `${GITHUB_RAW_BASE}image/${fileName}`;
-    } catch { 
-        return ""; 
-    }
+    } catch { return ""; }
 }
 
 async function startScraping() {
     const finalChannels = [];
     const currentTime = new Date().toLocaleString('ar-EG');
     
-    const sources = [
-        { url: 'https://play.arab-stream.live/', type: 'arab-stream' },
-        { url: 'https://www.qanwatlive.com/', type: 'qanwat-live' }
+    // قائمة الصفحات المطلوب كشطها من الموقع
+    const pages = [
+        'http://www.azrotv.com/iphone/arabic/',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_2.php',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_3.php',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_4.php',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_5.php',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_6.php',
+        'http://www.azrotv.com/iphone/arabic/mobi_arabic_7.php',
+        'http://www.azrotv.com/iphone/arabic/iraq.php',
+        'http://www.azrotv.com/iphone/arabic/tn.php'
     ];
 
-    for (const source of sources) {
-        console.log(`\n🌐 جاري الكشط من مصدر: ${source.url}`);
+    for (const pageUrl of pages) {
+        console.log(`\n🌐 جاري استخراج القنوات من: ${pageUrl}`);
         try {
-            const { data } = await axios.get(source.url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+            const { data } = await axios.get(pageUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
             const $ = cheerio.load(data);
-            let items = [];
+            
+            const items = [];
+            $('.BlockCha').each((i, el) => {
+                const linkTag = $(el).find('a.Azrotv-ChUrl');
+                const imgTag = $(el).find('img.oui9img');
+                
+                let pageLink = linkTag.attr('href');
+                if (pageLink && pageLink.startsWith('/')) pageLink = BASE_URL + pageLink;
 
-            if (source.type === 'arab-stream') {
-                $('.channel').each((i, el) => {
-                    items.push({
-                        name: $(el).find('span').text().trim(),
-                        page: $(el).find('a').attr('href'),
-                        img: $(el).find('img').attr('src'),
-                        cat: $(el).closest('.channels').prev('.section-title').text().trim() || "عام"
-                    });
+                items.push({
+                    name: imgTag.attr('alt') ? imgTag.attr('alt').replace(' بث مباشر', '').trim() : "قناة غير معروفة",
+                    page: pageLink,
+                    img: imgTag.attr('src'),
+                    cat: "عربي"
                 });
-            } else {
-                $('.card, .post-card').each((i, el) => {
-                    items.push({
-                        name: $(el).find('.name a').text().trim() || $(el).find('.name').text().trim(),
-                        page: $(el).find('a.post-link').attr('href') || $(el).find('a').attr('href'),
-                        img: $(el).find('img').attr('src'),
-                        cat: $(el).closest('.blog-section').find('.section-title').text().trim() || "بث مباشر"
-                    });
-                });
-            }
+            });
 
             for (const item of items) {
-                if (!item.page || !item.name) continue;
-                const fullPageUrl = item.page.startsWith('http') ? item.page : source.url.replace(/\/$/, '') + '/' + item.page.replace(/^\//, '');
+                if (!item.page) continue;
+                console.log(`🔍 فحص قناة: ${item.name}`);
                 
-                console.log(`🔍 فحص: ${item.name}`);
-                const streamUrl = await getStreamUrl(fullPageUrl);
+                const streamUrl = await getStreamUrl(item.page);
                 
-                if (streamUrl && await verifyVideo(streamUrl)) {
-                    console.log(`✅ شغال! جاري حفظ البيانات...`);
+                if (streamUrl) {
+                    console.log(`✅ تم العثور على سيرفر شغال!`);
                     const localImg = await processImage(item.img, item.name);
                     
                     finalChannels.push({
                         name: item.name,
                         category: item.cat,
                         url: streamUrl,
-                        server_url: fullPageUrl, // رابط السيرفر الأصلي (صفحة القناة)
+                        server_url: item.page,
                         local_img: localImg,
-                        original_img: item.img || "",
                         status: "online",
                         last_update: currentTime
                     });
                 } else {
-                    console.log(`❌ تخطي (رابط غير صالح)`);
+                    console.log(`❌ لا يوجد سيرفر متاح`);
                 }
             }
-        } catch (e) { console.log(`❌ خطأ في المصدر: ${e.message}`); }
+        } catch (e) { console.log(`❌ خطأ في الصفحة: ${e.message}`); }
     }
 
-    // حفظ الملف كـ Array مباشرة بدون Object خارجي
     fs.writeFileSync(JSON_FILE, JSON.stringify(finalChannels, null, 2));
-    console.log(`\n✨ تم الانتهاء! تم استخراج ${finalChannels.length} قناة بنجاح.`);
+    console.log(`\n✨ انتهى البحث! تم حفظ ${finalChannels.length} قناة.`);
 }
 
 startScraping();
