@@ -2,8 +2,8 @@ name: TV Channels Auto Scraper
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # يعمل تلقائياً كل 12 ساعة
-  workflow_dispatch: # زر التشغيل اليدوي من تبويب Actions
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,7 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,16 +19,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          cache: 'npm'
 
       - name: Install NPM Dependencies
         run: |
           npm init -y
-          npm install axios cheerio sharp fluent-ffmpeg
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth axios cheerio sharp
 
       - name: Run Scraper
         run: node scraper.js
@@ -39,5 +34,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add channels.json image/*.jpg
-          git commit -m "Auto-update: Channels check $(date)" || echo "No changes to commit"
+          git commit -m "Auto-update: Channels checked $(date)" || echo "No changes to commit"
           git push
