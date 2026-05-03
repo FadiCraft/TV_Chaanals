@@ -3,132 +3,82 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
-const ffmpeg = require('fluent-ffmpeg');
 
-// الإعدادات الأساسية
-const BASE_URL = 'https://play.arab-stream.live/';
-const IMAGE_DIR = './image';
-const JSON_FILE = 'channels.json';
-const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
+const BASE_URL = 'https://www.yallatv.online';
+const START_URL = 'https://www.yallatv.online/amp/';
+const IMG_DIR = './image';
 
-// إنشاء مجلد الصور إذا لم يكن موجوداً
-if (!fs.existsSync(IMAGE_DIR)) {
-    fs.mkdirSync(IMAGE_DIR, { recursive: true });
+// التأكد من وجود مجلد الصور
+if (!fs.existsSync(IMG_DIR)) {
+    fs.mkdirSync(IMG_DIR, { recursive: true });
 }
 
-/**
- * وظيفة فحص دفق الفيديو (Stream Check)
- * تستخدم ffprobe للتأكد من أن الرابط يرسل بيانات فيديو حقيقية
- */
-async function verifyVideo(streamUrl) {
-    return new Promise((resolve) => {
-        ffmpeg.ffprobe(streamUrl, (err, metadata) => {
-            if (err) {
-                resolve(false); // الرابط لا يعمل أو ليس رابط فيديو
-            } else {
-                // التأكد من وجود تراكم بيانات فيديو (Video Stream)
-                const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
-                resolve(hasVideo);
-            }
-        });
-    });
-}
-
-/**
- * استخراج رابط m3u8 المباشر من صفحة السيرفر
- */
-async function getStreamUrl(pageUrl) {
+async function scrape() {
     try {
-        const { data } = await axios.get(pageUrl, { 
-            timeout: 10000, 
-            headers: { 'User-Agent': 'Mozilla/5.0' } 
-        });
-        // البحث عن روابط m3u8 داخل كود الصفحة
-        const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
-        return match ? match[1] : null;
-    } catch {
-        return null;
-    }
-}
-
-/**
- * تحميل الصورة وتحويلها إلى JPG وحفظها محلياً
- */
-async function processImage(imgUrl, channelName) {
-    try {
-        const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
-        const fileName = `${safeName}.jpg`;
-        const filePath = path.join(IMAGE_DIR, fileName);
-
-        const response = await axios({ url: imgUrl, responseType: 'arraybuffer' });
-        await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
-
-        return `${GITHUB_RAW_BASE}image/${fileName}`;
-    } catch {
-        return imgUrl; // في حال الفشل نعود للرابط الأصلي
-    }
-}
-
-/**
- * السكريبت الأساسي
- */
-async function startScraping() {
-    try {
-        console.log('🚀 بدأت عملية الفحص والتحقق...');
-        const { data } = await axios.get(BASE_URL);
+        console.log('🚀 بدء عملية الفحص...');
+        const { data } = await axios.get(START_URL, { timeout: 10000 });
         const $ = cheerio.load(data);
-        const workingChannels = [];
+        
+        const channelsData = [];
+        const channels = $('.channels-grid a.channel');
 
-        const elements = $('.channel');
+        for (let i = 0; i < channels.length; i++) {
+            const el = channels[i];
+            const name = $(el).find('.channel-name').text().trim();
+            const relPath = $(el).attr('href');
+            const relImg = $(el).find('amp-img').attr('src') || $(el).find('img').attr('src');
 
-        for (let i = 0; i < elements.length; i++) {
-            const el = elements[i];
-            const name = $(el).find('span').text().trim();
-            const href = $(el).find('a').attr('href');
-            const img = $(el).find('img').attr('src');
+            if (!relPath) continue;
 
-            if (name && href) {
-                const fullPageUrl = href.startsWith('http') ? href : `https://play.arab-stream.live${href}`;
+            const channelPageUrl = new URL(relPath, BASE_URL).href;
+            const imageUrl = new URL(relImg, BASE_URL).href;
+            const imageName = `${path.basename(relImg, path.extname(relImg))}.jpg`;
+            const imagePath = path.join(IMG_DIR, imageName);
+
+            try {
+                // 1. جلب رابط البث المباشر من الصفحة الداخلية
+                const chResponse = await axios.get(channelPageUrl, { timeout: 10000 });
+                const $ch = cheerio.load(chResponse.data);
+                const iframeSrc = $ch('iframe.iframevideo').attr('src');
                 
-                console.log(`\n🔍 فحص القناة [${name}]...`);
-                const streamUrl = await getStreamUrl(fullPageUrl);
-
-                if (streamUrl) {
-                    console.log(`📡 وجدنا رابط بث، نختبر الفيديو الآن...`);
-                    const isLive = await verifyVideo(streamUrl);
-
-                    if (isLive) {
-                        console.log(`✅ فيديو شغال بنجاح!`);
-                        workingChannels.push({
-                            name,
-                            category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
-                            url: streamUrl,
-                            local_img: "", // سيتم تعبئته لاحقاً
-                            original_img: img,
-                            status: "online",
-                            last_update: new Date().toLocaleString('ar-EG')
-                        });
-                    } else {
-                        console.log(`⚠️ الرابط موجود ولكن الفيديو متوقف (OFFLINE)`);
-                    }
-                } else {
-                    console.log(`❌ لم نجد رابط m3u8 في هذه الصفحة.`);
+                if (!iframeSrc) {
+                    console.log(`⚠️ تخطي ${name}: لم يتم العثور على سيرفر.`);
+                    continue;
                 }
+
+                const directStreamUrl = new URL(iframeSrc, BASE_URL).href;
+
+                // 2. تحميل ومعالجة الصورة باستخدام Sharp (لتحسينها لتطبيقك)
+                const imgResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                await sharp(imgResponse.data)
+                    .resize(320, 180) // تغيير الحجم ليكون مناسباً لـ Android TV
+                    .jpeg({ quality: 80 })
+                    .toFile(imagePath);
+
+                channelsData.push({
+                    id: i + 1,
+                    name: name,
+                    image: `image/${imageName}`,
+                    stream_url: directStreamUrl,
+                    category: "MBC", // يمكنك استخراج القسم ديناميكياً إذا أردت
+                    updated_at: new Date().toISOString()
+                });
+
+                console.log(`✅ تم بنجاح: ${name}`);
+
+            } catch (err) {
+                console.error(`❌ خطأ في القناة ${name}:`, err.message);
             }
         }
 
-        console.log(`\n📸 جاري معالجة صور ${workingChannels.length} قناة...`);
-        for (let channel of workingChannels) {
-            channel.local_img = await processImage(channel.original_img, channel.name);
-        }
+        // 3. حفظ البيانات في ملف JSON
+        fs.writeFileSync('channels.json', JSON.stringify(channelsData, null, 4));
+        console.log(`\n🎉 اكتمل العمل! تم حفظ ${channelsData.length} قناة في channels.json`);
 
-        // حفظ ملف الـ JSON النهائي
-        fs.writeFileSync(JSON_FILE, JSON.stringify(workingChannels, null, 2), 'utf-8');
-        console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بالقنوات الشغالة فقط.`);
-
-    } catch (err) {
-        console.error('❌ خطأ فادح:', err.message);
+    } catch (error) {
+        console.error('🔴 خطأ فادح في السكريبت:', error.message);
+        process.exit(1);
     }
 }
 
-startScraping();
+scrape();
