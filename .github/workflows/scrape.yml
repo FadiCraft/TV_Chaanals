@@ -1,9 +1,12 @@
-name: Channel Scraper
+name: Update TV Channels Data
 
 on:
   schedule:
-    - cron: '0 0 * * *' # يعمل يومياً
-  workflow_dispatch: # يسمح لك بتشغيله يدوياً
+    - cron: '0 */12 * * *' # يعمل كل 12 ساعة تلقائياً
+  workflow_dispatch: # زر التشغيل اليدوي
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -11,12 +14,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20 # تم التحديث لحل مشكلة File is not defined
 
       - name: Install dependencies
         run: |
@@ -28,8 +31,8 @@ jobs:
 
       - name: Commit and Push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add channels.json image/*.jpg
-          git commit -m "Update channels data and images" || exit 0
+          git commit -m "Update: Channels list and images $(date)" || echo "No changes to commit"
           git push
