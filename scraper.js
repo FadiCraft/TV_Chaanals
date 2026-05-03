@@ -18,15 +18,13 @@ if (!fs.existsSync(IMAGE_DIR)) {
 
 /**
  * وظيفة فحص دفق الفيديو (Stream Check)
- * تستخدم ffprobe للتأكد من أن الرابط يرسل بيانات فيديو حقيقية
  */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
         ffmpeg.ffprobe(streamUrl, (err, metadata) => {
             if (err) {
-                resolve(false); // الرابط لا يعمل أو ليس رابط فيديو
+                resolve(false); 
             } else {
-                // التأكد من وجود تراكم بيانات فيديو (Video Stream)
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
                 resolve(hasVideo);
             }
@@ -35,7 +33,7 @@ async function verifyVideo(streamUrl) {
 }
 
 /**
- * استخراج رابط m3u8 المباشر من صفحة السيرفر
+ * استخراج رابط m3u8 المباشر
  */
 async function getStreamUrl(pageUrl) {
     try {
@@ -43,7 +41,6 @@ async function getStreamUrl(pageUrl) {
             timeout: 10000, 
             headers: { 'User-Agent': 'Mozilla/5.0' } 
         });
-        // البحث عن روابط m3u8 داخل كود الصفحة
         const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
         return match ? match[1] : null;
     } catch {
@@ -52,7 +49,7 @@ async function getStreamUrl(pageUrl) {
 }
 
 /**
- * تحميل الصورة وتحويلها إلى JPG وحفظها محلياً
+ * تحميل ومعالجة الصور
  */
 async function processImage(imgUrl, channelName) {
     try {
@@ -65,7 +62,7 @@ async function processImage(imgUrl, channelName) {
 
         return `${GITHUB_RAW_BASE}image/${fileName}`;
     } catch {
-        return imgUrl; // في حال الفشل نعود للرابط الأصلي
+        return imgUrl;
     }
 }
 
@@ -80,6 +77,7 @@ async function startScraping() {
         const workingChannels = [];
 
         const elements = $('.channel');
+        let currentId = 1; // عداد للـ ID
 
         for (let i = 0; i < elements.length; i++) {
             const el = elements[i];
@@ -90,7 +88,7 @@ async function startScraping() {
             if (name && href) {
                 const fullPageUrl = href.startsWith('http') ? href : `https://play.arab-stream.live${href}`;
                 
-                console.log(`\n🔍 فحص القناة [${name}]...`);
+                console.log(`\n🔍 [ID: ${currentId}] فحص القناة [${name}]...`);
                 const streamUrl = await getStreamUrl(fullPageUrl);
 
                 if (streamUrl) {
@@ -100,10 +98,11 @@ async function startScraping() {
                     if (isLive) {
                         console.log(`✅ فيديو شغال بنجاح!`);
                         workingChannels.push({
+                            id: currentId++, // إضافة الـ ID وزيادة العداد للمرة القادمة
                             name,
                             category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
                             url: streamUrl,
-                            local_img: "", // سيتم تعبئته لاحقاً
+                            local_img: "", 
                             original_img: img,
                             status: "online",
                             last_update: new Date().toLocaleString('ar-EG')
@@ -122,9 +121,8 @@ async function startScraping() {
             channel.local_img = await processImage(channel.original_img, channel.name);
         }
 
-        // حفظ ملف الـ JSON النهائي
         fs.writeFileSync(JSON_FILE, JSON.stringify(workingChannels, null, 2), 'utf-8');
-        console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بالقنوات الشغالة فقط.`);
+        console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بـ ${workingChannels.length} قناة شغالة.`);
 
     } catch (err) {
         console.error('❌ خطأ فادح:', err.message);
