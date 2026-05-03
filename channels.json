@@ -1,194 +1,258 @@
-[
+{
+  "total_channels": 28,
+  "last_update": "٣‏/٥‏/٢٠٢٦، ٥:٢٦:٥١ م",
+  "channels": [
     {
-        "id": 1,
-        "name": "قناة إم بي سي المغربية MBC 5 Cinq بث مباشر",
-        "logo": "image/ch_1777828268797.jpg",
-        "stream_url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/manifest/audio1/192kbps/audio.m3u8",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:09.026Z"
+      "id": 1,
+      "name": "الحياة دراما",
+      "category": "قنوات ترفيهية",
+      "url": "https://fastly.live.brightcove.com/1843521635140662966/eu-west-1/6057955906001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiZGd4MWQ4LmVncmVzcy5mZDJ2eHIiLCJhY2NvdW50X2lkIjoiNjA1Nzk1NTkwNjAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MDU3OTU1OTA2MDAxIl0sImp0aSI6IjE4NDM1MjE2MzUxNDA2NjI5NjYifQ.3f6Ek99wdZf_GSaWnd7hHgbJOSa2zbyqt2cUoxyTHzk/playlist-hls.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الحياة_دراما_1777828942073.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:22:22.793Z"
     },
     {
-        "id": 3,
-        "name": "قناة ام بي سي فور MBC 4 HD بث مباشر",
-        "logo": "image/ch_1777828274115.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=oQgVpgFif8e3StqPnfFX3U4HSZ0gfXsGcbTaJbe4lHPTa6yLT-By8J4DjqFOQWP4Rb6x9eMm-ZHv1-B3CpBYmdeJP0trzI3yaRAMZ-imq9jTDA6QWnFgzZEU6TcMd4vf5NicXvEjGmnloADojSeM8IkAMwxgv_HoK1vbUYr2hPSg27fYxmamK6wIId5ZJWsWTO_RcF7poTpKsCf9MsYSVP3JhuDzE3zevOcJGz0Y5osnTgXBsEuCkeQI7g5NjShJ5VhBTMFwv3M6kv4tn85veq8g6Q&anchor-ms=20000&execute-ms=30000&cb=wx2d19jg6zim",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:14.267Z"
+      "id": 2,
+      "name": "MBC 1",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_1_1777828961696.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:22:42.152Z"
     },
     {
-        "id": 4,
-        "name": "قناة ام بي سي العراق MBC IRAQ بث مباشر",
-        "logo": "image/ch_1777828275846.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=xWP-3SKmeNC-tS1WqBQ3LnWJ4E1zJNXvI3o_1Pp2QmTDjvG4Gc9bABZd71VcHa2bN6Ahm4tdIIYBe92W2pEnmKmQP-jAThWYlCicTi3_KnAkb6okllhAFPHx9k0fZ6shgdumfOXo_JuYwBQjUAyCDsyjLjeVdxygvTQdDKhLiBGbEqCXyRUjrjLGXt5aZ7P5_E7QtzK2BxtSOTTLo41dzh_I2uI2KlwyTEiyrrRHp0__Q8M7MDDFT0B0Nap0VX7FRm43e9IbA9Ln7243XLbjbjuF0Q&anchor-ms=20000&execute-ms=30000&cb=p8r9coui9qwz",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:15.932Z"
+      "id": 3,
+      "name": "MBC 3",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_3_1777828970091.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:22:50.615Z"
     },
     {
-        "id": 5,
-        "name": "قناة إم بي سي دراما MBC Drama بث مباشر",
-        "logo": "image/ch_1777828277640.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=AxFFgEuihgy7QAwtDGQzIVtfRQgcG9Hdkg0Np3RilkmNAO4G2y0IY0FXIsVu5r4Qrir-wdM5_mLiylflsgLKisG8wXtYP-5wgcX_CIRyy6ql7RBBkwcHr7lBfsStbI5xoI9gk1TXTsqB9_I5fJBLs_gK3Rz-v5zK5UzcPlHQChccs6ZM8nwISqKep-m_PciCCYWfDwYg5l0Z4BeTsfZwY3LyOnbibEIZ3DOUrnKMfXcUUTXSbkj5KcVr0gZo95F2MivW4nXx-vmua03gUtX3agZQGQ&anchor-ms=20000&execute-ms=30000&cb=bl7wfwxwiwj3",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:17.815Z"
+      "id": 4,
+      "name": "MBC 4",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_4_1777828976284.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:22:56.793Z"
     },
     {
-        "id": 6,
-        "name": "قناة إم بي سي ماكس MBC Max HD بث مباشر",
-        "logo": "image/ch_1777828279605.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=v7xX4R2fsa05-_8j9n_KH_V6SNWCMGYKFvMFuHq25Ci-_NYzRy3VMxC0CcUBP-YrQE-VGvEG6TyUbur6Kim8EfDM16ZZiVRuXq58IRynDrFxhGn4oEM0wMaCzxc0AhUKNArpr3k-wYhc8PVjAqDJ5P_NBO3IKsiilCVW9TdU_mqhBIb6CK4VWjw4Pc0Y9psz2tSXBroLMpBXHJ_6Ymt_iLl6otgyrHDNQQZmNDHn_aUe9kDst8qJ08Xc1ozdw2TFZd3HhUqmss6eds7cRHk0qAq_jA&anchor-ms=20000&execute-ms=30000&cb=23ke9trnhqlr",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:19.698Z"
+      "id": 5,
+      "name": "MBC 5",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_5_1777828983140.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:03.735Z"
     },
     {
-        "id": 7,
-        "name": "قناة إم بي سي أكشن MBC Action HD بث مباشر",
-        "logo": "image/ch_1777828281308.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=5KH0dpHkGIILfnpV2HVpMg_l8G0dBUVdl3ZRw4Vppo6HIOrzDxkl32X_eMmN3gRIiEipArSANZjEs54DpGiZhdU9ShjD1ynZLMOV39GZM4PHvzHopOm-nGJXSEbprcjC0RuwHt55AaRBXpoX6Bh2kdQVWInjKoP4mxvo64x39cz8qhkS6VFrQTH869HFpnugrEnL2_xoC5oF4ayKTs_usySiqBtokU0lwJMDkNcG7EKM0OyAkgPjEuYMctu8rxnsyRTPpZbdFVvomaOeimC-0Vi9lQ&anchor-ms=20000&execute-ms=30000&cb=xacd3aihybzn",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:21.395Z"
+      "id": 6,
+      "name": "MBC-Bollywood",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_bollywood_1777828989360.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:09.892Z"
     },
     {
-        "id": 8,
-        "name": "قناة ام بي سي بوليوود MBC Bollywood بث مباشر",
-        "logo": "image/ch_1777828283034.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=bK-RNQ4iM-qhZru7qbNWpubZnAoClSnBOQ_JXkkwlOY9KeFmB_7S5On9hpVHgneMgQOOwTQdC8HBkuADX6SNm0MSurgu3u1j_UTbP3eJp9BQMz3_L6fsfwQ8MsJ1y5PQS3jIof57DbHWJML_02vPPZtqQ4U8ura70YYpQP7BvEw8AeeaolUfUvurxhu7IlulQr8vOV6nTFFFXk41hjNqkOqfFEEsl3w8vLdUEREPcft4zOUqmB1O8R9e2lnxEisHj8SCbgRTnQomJsAsOTnIQRXdqQ&anchor-ms=20000&execute-ms=30000&cb=3dp4j7h0ymvt",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:23.307Z"
+      "id": 7,
+      "name": "MBC masr",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_masr_1777828996633.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:17.185Z"
     },
     {
-        "id": 9,
-        "name": "قناة إم بي سي تو MBC 2 TV بث مباشر",
-        "logo": "image/ch_1777828285024.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=F-rNV1If3H4wrdnp6LbMPlxMAdtqqkQ-Nb51jhxipL4bV_7D9r9OdqbclDb5Bued9HpAoIxhXEtH8wi6FRiOrglVx7JTtlebt5wzaW6UyV3x777JQer56dILwLsziYCAL0koEGXCteZqNX9kqfqpq5R2CSOaeu_y1s_oxIQKo85pl-0BCLDJfaby_tRghak5Gx5RoR2ygE33PRNaQFrW2apPJj8NZU6ppKOFE9-3ApZH3Ruw78WlK5vRJJzfKUiUSjB4qC4XQEnd4LvsKpKod7_X8A&anchor-ms=20000&execute-ms=30000&cb=j1bu9esore54",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:25.105Z"
+      "id": 8,
+      "name": "MBC masr 2",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-2/754931856515075b0aabf0e583495c68/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_masr_2_1777829004660.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:25.218Z"
     },
     {
-        "id": 10,
-        "name": "قناة إم بي سي الأولى MBC 1 بث مباشر",
-        "logo": "image/ch_1777828286786.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=LeaX5LjGri2-vfnxHtojRNBECIgm83pcjzsCnEdYxZLbAKyJtbLHohNwq4hQ8OXtgFbBNnXKQN-L9So0WZwBO9fvqB-7QEy87kzzZCnP72KT4YvHczw7k4q-n8vyL8dIcLM14Qw9p4PGlIg0xoUMSF9XbTd0SAQJ5x-nYFbcOh_9V9JDH5svL8Z2rD4IASYWWJtdpOe3FZ8ohGIUD5ZtUoOLTGMEYxdg1Khufy1ELO5PAIEY-ru2MIlwW2dL2XeoOoNrqJwZgS705EmmlOZtUE1mXA&anchor-ms=20000&execute-ms=30000&cb=4lzu0fib4w8v",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:26.868Z"
+      "id": 9,
+      "name": "MBC drama",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_drama_1777829019974.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:40.630Z"
     },
     {
-        "id": 11,
-        "name": "قناة إم بي سي مصر دراما MBC Masr Drama بث مباشر",
-        "logo": "image/ch_1777828288515.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=aqcmG9mxSk6lAX7c_m7KrPbLzEFF5ETnfdkfOG7tC3aDPJ2dAXGC3CoehsOhxMWrKrIaB2BlkBqOeTwN1y-mx90OvDeiHXkZ1BjVHDi1Rcn5jbqT6bGVQQBdMlqUnJs4WXHU4a2EWRRdOQXMBzVjrkw6UA-N3rpUS4wDsvbaMUsnpvx1lxBGsKoeYYCX3Xft4hH40bhSrr_ZZOybZqfSNb2P7jKVNzMochF97WSe9hHuo8Ohh93ORKFovZo6b95qsCTRyqn1O27kQnlpDv1jqspeIA&anchor-ms=20000&execute-ms=30000&cb=qgtcokhqrtxy",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:28.655Z"
+      "id": 10,
+      "name": "MBC drama plus",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_drama_plus_1777829026765.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:23:47.281Z"
     },
     {
-        "id": 12,
-        "name": "قناة إم بي سي مصر الثانية MBC Masr 2 بث مباشر",
-        "logo": "image/ch_1777828290406.jpg",
-        "stream_url": "https://www.google.com/recaptcha/enterprise/anchor?ar=1&k=6LfwuyUTAAAAAOAmoS0fdqijC2PbbdH4kjq62Y1b&co=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbTo0NDM.&hl=en&v=gTpTIWhbKpxADzTzkcabhXN4&size=normal&s=pfBTGXsS7gXgH5RI8xGUhZkyHMk9z274LZ3_nHeQNzgg0JDuD6DV_a0w8sejlQU6tnsU69rUh6Ap-r1jkD-01CUBQ_SDjs4OU055ehXKu78lF5TkgyP6DokKsXXwTO1m5lbpFepajPqdo6uTpJN1mqGB8kRuNWWPwRP8KYp58xJkErXpNE0T-A2Vrjlc6NMk3KF152wskhHPGcNE-FliBz3CukpfiNkKzvYbt98av9AJP_lTKrnrabyP6D0NROxZ7K5PInKlY0ujNIls2m_sCbU1Wg&anchor-ms=20000&execute-ms=30000&cb=vng2u2jn0bbc",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:30.497Z"
+      "id": 11,
+      "name": "MBC masr drama",
+      "category": "قنوات mbc",
+      "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_masr_drama_1777829043663.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:04.276Z"
     },
     {
-        "id": 13,
-        "name": "قناة ام بي سي مصر MBC Masr HD بث مباشر",
-        "logo": "image/ch_1777828293454.jpg",
-        "stream_url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/manifest/audio1/192kbps/audio.m3u8",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:33.531Z"
+      "id": 12,
+      "name": "روتانا كيدز",
+      "category": "قنوات روتانا",
+      "url": "https://cdn1.iptvcdn.tv/mcnc/ROTANA_KIDS/playlist.m3u8?token=demo",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روتانا_كيدز_1777829049987.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:10.548Z"
     },
     {
-        "id": 14,
-        "name": "قناة روتانا كيدز Rotana Kids بث مباشر",
-        "logo": "image/ch_1777828296159.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_86.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:36.252Z"
+      "id": 13,
+      "name": "MBC 3",
+      "category": "قنوات الأطفال",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mbc_3_1777829057636.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:17.908Z"
     },
     {
-        "id": 15,
-        "name": "قناة روتانا دراما Rotana Drama بث مباشر",
-        "logo": "image/ch_1777828298709.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_80.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:38.799Z"
+      "id": 14,
+      "name": "رؤيا كيدز",
+      "category": "قنوات الأطفال",
+      "url": "https://playlist.fasttvcdn.com/pl/ptllxjd03j6g9oxxjdfapg/roya-kids/playlist.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رؤيا_كيدز_1777829067759.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:28.310Z"
     },
     {
-        "id": 16,
-        "name": "قناة روتانا كلاسيك Rotana Classic بث مباشر",
-        "logo": "image/ch_1777828301240.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_52.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:41.314Z"
+      "id": 15,
+      "name": "الكأس",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_1777829075703.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:36.399Z"
     },
     {
-        "id": 17,
-        "name": "قناة روتانا كوميدي Rotana Comedy بث مباشر",
-        "logo": "image/ch_1777828303767.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_25.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:43.859Z"
+      "id": 16,
+      "name": "الكأس 2",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_2_1777829086295.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:46.867Z"
     },
     {
-        "id": 18,
-        "name": "قناة روتانا خليجية Rotana Khalejia بث مباشر",
-        "logo": "image/ch_1777828306311.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_73.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:11:46.493Z"
+      "id": 17,
+      "name": "الكأس 3",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass3-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_3_1777829097255.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:24:57.979Z"
     },
     {
-        "id": 23,
-        "name": "قنوات السعودية الرياضية KSA Sports بث مباشر",
-        "logo": "image/ch_1777828324599.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/1_20.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:04.703Z"
+      "id": 18,
+      "name": "الكأس 4",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_4_1777829107405.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:07.931Z"
     },
     {
-        "id": 25,
-        "name": "قنوات أبو ظبي الرياضية Abu Dhabi Sports بث مباشر",
-        "logo": "image/ch_1777828329946.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/1_37.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:10.048Z"
+      "id": 19,
+      "name": "الكأس 5",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass5-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_5_1777829116107.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:16.730Z"
     },
     {
-        "id": 26,
-        "name": "قنوات إس إس سي SSC Sports بث مباشر لجميع الأجهزة",
-        "logo": "image/ch_1777828332863.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_49.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:12.953Z"
+      "id": 20,
+      "name": "الكأس 6",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass6-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_6_1777829126309.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:26.898Z"
     },
     {
-        "id": 31,
-        "name": "قناة كرتون نتورك بالعربية CN Arabic بث مباشر",
-        "logo": "image/ch_1777828345530.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:25.613Z"
+      "id": 21,
+      "name": "الكأس 7",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/alkass7-p/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الكأس_7_1777829137258.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:37.829Z"
     },
     {
-        "id": 32,
-        "name": "قناة ماجد للأطفال Majid Kids بث مباشر",
-        "logo": "image/ch_1777828348042.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/06/blog-post_1.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:28.124Z"
+      "id": 22,
+      "name": "شوف الكأس 1",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/شوف_الكأس_1_1777829148555.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:49.126Z"
     },
     {
-        "id": 33,
-        "name": "قناة سبيستون Spacetoon بث مباشر",
-        "logo": "image/ch_1777828350911.jpg",
-        "stream_url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-spacetoon/d8382fb9ab4b2307058f12c7ea90db54/manifest/audio1/192kbps/audio.m3u8",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:31.059Z"
+      "id": 23,
+      "name": "شوف الكأس 2",
+      "category": "قنوات الكأس",
+      "url": "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/شوف_الكأس_2_1777829158678.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:25:59.402Z"
     },
     {
-        "id": 34,
-        "name": "قناة روتانا كيدز Rotana Kids بث مباشر",
-        "logo": "image/ch_1777828353541.jpg",
-        "stream_url": "https://tv.qanwatlive.com/2025/03/blog-post_86.html",
-        "status": "Online",
-        "last_check": "2026-05-03T17:12:33.621Z"
+      "id": 24,
+      "name": "الاردن الرياضية",
+      "category": "قنوات رياضية",
+      "url": "https://playlist.fasttvcdn.com/pl/a2le4pbpa6rpzv147haf4w/youth-jordan/playlist.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الاردن_الرياضية_1777829169741.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:26:10.332Z"
+    },
+    {
+      "id": 25,
+      "name": "الشرق الوثائقية",
+      "category": "قنوات وثائقية",
+      "url": "https://svs.itworkscdn.net/asharqdocumentarylive/asharqdocumentary.smil/playlist_dvr.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الشرق_الوثائقية_1777829179789.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:26:20.381Z"
+    },
+    {
+      "id": 26,
+      "name": "الشرق ديسكفرى",
+      "category": "قنوات وثائقية",
+      "url": "https://svs.itworkscdn.net/asharqdiscoverylive/asharqd.smil/playlist_dvr.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الشرق_ديسكفرى_1777829189745.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:26:30.387Z"
+    },
+    {
+      "id": 27,
+      "name": "عمان الثقافية",
+      "category": "قنوات وثائقية",
+      "url": "https://partwota.cdn.mgmlcdn.com/omcultural/smil:omcultural.stream.smil/chunklist.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/عمان_الثقافية_1777829199601.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:26:40.131Z"
+    },
+    {
+      "id": 28,
+      "name": "العربي الوثاتقية",
+      "category": "قنوات وثائقية",
+      "url": "https://kwtktvata.cdn.mangomolo.com/ktva/smil:tktva.stream.smil/index.m3u8",
+      "image": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/العربي_الوثاتقية_1777829210176.jpg",
+      "source": "arab-stream",
+      "updated_at": "2026-05-03T17:26:50.738Z"
     }
-]
+  ]
+}
