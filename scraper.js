@@ -1,97 +1,116 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const sharp = require('sharp');
+
+// تفعيل إضافة التخفي لتجاوز حماية Cloudflare
+puppeteer.use(StealthPlugin());
 
 const BASE_URL = 'https://www.yallatv.online';
 const START_URL = 'https://www.yallatv.online/amp/';
 const IMG_DIR = './image';
 
-// إعداد الترويسات لمحاكاة متصفح حقيقي
-const axiosConfig = {
-    headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Language': 'ar,en-US;q=0.7,en;q=0.3',
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Referer': 'https://www.google.com/'
-    },
-    timeout: 15000
-};
-
-if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
+// إنشاء مجلد الصور إذا لم يكن موجوداً
+if (!fs.existsSync(IMG_DIR)) {
+    fs.mkdirSync(IMG_DIR, { recursive: true });
+}
 
 async function scrape() {
+    console.log('🚀 بدء تشغيل المتصفح وتجاوز الحماية...');
+    
+    const browser = await puppeteer.launch({
+        headless: "new",
+        args: [
+            '--no-sandbox', 
+            '--disable-setuid-sandbox',
+            '--disable-blink-features=AutomationControlled'
+        ]
+    });
+
     try {
-        console.log('🚀 محاولة الاتصال بالموقع مع محاكاة متصفح...');
-        
-        // استخدام axiosConfig في كل طلب
-        const { data } = await axios.get(START_URL, axiosConfig);
-        const $ = cheerio.load(data);
-        
-        const channelsData = [];
-        const channels = $('.channels-grid a.channel');
+        const page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+
+        // 1. الدخول لصفحة AMP الرئيسية
+        console.log('🌐 جاري الدخول إلى صفحة AMP...');
+        await page.goto(START_URL, { waitUntil: 'networkidle2', timeout: 60000 });
+
+        // استخراج بيانات القنوات (الاسم، رابط الصفحة، رابط الصورة)
+        const channels = await page.evaluate((base) => {
+            const grid = document.querySelectorAll('.channels-grid a.channel');
+            return Array.from(grid).map(link => ({
+                name: link.querySelector('.channel-name')?.innerText.trim(),
+                pageUrl: new URL(link.getAttribute('href'), base).href,
+                rawImg: link.querySelector('amp-img')?.getAttribute('src') || link.querySelector('img')?.getAttribute('src')
+            }));
+        }, BASE_URL);
+
+        console.log(`[+] تم العثور على ${channels.length} قناة. جاري استخراج السيرفرات...`);
+
+        const finalResults = [];
 
         for (let i = 0; i < channels.length; i++) {
-            const el = channels[i];
-            const name = $(el).find('.channel-name').text().trim();
-            const relPath = $(el).attr('href');
-            const relImg = $(el).find('amp-img').attr('src') || $(el).find('img').attr('src');
-
-            if (!relPath) continue;
-
-            const channelPageUrl = new URL(relPath, BASE_URL).href;
-            const imageUrl = new URL(relImg, BASE_URL).href;
-            const imageName = `${path.basename(relImg, path.extname(relImg))}.jpg`;
-            const imagePath = path.join(IMG_DIR, imageName);
+            const ch = channels[i];
+            if (!ch.pageUrl || !ch.name) continue;
 
             try {
-                // جلب صفحة القناة مع الترويسات
-                const chResponse = await axios.get(channelPageUrl, axiosConfig);
-                const $ch = cheerio.load(chResponse.data);
-                const iframeSrc = $ch('iframe.iframevideo').attr('src');
+                // الانتقال لصفحة القناة الداخلية
+                await page.goto(ch.pageUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
                 
-                if (!iframeSrc) continue;
-
-                const directStreamUrl = new URL(iframeSrc, BASE_URL).href;
-
-                // تحميل الصورة
-                const imgResponse = await axios.get(imageUrl, { ...axiosConfig, responseType: 'arraybuffer' });
-                await sharp(imgResponse.data)
-                    .resize(320, 180)
-                    .jpeg({ quality: 80 })
-                    .toFile(imagePath);
-
-                channelsData.push({
-                    id: i + 1,
-                    name: name,
-                    image: `image/${imageName}`,
-                    stream_url: directStreamUrl,
-                    updated_at: new Date().toISOString()
+                // استخراج رابط iframe البث
+                const iframeSrc = await page.evaluate(() => {
+                    const frame = document.querySelector('iframe.iframevideo');
+                    return frame ? frame.getAttribute('src') : null;
                 });
 
-                console.log(`✅ تم جلب: ${name}`);
+                if (iframeSrc) {
+                    const directUrl = new URL(iframeSrc, BASE_URL).href;
+                    const imageName = `${path.basename(ch.rawImg, path.extname(ch.rawImg))}.jpg`;
+                    const imagePath = path.join(IMG_DIR, imageName);
 
-                // إضافة تأخير بسيط (Delay) لتجنب الحظر أثناء التنقل بين الصفحات
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                    // تحميل ومعالجة الصورة باستخدام Sharp
+                    if (ch.rawImg) {
+                        try {
+                            const fullImgUrl = new URL(ch.rawImg, BASE_URL).href;
+                            const imgRes = await axios.get(fullImgUrl, { responseType: 'arraybuffer' });
+                            await sharp(imgRes.data)
+                                .resize(320, 180)
+                                .jpeg({ quality: 85 })
+                                .toFile(imagePath);
+                        } catch (imgErr) {
+                            console.log(`⚠️ فشل تحميل صورة: ${ch.name}`);
+                        }
+                    }
+
+                    finalResults.push({
+                        id: i + 1,
+                        name: ch.name,
+                        image: `image/${imageName}`,
+                        stream_url: directUrl,
+                        updated_at: new Date().toISOString()
+                    });
+
+                    console.log(`✅ تم استخراج: ${ch.name}`);
+                }
+
+                // تأخير بسيط لتجنب كشف البوت
+                await new Promise(r => setTimeout(r, 1500));
 
             } catch (err) {
-                console.error(`❌ خطأ في ${name}: status ${err.response?.status || err.message}`);
+                console.error(`❌ خطأ في ${ch.name}: ${err.message}`);
             }
         }
 
-        fs.writeFileSync('channels.json', JSON.stringify(channelsData, null, 4));
-        console.log(`🎉 تم تحديث البيانات بنجاح.`);
+        // حفظ النتائج النهائية في ملف JSON
+        fs.writeFileSync('channels.json', JSON.stringify(finalResults, null, 4));
+        console.log(`\n🎉 اكتمل العمل! تم تحديث ${finalResults.length} قناة.`);
 
     } catch (error) {
-        if (error.response?.status === 403) {
-            console.error('🔴 الموقع لا يزال يحظر الطلب (403). قد يحتاج إلى Cloudflare Solver أو Puppeteer.');
-        } else {
-            console.error('🔴 خطأ فادح:', error.message);
-        }
-        process.exit(1);
+        console.error('🔴 خطأ فادح أثناء التشغيل:', error.message);
+    } finally {
+        await browser.close();
     }
 }
 
