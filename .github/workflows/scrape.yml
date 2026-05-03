@@ -1,9 +1,9 @@
-name: Update TV Channels Data
+name: TV Channels Auto Scraper
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # يعمل كل 12 ساعة تلقائياً
-  workflow_dispatch: # زر التشغيل اليدوي
+    - cron: '0 */12 * * *' # يعمل تلقائياً كل 12 ساعة
+  workflow_dispatch: # زر التشغيل اليدوي من تبويب Actions
 
 permissions:
   contents: write
@@ -19,12 +19,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # تم التحديث لحل مشكلة File is not defined
+          node-version: 20
 
-      - name: Install dependencies
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install NPM Dependencies
         run: |
           npm init -y
-          npm install axios cheerio sharp
+          npm install axios cheerio sharp fluent-ffmpeg
 
       - name: Run Scraper
         run: node scraper.js
@@ -34,5 +39,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add channels.json image/*.jpg
-          git commit -m "Update: Channels list and images $(date)" || echo "No changes to commit"
+          git commit -m "Auto-update: Channels check $(date)" || echo "No changes to commit"
           git push
