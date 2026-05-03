@@ -7,18 +7,29 @@ const sharp = require('sharp');
 const URL = 'https://play.arab-stream.live/';
 const IMAGE_DIR = './image';
 const JSON_FILE = 'channels.json';
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
-// التأكد من وجود مجلد الصور
 if (!fs.existsSync(IMAGE_DIR)) {
     fs.mkdirSync(IMAGE_DIR, { recursive: true });
 }
 
 /**
- * وظيفة تحميل الصورة وتحويلها إلى JPG
+ * فحص الرابط للتأكد من أنه يعمل
+ */
+async function isUrlWorking(url) {
+    try {
+        const response = await axios.get(url, { timeout: 5000, headers: { 'User-Agent': 'Mozilla/5.0' } });
+        return response.status === 200;
+    } catch (error) {
+        return false;
+    }
+}
+
+/**
+ * تحميل وتحويل الصورة والحصول على رابط GitHub الكامل
  */
 async function downloadAndConvertImage(imgUrl, channelName) {
     try {
-        // تنظيف اسم القناة لاستخدامه كاسم ملف
         const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
         const fileName = `${safeName}.jpg`;
         const filePath = path.join(IMAGE_DIR, fileName);
@@ -26,70 +37,72 @@ async function downloadAndConvertImage(imgUrl, channelName) {
         const response = await axios({
             url: imgUrl,
             responseType: 'arraybuffer',
-            timeout: 10000,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
+            timeout: 10000
         });
 
-        await sharp(response.data)
-            .jpeg({ quality: 85 })
-            .toFile(filePath);
+        await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
 
-        return `./image/${fileName}`;
+        // إرجاع الرابط الكامل على GitHub
+        return `${GITHUB_RAW_BASE}image/${fileName}`;
     } catch (error) {
-        console.error(`❌ فشل معالجة صورة [${channelName}]:`, error.message);
-        return imgUrl; // العودة للرابط الأصلي في حال الفشل
+        console.error(`❌ فشل معالجة صورة [${channelName}]`);
+        return imgUrl; 
     }
 }
 
-/**
- * الوظيفة الأساسية للكشط
- */
 async function scrapeChannels() {
     try {
-        console.log('🚀 جاري بدء عملية الكشط...');
+        console.log('🚀 بدء العمل...');
         const { data } = await axios.get(URL);
         const $ = cheerio.load(data);
         const results = [];
 
-        // استخراج البيانات بناءً على هيكل الموقع
-        $('.section-title').each((i, section) => {
-            const categoryName = $(section).text().trim();
-            const channelsContainer = $(section).next('.channels');
+        const sections = $('.section-title');
 
-            channelsContainer.find('.channel').each((j, el) => {
+        for (let i = 0; i < sections.length; i++) {
+            const categoryName = $(sections[i]).text().trim();
+            const channels = $(sections[i]).next('.channels').find('.channel');
+
+            for (let j = 0; j < channels.length; j++) {
+                const el = channels[j];
                 const name = $(el).find('span').text().trim();
-                const link = $(el).find('a').attr('href');
+                let link = $(el).find('a').attr('href');
                 const imgUrl = $(el).find('img').attr('src');
 
                 if (name && link) {
-                    results.push({
-                        category: categoryName,
-                        name: name,
-                        url: link.startsWith('http') ? link : `https://play.arab-stream.live${link}`,
-                        original_img: imgUrl
-                    });
+                    const fullLink = link.startsWith('http') ? link : `https://play.arab-stream.live${link}`;
+                    
+                    console.log(`🔍 فحص القناة: ${name}`);
+                    const working = await isUrlWorking(fullLink);
+
+                    if (working) {
+                        results.push({
+                            category: categoryName,
+                            name: name,
+                            url: fullLink,
+                            status: "working",
+                            original_img: imgUrl
+                        });
+                    } else {
+                        console.log(`⚠️ تخطي القناة (الرابط لا يعمل): ${name}`);
+                    }
                 }
-            });
-        });
+            }
+        }
 
-        console.log(`✅ تم العثور على ${results.length} قناة. جاري معالجة الصور الآن...`);
+        console.log(`✅ تم إيجاد ${results.length} قناة تعمل. جاري معالجة الصور...`);
 
-        // معالجة الصور بالتتابع لتجنب استهلاك الذاكرة العالي
         for (let channel of results) {
             if (channel.original_img) {
                 channel.local_img = await downloadAndConvertImage(channel.original_img, channel.name);
             }
         }
 
-        // حفظ ملف JSON النهائي
         fs.writeFileSync(JSON_FILE, JSON.stringify(results, null, 2), 'utf-8');
-        console.log(`\n✨ انتهى العمل! تم حفظ البيانات في ${JSON_FILE}`);
+        console.log(`✨ تم التحديث بنجاح!`);
 
     } catch (error) {
-        console.error('❌ خطأ فادح في السكريبت:', error.message);
-        process.exit(1);
+        console.error('❌ خطأ:', error.message);
     }
 }
 
