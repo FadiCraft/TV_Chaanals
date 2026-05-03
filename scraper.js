@@ -5,26 +5,22 @@ const path = require('path');
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
-// الإعدادات الأساسية
+// الإعدادات الموحدة
 const IMAGE_DIR = './image';
-const JSON_FILE = 'all_channels.json'; // ملف واحد للجميع
+const JSON_FILE = 'channels.json'; // الملف النهائي الموحد
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
-// إنشاء مجلد الصور إذا لم يكن موجوداً
-if (!fs.existsSync(IMAGE_DIR)) {
-    fs.mkdirSync(IMAGE_DIR, { recursive: true });
-}
+if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
 /**
- * وظيفة فحص دفق الفيديو (Stream Check)
+ * فحص دفق الفيديو باستخدام ffprobe
  */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
         ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "5"], (err, metadata) => {
-            if (err) {
-                resolve(false);
-            } else {
-                const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
+            if (err) resolve(false);
+            else {
+                const hasVideo = metadata.streams && metadata.streams.some(s => s.codec_type === 'video');
                 resolve(hasVideo);
             }
         });
@@ -32,39 +28,21 @@ async function verifyVideo(streamUrl) {
 }
 
 /**
- * استخراج رابط m3u8 من صفحة Arab-Stream
+ * استخراج رابط m3u8 من صفحات المواقع المختلفة
  */
-async function getStreamUrlArabStream(pageUrl) {
-    try {
-        const { data } = await axios.get(pageUrl, { 
-            timeout: 10000, 
-            headers: { 'User-Agent': 'Mozilla/5.0' } 
-        });
-        const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
-        return match ? match[1] : null;
-    } catch {
-        return null;
-    }
-}
-
-/**
- * استخراج رابط m3u8 من صفحة Qanwat-Live
- */
-async function getStreamUrlQanwatLive(pageUrl) {
+async function getStreamUrl(pageUrl) {
     try {
         const { data } = await axios.get(pageUrl, { 
             timeout: 10000, 
             headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } 
         });
 
-        const $ = cheerio.load(data);
-        const scripts = $('script').text();
-        
-        // محاولة استخراج m3u8 من السكريبتات
-        const m3u8Match = scripts.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)/);
+        // البحث عن روابط m3u8 مباشرة في النص أو السكريبتات
+        const m3u8Match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)/);
         if (m3u8Match) return m3u8Match[1].replace(/\\/g, '');
 
-        // البحث داخل iframe
+        // البحث داخل iframe (خاص بموقع قنوات لايف)
+        const $ = cheerio.load(data);
         const iframeSrc = $('iframe[src*="player"], iframe[src*="stream"], iframe#iframe').attr('src');
         if (iframeSrc) {
             const finalIframeUrl = iframeSrc.startsWith('//') ? 'https:' + iframeSrc : iframeSrc;
@@ -77,7 +55,7 @@ async function getStreamUrlQanwatLive(pageUrl) {
 }
 
 /**
- * تحميل الصورة وتحويلها إلى JPG وحفظها محلياً
+ * معالجة الصور وحفظها
  */
 async function processImage(imgUrl, channelName) {
     if (!imgUrl) return "";
@@ -88,169 +66,100 @@ async function processImage(imgUrl, channelName) {
 
         const response = await axios({ url: imgUrl, responseType: 'arraybuffer', timeout: 5000 });
         await sharp(response.data)
-            .resize(400, 225)
+            .resize(400, 225, { fit: 'cover' })
             .jpeg({ quality: 85 })
             .toFile(filePath);
 
         return `${GITHUB_RAW_BASE}image/${fileName}`;
     } catch { 
-        return ""; 
+        return imgUrl; // العودة للرابط الأصلي في حال فشل المعالجة
     }
 }
 
 /**
- * كشط قنوات Arab-Stream
- */
-async function scrapeArabStream() {
-    const channels = [];
-    const BASE_URL = 'https://play.arab-stream.live/';
-    
-    try {
-        console.log('\n🌐 جاري الكشط من Arab-Stream...');
-        const { data } = await axios.get(BASE_URL);
-        const $ = cheerio.load(data);
-        const elements = $('.channel');
-
-        for (let i = 0; i < elements.length; i++) {
-            const el = elements[i];
-            const name = $(el).find('span').text().trim();
-            const href = $(el).find('a').attr('href');
-            const img = $(el).find('img').attr('src');
-
-            if (name && href) {
-                const fullPageUrl = href.startsWith('http') ? href : `${BASE_URL}${href}`;
-                
-                console.log(`🔍 فحص القناة [${name}] من Arab-Stream...`);
-                const streamUrl = await getStreamUrlArabStream(fullPageUrl);
-
-                if (streamUrl) {
-                    console.log(`📡 وجدنا رابط بث، نختبر الفيديو الآن...`);
-                    const isLive = await verifyVideo(streamUrl);
-
-                    if (isLive) {
-                        console.log(`✅ فيديو شغال بنجاح!`);
-                        channels.push({
-                            name,
-                            category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
-                            url: streamUrl,
-                            server_url: fullPageUrl,
-                            local_img: "",
-                            original_img: img || "",
-                            status: "online",
-                            source: "arab-stream",
-                            last_update: new Date().toLocaleString('ar-EG')
-                        });
-                    } else {
-                        console.log(`⚠️ الرابط موجود ولكن الفيديو متوقف (OFFLINE)`);
-                    }
-                } else {
-                    console.log(`❌ لم نجد رابط m3u8 في هذه الصفحة.`);
-                }
-            }
-        }
-    } catch (err) {
-        console.error(`❌ خطأ في كشط Arab-Stream:`, err.message);
-    }
-    
-    return channels;
-}
-
-/**
- * كشط قنوات Qanwat-Live
- */
-async function scrapeQanwatLive() {
-    const channels = [];
-    const BASE_URL = 'https://www.qanwatlive.com/';
-    
-    try {
-        console.log('\n🌐 جاري الكشط من Qanwat-Live...');
-        const { data } = await axios.get(BASE_URL, { 
-            headers: { 'User-Agent': 'Mozilla/5.0' } 
-        });
-        const $ = cheerio.load(data);
-        
-        $('.card, .post-card').each((i, el) => {
-            const name = $(el).find('.name a').text().trim() || $(el).find('.name').text().trim();
-            const page = $(el).find('a.post-link').attr('href') || $(el).find('a').attr('href');
-            const img = $(el).find('img').attr('src');
-            const cat = $(el).closest('.blog-section').find('.section-title').text().trim() || "بث مباشر";
-
-            if (name && page) {
-                const fullPageUrl = page.startsWith('http') ? page : BASE_URL + page.replace(/^\//, '');
-                
-                console.log(`🔍 فحص القناة [${name}] من Qanwat-Live...`);
-                getStreamUrlQanwatLive(fullPageUrl).then(async (streamUrl) => {
-                    if (streamUrl && await verifyVideo(streamUrl)) {
-                        console.log(`✅ فيديو شغال بنجاح!`);
-                        channels.push({
-                            name,
-                            category: cat,
-                            url: streamUrl,
-                            server_url: fullPageUrl,
-                            local_img: "",
-                            original_img: img || "",
-                            status: "online",
-                            source: "qanwat-live",
-                            last_update: new Date().toLocaleString('ar-EG')
-                        });
-                    }
-                }).catch(() => {
-                    console.log(`❌ تخطي (رابط غير صالح)`);
-                });
-            }
-        });
-        
-        // انتظار جميع الوعود
-        await new Promise(resolve => setTimeout(resolve, 5000));
-        
-    } catch (err) {
-        console.error(`❌ خطأ في كشط Qanwat-Live:`, err.message);
-    }
-    
-    return channels;
-}
-
-/**
- * الدمج والتنفيذ الرئيسي
+ * الوظيفة الرئيسية لبدء الكشط من جميع المصادر
  */
 async function startScraping() {
-    try {
-        console.log('🚀 بدأت عملية الكشط المجمعة...\n');
-        
-        // تجميع القنوات من كلا المصدرين
-        const [arabStreamChannels, qanwatLiveChannels] = await Promise.all([
-            scrapeArabStream(),
-            scrapeQanwatLive()
-        ]);
-        
-        const allChannels = [...arabStreamChannels, ...qanwatLiveChannels];
-        
-        // إزالة التكرارات (بناءً على الرابط)
-        const uniqueChannels = allChannels.filter((channel, index, self) =>
-            index === self.findIndex((c) => c.url === channel.url)
-        );
-        
-        console.log(`\n📸 جاري معالجة صور ${uniqueChannels.length} قناة...`);
-        
-        // معالجة الصور
-        for (let channel of uniqueChannels) {
-            if (channel.original_img) {
-                channel.local_img = await processImage(channel.original_img, channel.name);
+    const finalChannels = [];
+    const currentTime = new Date().toLocaleString('ar-EG');
+    
+    const sources = [
+        { url: 'https://play.arab-stream.live/', type: 'arab-stream' },
+        { url: 'https://www.qanwatlive.com/', type: 'qanwat-live' }
+    ];
+
+    for (const source of sources) {
+        console.log(`\n🚀 جاري العمل على مصدر: ${source.url}`);
+        try {
+            const { data } = await axios.get(source.url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+            const $ = cheerio.load(data);
+            let items = [];
+
+            // تحديد طريقة استخراج العناصر بناءً على نوع الموقع
+            if (source.type === 'arab-stream') {
+                $('.channel').each((i, el) => {
+                    items.push({
+                        name: $(el).find('span').text().trim(),
+                        page: $(el).find('a').attr('href'),
+                        img: $(el).find('img').attr('src'),
+                        cat: $(el).closest('.channels').prev('.section-title').text().trim() || "عرب ستريم"
+                    });
+                });
+            } else if (source.type === 'qanwat-live') {
+                $('.card, .post-card').each((i, el) => {
+                    items.push({
+                        name: $(el).find('.name a').text().trim() || $(el).find('.name').text().trim(),
+                        page: $(el).find('a.post-link').attr('href') || $(el).find('a').attr('href'),
+                        img: $(el).find('img').attr('src'),
+                        cat: $(el).closest('.blog-section').find('.section-title').text().trim() || "قنوات لايف"
+                    });
+                });
             }
+
+            // فحص العناصر المستخرجة
+            for (const item of items) {
+                if (!item.page || !item.name) continue;
+                
+                // بناء الرابط الكامل للصفحة
+                let fullPageUrl = item.page;
+                if (!item.page.startsWith('http')) {
+                    fullPageUrl = source.url.replace(/\/$/, '') + '/' + item.page.replace(/^\//, '');
+                }
+                
+                console.log(`🔍 فحص القناة: [${item.name}] من مصدر [${source.type}]`);
+                const streamUrl = await getStreamUrl(fullPageUrl);
+                
+                if (streamUrl && await verifyVideo(streamUrl)) {
+                    console.log(`✅ القناة تعمل! جاري معالجة الصورة...`);
+                    const localImg = await processImage(item.img, item.name);
+                    
+                    finalChannels.push({
+                        name: item.name,
+                        category: item.cat,
+                        url: streamUrl,
+                        server_url: fullPageUrl,
+                        local_img: localImg,
+                        original_img: item.img || "",
+                        status: "online",
+                        source_type: source.type, // إضافة نوع المصدر للتمييز
+                        last_update: currentTime
+                    });
+                } else {
+                    console.log(`❌ القناة متوقفة أو لم يتم العثور على رابط.`);
+                }
+            }
+        } catch (e) {
+            console.log(`❌ خطأ في المصدر ${source.url}: ${e.message}`);
         }
-        
-        // حفظ ملف الـ JSON النهائي
-        fs.writeFileSync(JSON_FILE, JSON.stringify(uniqueChannels, null, 2), 'utf-8');
-        
-        console.log(`\n✨ تم الانتهاء بنجاح!`);
-        console.log(`📊 إحصائيات سريعة:`);
-        console.log(`   - Arab-Stream: ${arabStreamChannels.length} قناة`);
-        console.log(`   - Qanwat-Live: ${qanwatLiveChannels.length} قناة`);
-        console.log(`   - إجمالي القنوات الفريدة: ${uniqueChannels.length} قناة`);
-        console.log(`📁 الملف النهائي: ${JSON_FILE}`);
-        
-    } catch (err) {
-        console.error('❌ خطأ فادح:', err.message);
+    }
+
+    // حفظ جميع النتائج في ملف JSON واحد
+    if (finalChannels.length > 0) {
+        fs.writeFileSync(JSON_FILE, JSON.stringify(finalChannels, null, 2), 'utf-8');
+        console.log(`\n✨ انتهى العمل بنجاح!`);
+        console.log(`📊 إجمالي القنوات الشغالة والمحفوظة في ${JSON_FILE}: ${finalChannels.length}`);
+    } else {
+        console.log(`\n⚠️ لم يتم العثور على أي قنوات تعمل، لم يتم تحديث الملف.`);
     }
 }
 
