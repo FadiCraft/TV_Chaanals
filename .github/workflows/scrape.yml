@@ -20,12 +20,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # تم إزالة سطر الـ cache لحل المشكلة
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Install Dependencies
         run: |
           npm init -y
-          npm install puppeteer-extra puppeteer-extra-plugin-stealth puppeteer axios sharp cheerio
+          npm install axios cheerio sharp fluent-ffmpeg
 
       - name: Run Scraper
         run: node scraper.js
