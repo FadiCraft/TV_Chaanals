@@ -6,7 +6,7 @@ const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
 const IMAGE_DIR = './image';
-const JSON_FILE = 'channels2.json';
+const JSON_FILE = 'channels.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
@@ -82,7 +82,7 @@ async function startScraping() {
     const currentTime = new Date().toLocaleString('ar-EG');
     
     const sources = [
-       
+        { url: 'https://play.arab-stream.live/', type: 'arab-stream' },
         { url: 'https://www.qanwatlive.com/', type: 'qanwat-live' }
     ];
 
