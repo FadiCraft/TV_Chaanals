@@ -1,0 +1,35 @@
+name: Channel Scraper
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # يعمل يومياً
+  workflow_dispatch: # يسمح لك بتشغيله يدوياً
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          npm install axios cheerio sharp
+
+      - name: Run Scraper
+        run: node scraper.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add channels.json image/*.jpg
+          git commit -m "Update channels data and images" || exit 0
+          git push
