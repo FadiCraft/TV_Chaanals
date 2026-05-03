@@ -8,7 +8,7 @@ const ffmpeg = require('fluent-ffmpeg');
 // الإعدادات الأساسية
 const BASE_URL = 'https://play.arab-stream.live/';
 const IMAGE_DIR = './image';
-const JSON_FILE = 'channels.json';
+const JSON_FILE = 'channels1.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
 // إنشاء مجلد الصور إذا لم يكن موجوداً
