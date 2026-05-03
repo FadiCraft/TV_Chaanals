@@ -5,26 +5,33 @@ const path = require('path');
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
-// الإعدادات الأساسية
+// دالة بسيطة للانتظار (Delay)
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 const BASE_URL = 'https://play.arab-stream.live/';
 const IMAGE_DIR = './image';
 const JSON_FILE = 'channels.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
-// إنشاء مجلد الصور إذا لم يكن موجوداً
+// إعدادات axios الافتراضية لتبدو كمتصفح حقيقي
+const axiosInstance = axios.create({
+    timeout: 15000,
+    headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'ar,en-US;q=0.7,en;q=0.3',
+    }
+});
+
 if (!fs.existsSync(IMAGE_DIR)) {
     fs.mkdirSync(IMAGE_DIR, { recursive: true });
 }
 
-/**
- * وظيفة فحص دفق الفيديو (Stream Check)
- */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
         ffmpeg.ffprobe(streamUrl, (err, metadata) => {
-            if (err) {
-                resolve(false); 
-            } else {
+            if (err) resolve(false);
+            else {
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
                 resolve(hasVideo);
             }
@@ -32,55 +39,44 @@ async function verifyVideo(streamUrl) {
     });
 }
 
-/**
- * استخراج رابط m3u8 المباشر
- */
 async function getStreamUrl(pageUrl) {
     try {
-        const { data } = await axios.get(pageUrl, { 
-            timeout: 10000, 
-            headers: { 'User-Agent': 'Mozilla/5.0' } 
-        });
+        const { data } = await axiosInstance.get(pageUrl);
         const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
         return match ? match[1] : null;
-    } catch {
+    } catch (err) {
+        if (err.response && err.response.status === 429) {
+            console.error('⚠️ السيرفر أعطى خطأ 429 (طلبات كثيرة). سننتظر قليلاً...');
+            await sleep(5000); // انتظر 5 ثواني إذا تم حظرك
+        }
         return null;
     }
 }
 
-/**
- * تحميل ومعالجة الصور
- */
 async function processImage(imgUrl, channelName) {
     try {
         const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
         const fileName = `${safeName}.jpg`;
         const filePath = path.join(IMAGE_DIR, fileName);
-
-        const response = await axios({ url: imgUrl, responseType: 'arraybuffer' });
+        const response = await axiosInstance({ url: imgUrl, responseType: 'arraybuffer' });
         await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
-
         return `${GITHUB_RAW_BASE}image/${fileName}`;
     } catch {
         return imgUrl;
     }
 }
 
-/**
- * السكريبت الأساسي
- */
 async function startScraping() {
     try {
         console.log('🚀 بدأت عملية الفحص والتحقق...');
-        const { data } = await axios.get(BASE_URL);
+        const { data } = await axiosInstance.get(BASE_URL);
         const $ = cheerio.load(data);
         const workingChannels = [];
+        const elements = $('.channel').toArray(); // تحويل لصفوف لتسهيل التعامل
 
-        const elements = $('.channel');
-        let currentId = 1; // عداد للـ ID
+        let currentId = 1;
 
-        for (let i = 0; i < elements.length; i++) {
-            const el = elements[i];
+        for (const el of elements) {
             const name = $(el).find('span').text().trim();
             const href = $(el).find('a').attr('href');
             const img = $(el).find('img').attr('src');
@@ -88,41 +84,34 @@ async function startScraping() {
             if (name && href) {
                 const fullPageUrl = href.startsWith('http') ? href : `https://play.arab-stream.live${href}`;
                 
-                console.log(`\n🔍 [ID: ${currentId}] فحص القناة [${name}]...`);
+                console.log(`\n🔍 [ID: ${currentId}] فحص: ${name}`);
+                
+                // --- الحل الأساسي: إضافة انتظار 2 ثانية بين كل قناة وأخرى ---
+                await sleep(2000); 
+
                 const streamUrl = await getStreamUrl(fullPageUrl);
 
                 if (streamUrl) {
-                    console.log(`📡 وجدنا رابط بث، نختبر الفيديو الآن...`);
                     const isLive = await verifyVideo(streamUrl);
-
                     if (isLive) {
-                        console.log(`✅ فيديو شغال بنجاح!`);
+                        console.log(`✅ شغال.`);
                         workingChannels.push({
-                            id: currentId++, // إضافة الـ ID وزيادة العداد للمرة القادمة
+                            id: currentId++,
                             name,
                             category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
                             url: streamUrl,
-                            local_img: "", 
+                            local_img: await processImage(img, name),
                             original_img: img,
                             status: "online",
                             last_update: new Date().toLocaleString('ar-EG')
                         });
-                    } else {
-                        console.log(`⚠️ الرابط موجود ولكن الفيديو متوقف (OFFLINE)`);
                     }
-                } else {
-                    console.log(`❌ لم نجد رابط m3u8 في هذه الصفحة.`);
                 }
             }
         }
 
-        console.log(`\n📸 جاري معالجة صور ${workingChannels.length} قناة...`);
-        for (let channel of workingChannels) {
-            channel.local_img = await processImage(channel.original_img, channel.name);
-        }
-
         fs.writeFileSync(JSON_FILE, JSON.stringify(workingChannels, null, 2), 'utf-8');
-        console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بـ ${workingChannels.length} قناة شغالة.`);
+        console.log(`\n✨ انتهى العمل! تم حفظ ${workingChannels.length} قناة.`);
 
     } catch (err) {
         console.error('❌ خطأ فادح:', err.message);
