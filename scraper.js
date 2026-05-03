@@ -1,120 +1,184 @@
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const axios = require('axios');
+const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios');
 const sharp = require('sharp');
+const ffmpeg = require('fluent-ffmpeg');
 
-puppeteer.use(StealthPlugin());
+const IMAGE_DIR = './image';
+const JSON_FILE = 'channels.json';
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
-const BASE_URL = 'https://www.qanwatlive.com/';
-const IMG_DIR = './image';
+if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
-if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
+let channelIdCounter = 1;
 
-// دالة لفحص الرابط هل يعمل أم لا (Status 200)
-async function isLinkWorking(url) {
-    try {
-        const response = await axios.head(url, { timeout: 5000 });
-        return response.status === 200;
-    } catch (error) {
-        return false;
-    }
+/**
+ * فحص الفيديو فعلياً باستخدام ffprobe للتأكد أن الرابط يعمل وبث حقيقي
+ */
+async function verifyVideo(streamUrl) {
+    return new Promise((resolve) => {
+        // نضع timeout قصير للفحص حتى لا يعلق السكريبت
+        ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "5"], (err, metadata) => {
+            if (err) {
+                resolve(false);
+            } else {
+                const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
+                resolve(hasVideo);
+            }
+        });
+    });
 }
 
-async function scrape() {
-    console.log('🚀 بدء الفحص المتقدم لاستخراج الروابط المباشرة...');
-    
-    const browser = await puppeteer.launch({
-        headless: "new",
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-
+/**
+ * استخراج رابط m3u8 المباشر
+ * تم تحسين المنطق للبحث داخل الـ Scripts والـ Iframes بعمق أكبر
+ */
+async function getStreamUrl(pageUrl) {
     try {
-        const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
-
-        console.log('🌐 جاري جلب قائمة القنوات...');
-        await page.goto(BASE_URL, { waitUntil: 'networkidle2' });
-
-        const channels = await page.evaluate(() => {
-            const cards = document.querySelectorAll('.swiper-slide.card');
-            return Array.from(cards).map(card => ({
-                name: card.querySelector('.name a')?.innerText.trim(),
-                pageUrl: card.querySelector('a.post-link')?.href,
-                imgUrl: card.querySelector('img.card-img')?.src
-            })).filter(c => c.pageUrl);
+        const { data } = await axios.get(pageUrl, { 
+            timeout: 10000, 
+            headers: { 
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Referer': 'https://www.qanwatlive.com/'
+            } 
         });
 
-        const finalResults = [];
+        const $ = cheerio.load(data);
+        
+        // 1. البحث عن روابط m3u8 في سكريبتات الصفحة مباشرة
+        const scripts = $('script').text();
+        const m3u8Match = scripts.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)/);
+        if (m3u8Match) return m3u8Match[1].replace(/\\/g, ''); // تنظيف الرابط من أي Backslashes
 
-        for (let i = 0; i < channels.length; i++) {
-            const ch = channels[i];
-            const chPage = await browser.newPage();
-            let directStreamUrl = null;
-
-            // تفعيل مراقبة الشبكة لالتقاط الروابط المباشرة
-            await chPage.setRequestInterception(true);
-            chPage.on('request', request => {
-                const url = request.url();
-                if (url.includes('.m3u8') || url.includes('.mp4') || url.includes('get_stream')) {
-                    directStreamUrl = url;
-                }
-                request.continue();
+        // 2. إذا لم يجد، يبحث عن الـ iframe ويحاول استخراج الرابط منه
+        const iframeSrc = $('iframe[src*="player"], iframe[src*="stream"], iframe#iframe').attr('src');
+        
+        if (iframeSrc) {
+            const finalIframeUrl = iframeSrc.startsWith('//') ? 'https:' + iframeSrc : iframeSrc;
+            const iframeContent = await axios.get(finalIframeUrl, { 
+                timeout: 7000, 
+                headers: { 'User-Agent': 'Mozilla/5.0', 'Referer': pageUrl } 
             });
-
-            try {
-                console.log(`🔍 فحص القناة (${i + 1}/${channels.length}): ${ch.name}`);
-                await chPage.goto(ch.pageUrl, { waitUntil: 'networkidle2', timeout: 45000 });
-
-                // إذا لم يتم التقاط رابط m3u8 تلقائياً، نبحث في الـ Iframes
-                if (!directStreamUrl) {
-                    directStreamUrl = await chPage.evaluate(() => {
-                        const frame = document.querySelector('iframe');
-                        return frame ? frame.src : null;
-                    });
-                }
-
-                if (directStreamUrl) {
-                    // فحص الرابط المستخرج هل يعمل؟
-                    const status = await isLinkWorking(directStreamUrl);
-                    
-                    if (status) {
-                        const imageName = `ch_${Date.now()}.jpg`;
-                        const imagePath = path.join(IMG_DIR, imageName);
-
-                        // تحميل الصورة ومعالجتها
-                        try {
-                            const imgRes = await axios.get(ch.imgUrl, { responseType: 'arraybuffer' });
-                            await sharp(imgRes.data).resize(400, 225).toFile(imagePath);
-                        } catch (e) {}
-
-                        finalResults.push({
-                            id: i + 1,
-                            name: ch.name,
-                            logo: `image/${imageName}`,
-                            stream_url: directStreamUrl,
-                            status: "Online",
-                            last_check: new Date().toISOString()
-                        });
-                        console.log(`✅ تعمل: ${ch.name}`);
-                    } else {
-                        console.log(`❌ رابط معطل للقناة: ${ch.name}`);
-                    }
-                }
-            } catch (err) {
-                console.log(`⚠️ خطأ أثناء معالجة ${ch.name}`);
-            } finally {
-                await chPage.close();
-            }
+            
+            const m3u8InIframe = iframeContent.data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
+            if (m3u8InIframe) return m3u8InIframe[1].replace(/\\/g, '');
         }
 
-        fs.writeFileSync('channels.json', JSON.stringify(finalResults, null, 4));
-        console.log(`\n🎉 اكتمل العمل! القنوات الشغالة: ${finalResults.length}`);
+        return null;
+    } catch { return null; }
+}
 
-    } finally {
-        await browser.close();
+/**
+ * معالجة وحفظ الشعار
+ */
+async function processImage(imgUrl, channelName) {
+    if (!imgUrl) return "";
+    try {
+        const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
+        const fileName = `${safeName}_${Date.now()}.jpg`;
+        const filePath = path.join(IMAGE_DIR, fileName);
+
+        const response = await axios({ url: imgUrl, responseType: 'arraybuffer', timeout: 5000 });
+        await sharp(response.data)
+            .resize(400, 225) // مقاس موحد للـ Android TV
+            .jpeg({ quality: 85 })
+            .toFile(filePath);
+
+        return `${GITHUB_RAW_BASE}image/${fileName}`;
+    } catch { 
+        return imgUrl; // في حال الفشل نعود للرابط الأصلي
     }
 }
 
-scrape();
+async function startScraping() {
+    const finalChannels = [];
+    
+    const sources = [
+        { url: 'https://play.arab-stream.live/', type: 'arab-stream' },
+        { url: 'https://www.qanwatlive.com/', type: 'qanwat-live' }
+    ];
+
+    for (const source of sources) {
+        console.log(`\n🌐 جاري الكشط من مصدر: ${source.url}`);
+        try {
+            const { data } = await axios.get(source.url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+            const $ = cheerio.load(data);
+            let items = [];
+
+            if (source.type === 'arab-stream') {
+                $('.channel').each((i, el) => {
+                    const name = $(el).find('span').text().trim();
+                    const page = $(el).find('a').attr('href');
+                    if (name && page) {
+                        items.push({
+                            name: name,
+                            page: page,
+                            img: $(el).find('img').attr('src'),
+                            cat: $(el).closest('.channels').prev('.section-title').text().trim() || "عام"
+                        });
+                    }
+                });
+            } else {
+                // استهداف كروت قنوات لايف (QanwatLive)
+                $('.card, .post-card').each((i, el) => {
+                    const name = $(el).find('.name a').text().trim();
+                    const page = $(el).find('a.post-link').attr('href') || $(el).find('a').attr('href');
+                    if (name && page) {
+                        items.push({
+                            name: name,
+                            page: page,
+                            img: $(el).find('img').attr('src'),
+                            cat: "بث مباشر"
+                        });
+                    }
+                });
+            }
+
+            for (const item of items) {
+                const fullPageUrl = item.page.startsWith('http') ? item.page : source.url.replace(/\/$/, '') + '/' + item.page.replace(/^\//, '');
+                
+                console.log(`🔍 فحص: ${item.name}`);
+                
+                const streamUrl = await getStreamUrl(fullPageUrl);
+                
+                if (streamUrl) {
+                    // الفحص النهائي للتأكد أن الرابط يفتح فيديو فعلاً
+                    const isValid = await verifyVideo(streamUrl);
+                    
+                    if (isValid) {
+                        console.log(`✅ شغال ومتحقق! جاري المعالجة...`);
+                        const imgResult = await processImage(item.img, item.name);
+                        
+                        finalChannels.push({
+                            id: channelIdCounter++,
+                            name: item.name,
+                            category: item.cat,
+                            url: streamUrl,
+                            image: imgResult,
+                            source: source.type,
+                            updated_at: new Date().toISOString()
+                        });
+                    } else {
+                        console.log(`❌ الرابط المستخرج لا يعمل (Failed Probe)`);
+                    }
+                } else {
+                    console.log(`⚠️ لم يتم العثور على رابط m3u8`);
+                }
+            }
+        } catch (e) { 
+            console.log(`❌ خطأ في المصدر ${source.url}: ${e.message}`); 
+        }
+    }
+
+    const output = {
+        total_channels: finalChannels.length,
+        last_update: new Date().toLocaleString('ar-EG'),
+        channels: finalChannels
+    };
+
+    fs.writeFileSync(JSON_FILE, JSON.stringify(output, null, 2));
+    console.log(`\n✨ تم الانتهاء! تم حفظ ${finalChannels.length} قناة شغالة في ${JSON_FILE}`);
+}
+
+startScraping();
