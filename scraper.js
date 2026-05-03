@@ -5,25 +5,28 @@ const path = require('path');
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
-const URL = 'https://play.arab-stream.live/';
+// الإعدادات الأساسية
+const BASE_URL = 'https://play.arab-stream.live/';
 const IMAGE_DIR = './image';
 const JSON_FILE = 'channels.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
+// إنشاء مجلد الصور إذا لم يكن موجوداً
 if (!fs.existsSync(IMAGE_DIR)) {
     fs.mkdirSync(IMAGE_DIR, { recursive: true });
 }
 
 /**
- * فحص رابط البث (m3u8/mp4) للتأكد من وجود دفق فيديو حقيقي
+ * وظيفة فحص دفق الفيديو (Stream Check)
+ * تستخدم ffprobe للتأكد من أن الرابط يرسل بيانات فيديو حقيقية
  */
-function verifyVideoStream(streamUrl) {
+async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
         ffmpeg.ffprobe(streamUrl, (err, metadata) => {
             if (err) {
-                resolve(false);
+                resolve(false); // الرابط لا يعمل أو ليس رابط فيديو
             } else {
-                // التأكد من وجود مسار فيديو (video stream) داخل الرابط
+                // التأكد من وجود تراكم بيانات فيديو (Video Stream)
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
                 resolve(hasVideo);
             }
@@ -32,87 +35,100 @@ function verifyVideoStream(streamUrl) {
 }
 
 /**
- * استخراج رابط البث المباشر من صفحة السيرفر
+ * استخراج رابط m3u8 المباشر من صفحة السيرفر
  */
-async function extractStreamUrl(pageUrl) {
+async function getStreamUrl(pageUrl) {
     try {
-        const { data } = await axios.get(pageUrl, { timeout: 8000 });
-        // البحث عن روابط m3u8 داخل كود الصفحة أو الأكواد البرمجية
-        const m3u8Match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
-        return m3u8Match ? m3u8Match[1] : null;
+        const { data } = await axios.get(pageUrl, { 
+            timeout: 10000, 
+            headers: { 'User-Agent': 'Mozilla/5.0' } 
+        });
+        // البحث عن روابط m3u8 داخل كود الصفحة
+        const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
+        return match ? match[1] : null;
     } catch {
         return null;
     }
 }
 
-async function downloadAndConvertImage(imgUrl, channelName) {
+/**
+ * تحميل الصورة وتحويلها إلى JPG وحفظها محلياً
+ */
+async function processImage(imgUrl, channelName) {
     try {
         const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
         const fileName = `${safeName}.jpg`;
         const filePath = path.join(IMAGE_DIR, fileName);
+
         const response = await axios({ url: imgUrl, responseType: 'arraybuffer' });
         await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
+
         return `${GITHUB_RAW_BASE}image/${fileName}`;
     } catch {
-        return imgUrl;
+        return imgUrl; // في حال الفشل نعود للرابط الأصلي
     }
 }
 
-async function scrapeChannels() {
+/**
+ * السكريبت الأساسي
+ */
+async function startScraping() {
     try {
-        console.log('🚀 بدء الفحص العميق لروابط الفيديو...');
-        const { data } = await axios.get(URL);
+        console.log('🚀 بدأت عملية الفحص والتحقق...');
+        const { data } = await axios.get(BASE_URL);
         const $ = cheerio.load(data);
-        const results = [];
+        const workingChannels = [];
 
-        const channelElements = $('.channel');
+        const elements = $('.channel');
 
-        for (let i = 0; i < channelElements.length; i++) {
-            const el = channelElements[i];
+        for (let i = 0; i < elements.length; i++) {
+            const el = elements[i];
             const name = $(el).find('span').text().trim();
-            const pageLink = $(el).find('a').attr('href');
-            const imgUrl = $(el).find('img').attr('src');
+            const href = $(el).find('a').attr('href');
+            const img = $(el).find('img').attr('src');
 
-            if (name && pageLink) {
-                const fullPageUrl = pageLink.startsWith('http') ? pageLink : `https://play.arab-stream.live${pageLink}`;
+            if (name && href) {
+                const fullPageUrl = href.startsWith('http') ? href : `https://play.arab-stream.live${href}`;
                 
-                console.log(`🔍 جاري البحث عن رابط البث لـ: ${name}`);
-                const streamUrl = await extractStreamUrl(fullPageUrl);
+                console.log(`\n🔍 فحص القناة [${name}]...`);
+                const streamUrl = await getStreamUrl(fullPageUrl);
 
                 if (streamUrl) {
-                    console.log(`📽️ تم العثور على رابط، جاري فحص جودة البث...`);
-                    const isLive = await verifyVideoStream(streamUrl);
+                    console.log(`📡 وجدنا رابط بث، نختبر الفيديو الآن...`);
+                    const isLive = await verifyVideo(streamUrl);
 
                     if (isLive) {
-                        results.push({
+                        console.log(`✅ فيديو شغال بنجاح!`);
+                        workingChannels.push({
                             name,
-                            category: $(el).closest('.channels').prev('.section-title').text().trim(),
-                            stream_url: streamUrl,
-                            page_url: fullPageUrl,
-                            live: true,
-                            original_img: imgUrl
+                            category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
+                            url: streamUrl,
+                            local_img: "", // سيتم تعبئته لاحقاً
+                            original_img: img,
+                            status: "online",
+                            last_update: new Date().toLocaleString('ar-EG')
                         });
-                        console.log(`✅ القناة شغال بثها حالياً: ${name}`);
                     } else {
-                        console.log(`⚠️ الرابط موجود ولكن لا يوجد دفق فيديو (OFFLINE): ${name}`);
+                        console.log(`⚠️ الرابط موجود ولكن الفيديو متوقف (OFFLINE)`);
                     }
                 } else {
-                    console.log(`❌ لم يتم العثور على رابط بث في الصفحة: ${name}`);
+                    console.log(`❌ لم نجد رابط m3u8 في هذه الصفحة.`);
                 }
             }
         }
 
-        console.log('\n📸 جاري معالجة الصور...');
-        for (let channel of results) {
-            channel.local_img = await downloadAndConvertImage(channel.original_img, channel.name);
+        console.log(`\n📸 جاري معالجة صور ${workingChannels.length} قناة...`);
+        for (let channel of workingChannels) {
+            channel.local_img = await processImage(channel.original_img, channel.name);
         }
 
-        fs.writeFileSync(JSON_FILE, JSON.stringify(results, null, 2), 'utf-8');
-        console.log(`✨ تم تحديث ${results.length} قناة شغالة فعلياً.`);
+        // حفظ ملف الـ JSON النهائي
+        fs.writeFileSync(JSON_FILE, JSON.stringify(workingChannels, null, 2), 'utf-8');
+        console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بالقنوات الشغالة فقط.`);
 
-    } catch (error) {
-        console.error('❌ خطأ:', error.message);
+    } catch (err) {
+        console.error('❌ خطأ فادح:', err.message);
     }
 }
 
-scrapeChannels();
+startScraping();
