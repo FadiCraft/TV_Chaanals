@@ -2,7 +2,7 @@ name: TV Channels Auto Scraper
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
+    - cron: '0 */12 * * *' # تحديث كل 12 ساعة
   workflow_dispatch:
 
 permissions:
@@ -29,12 +29,16 @@ jobs:
           npm init -y
           npm install axios cheerio sharp fluent-ffmpeg
 
-      - name: Run Arab Stream Scraper
-        run: node arab-stream.js
-        continue-on-error: true
-
-      - name: Run Qanwat Live Scraper
+      - name: Run Scraper
         run: node qanwat-live.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add channels.json image/*.jpg
+          git commit -m "Auto-update channels: $(date)" || echo "No changes to commit"
+          git push        run: node qanwat-live.js
         continue-on-error: true
 
       - name: Merge Channel Files
