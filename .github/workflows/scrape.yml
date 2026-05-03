@@ -30,7 +30,7 @@ jobs:
           npm install axios cheerio sharp fluent-ffmpeg
 
       - name: Run Scraper
-        run: node qanwat-live.js
+        run: node scraper.js
 
       - name: Commit and Push changes
         run: |
@@ -38,16 +38,4 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add channels.json image/*.jpg
           git commit -m "Auto-update channels: $(date)" || echo "No changes to commit"
-          git push        run: node qanwat-live.js
-        continue-on-error: true
-
-      - name: Merge Channel Files
-        run: node scraper.js
-
-      - name: Commit and Push changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add channels.json channels1.json channels2.json image/*.jpg
-          git commit -m "Auto-update channels: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           git push
