@@ -39,23 +39,16 @@ async function runScrapers() {
             console.log('⚠️ الملف channels2.json غير موجود');
         }
         
-        // دمج المصفوفتين
+        // دمج المصفوفتين مباشرة بدون حذف التكرار
         const mergedChannels = [...channels1, ...channels2];
         
-        // إزالة التكرارات (اختياري - بناءً على الاسم والرابط)
-        const uniqueChannels = mergedChannels.filter((channel, index, self) => 
-            index === self.findIndex((c) => (
-                c.name === channel.name && c.url === channel.url
-            ))
-        );
-        
         console.log(`\n📊 إحصائيات الدمج:`);
-        console.log(`- إجمالي القنوات قبل إزالة التكرار: ${mergedChannels.length}`);
-        console.log(`- إجمالي القنوات بعد إزالة التكرار: ${uniqueChannels.length}`);
-        console.log(`- تم إزالة ${mergedChannels.length - uniqueChannels.length} قناة مكررة`);
+        console.log(`- عدد القنوات من الملف الأول: ${channels1.length}`);
+        console.log(`- عدد القنوات من الملف الثاني: ${channels2.length}`);
+        console.log(`- إجمالي القنوات: ${mergedChannels.length}`);
         
         // حفظ الملف المدمج
-        fs.writeFileSync('channels.json', JSON.stringify(uniqueChannels, null, 2), 'utf8');
+        fs.writeFileSync('channels.json', JSON.stringify(mergedChannels, null, 2), 'utf8');
         console.log('✅ تم حفظ الملف المدمج channels.json بنجاح');
         
         // تحديث تاريخ آخر تحديث
