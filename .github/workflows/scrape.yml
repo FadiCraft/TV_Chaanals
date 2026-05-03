@@ -29,13 +29,69 @@ jobs:
           npm init -y
           npm install axios cheerio sharp fluent-ffmpeg
 
-      - name: Run Scraper
+      - name: Run Arab Stream Scraper
+        run: node arab-stream.js
+        continue-on-error: true
+
+      - name: Run Qanwat Live Scraper
+        run: node qanwat-live.js
+        continue-on-error: true
+
+      - name: Merge Channel Files
         run: node scraper.js
 
       - name: Commit and Push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add channels.json image/*.jpg
-          git commit -m "Auto-update channels: $(date)" || echo "No changes to commit"
+          git add channels.json channels1.json channels2.json image/*.jpg
+          git commit -m "Auto-update channels: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git pushname: TV Channels Auto Scraper
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # تحديث كل 12 ساعة
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Dependencies
+        run: |
+          npm init -y
+          npm install axios cheerio sharp fluent-ffmpeg
+
+      - name: Run Arab Stream Scraper
+        run: node arab-stream.js
+        continue-on-error: true
+
+      - name: Run Qanwat Live Scraper
+        run: node qanwat-live.js
+        continue-on-error: true
+
+      - name: Merge Channel Files
+        run: node scraper.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add channels.json channels1.json channels2.json image/*.jpg
+          git commit -m "Auto-update channels: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
           git push
