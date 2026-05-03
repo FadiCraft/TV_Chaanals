@@ -82,7 +82,7 @@ async function startScraping() {
     const currentTime = new Date().toLocaleString('ar-EG');
     
     const sources = [
-       
+        { url: 'https://play.arab-stream.live/', type: 'arab-stream' },
         { url: 'https://www.qanwatlive.com/', type: 'qanwat-live' }
     ];
 
