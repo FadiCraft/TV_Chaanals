@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const ffmpeg = require('fluent-ffmpeg');
 
 const URL = 'https://play.arab-stream.live/';
 const IMAGE_DIR = './image';
@@ -14,92 +15,100 @@ if (!fs.existsSync(IMAGE_DIR)) {
 }
 
 /**
- * فحص الرابط للتأكد من أنه يعمل
+ * فحص رابط البث (m3u8/mp4) للتأكد من وجود دفق فيديو حقيقي
  */
-async function isUrlWorking(url) {
-    try {
-        const response = await axios.get(url, { timeout: 5000, headers: { 'User-Agent': 'Mozilla/5.0' } });
-        return response.status === 200;
-    } catch (error) {
-        return false;
-    }
+function verifyVideoStream(streamUrl) {
+    return new Promise((resolve) => {
+        ffmpeg.ffprobe(streamUrl, (err, metadata) => {
+            if (err) {
+                resolve(false);
+            } else {
+                // التأكد من وجود مسار فيديو (video stream) داخل الرابط
+                const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
+                resolve(hasVideo);
+            }
+        });
+    });
 }
 
 /**
- * تحميل وتحويل الصورة والحصول على رابط GitHub الكامل
+ * استخراج رابط البث المباشر من صفحة السيرفر
  */
+async function extractStreamUrl(pageUrl) {
+    try {
+        const { data } = await axios.get(pageUrl, { timeout: 8000 });
+        // البحث عن روابط m3u8 داخل كود الصفحة أو الأكواد البرمجية
+        const m3u8Match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
+        return m3u8Match ? m3u8Match[1] : null;
+    } catch {
+        return null;
+    }
+}
+
 async function downloadAndConvertImage(imgUrl, channelName) {
     try {
         const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
         const fileName = `${safeName}.jpg`;
         const filePath = path.join(IMAGE_DIR, fileName);
-
-        const response = await axios({
-            url: imgUrl,
-            responseType: 'arraybuffer',
-            timeout: 10000
-        });
-
+        const response = await axios({ url: imgUrl, responseType: 'arraybuffer' });
         await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
-
-        // إرجاع الرابط الكامل على GitHub
         return `${GITHUB_RAW_BASE}image/${fileName}`;
-    } catch (error) {
-        console.error(`❌ فشل معالجة صورة [${channelName}]`);
-        return imgUrl; 
+    } catch {
+        return imgUrl;
     }
 }
 
 async function scrapeChannels() {
     try {
-        console.log('🚀 بدء العمل...');
+        console.log('🚀 بدء الفحص العميق لروابط الفيديو...');
         const { data } = await axios.get(URL);
         const $ = cheerio.load(data);
         const results = [];
 
-        const sections = $('.section-title');
+        const channelElements = $('.channel');
 
-        for (let i = 0; i < sections.length; i++) {
-            const categoryName = $(sections[i]).text().trim();
-            const channels = $(sections[i]).next('.channels').find('.channel');
+        for (let i = 0; i < channelElements.length; i++) {
+            const el = channelElements[i];
+            const name = $(el).find('span').text().trim();
+            const pageLink = $(el).find('a').attr('href');
+            const imgUrl = $(el).find('img').attr('src');
 
-            for (let j = 0; j < channels.length; j++) {
-                const el = channels[j];
-                const name = $(el).find('span').text().trim();
-                let link = $(el).find('a').attr('href');
-                const imgUrl = $(el).find('img').attr('src');
+            if (name && pageLink) {
+                const fullPageUrl = pageLink.startsWith('http') ? pageLink : `https://play.arab-stream.live${pageLink}`;
+                
+                console.log(`🔍 جاري البحث عن رابط البث لـ: ${name}`);
+                const streamUrl = await extractStreamUrl(fullPageUrl);
 
-                if (name && link) {
-                    const fullLink = link.startsWith('http') ? link : `https://play.arab-stream.live${link}`;
-                    
-                    console.log(`🔍 فحص القناة: ${name}`);
-                    const working = await isUrlWorking(fullLink);
+                if (streamUrl) {
+                    console.log(`📽️ تم العثور على رابط، جاري فحص جودة البث...`);
+                    const isLive = await verifyVideoStream(streamUrl);
 
-                    if (working) {
+                    if (isLive) {
                         results.push({
-                            category: categoryName,
-                            name: name,
-                            url: fullLink,
-                            status: "working",
+                            name,
+                            category: $(el).closest('.channels').prev('.section-title').text().trim(),
+                            stream_url: streamUrl,
+                            page_url: fullPageUrl,
+                            live: true,
                             original_img: imgUrl
                         });
+                        console.log(`✅ القناة شغال بثها حالياً: ${name}`);
                     } else {
-                        console.log(`⚠️ تخطي القناة (الرابط لا يعمل): ${name}`);
+                        console.log(`⚠️ الرابط موجود ولكن لا يوجد دفق فيديو (OFFLINE): ${name}`);
                     }
+                } else {
+                    console.log(`❌ لم يتم العثور على رابط بث في الصفحة: ${name}`);
                 }
             }
         }
 
-        console.log(`✅ تم إيجاد ${results.length} قناة تعمل. جاري معالجة الصور...`);
-
+        console.log('\n📸 جاري معالجة الصور...');
         for (let channel of results) {
-            if (channel.original_img) {
-                channel.local_img = await downloadAndConvertImage(channel.original_img, channel.name);
-            }
+            channel.local_img = await downloadAndConvertImage(channel.original_img, channel.name);
         }
 
         fs.writeFileSync(JSON_FILE, JSON.stringify(results, null, 2), 'utf-8');
-        console.log(`✨ تم التحديث بنجاح!`);
+        console.log(`✨ تم تحديث ${results.length} قناة شغالة فعلياً.`);
 
     } catch (error) {
         console.error('❌ خطأ:', error.message);
