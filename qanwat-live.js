@@ -71,7 +71,7 @@ async function processImage(imgUrl, channelName) {
             .jpeg({ quality: 85 })
             .toFile(filePath);
 
-        return `${GITHUB_RAW_BASE}image/${fileName}`;
+        return `${GITHUB_RAW_BASE}image2/${fileName}`;
     } catch { 
         return ""; 
     }
