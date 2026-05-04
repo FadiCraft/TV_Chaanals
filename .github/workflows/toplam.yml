@@ -1,17 +1,20 @@
-name: تجميع الملفات 
+name: تجميع الملفات
 
 on:
   schedule:
-    # يشتغل السكريبت يومياً الساعة 12 صباحاً بتوقيت UTC
-    # يمكنك تغيير الوقت عبر موقع crontab.guru
+    # سيتم التشغيل يومياً الساعة 12 منتصف الليل بتوقيت UTC
     - cron: '0 0 * * *'
   
-  # للسماح بتشغيل الكود يدوياً أيضاً للتجربة
+  # يتيح لك تشغيل السكريبت يدوياً من صفحة Actions
   workflow_dispatch:
 
 jobs:
-  build:
+  merge-job:
     runs-on: ubuntu-latest
+    
+    # للتأكد من أن الـ Action لديه صلاحية الكتابة في المستودع
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repository
@@ -26,38 +29,58 @@ jobs:
         run: |
           node -e "
           const fs = require('fs');
-          // ضع أسماء ملفاتك هنا بدقة
-          const files = ['file1.json', 'file2.json', 'file3.json'];
+          
+          // أسماء الملفات كما تظهر في صورتك
+          const inputFiles = ['channels1.json', 'channels2.json', 'channels3.json'];
+          const outputFile = 'all_channels.json';
           let allChannels = [];
 
-          files.forEach(file => {
+          console.log('--- بدء عملية الدمج ---');
+
+          inputFiles.forEach(file => {
             if (fs.existsSync(file)) {
               try {
-                const data = JSON.parse(fs.readFileSync(file, 'utf8'));
-                if (Array.isArray(data)) {
-                  allChannels = allChannels.concat(data);
+                const rawData = fs.readFileSync(file, 'utf8').trim();
+                if (rawData) {
+                  const jsonData = JSON.parse(rawData);
+                  if (Array.isArray(jsonData)) {
+                    console.log('✅ تم العثور على ' + jsonData.length + ' قناة في: ' + file);
+                    allChannels = allChannels.concat(jsonData);
+                  } else {
+                    console.log('⚠️ الملف ' + file + ' ليس مصفوفة (Array).');
+                  }
+                } else {
+                  console.log('⚠️ الملف ' + file + ' فارغ تماماً.');
                 }
-              } catch (e) {
-                console.error('Error reading ' + file, e);
+              } catch (err) {
+                console.error('❌ خطأ في قراءة ' + file + ': ' + err.message);
               }
+            } else {
+              console.log('❌ الملف غير موجود: ' + file);
             }
           });
 
-          // إضافة ID لكل قناة وإعادة الهيكلة
-          const indexedData = allChannels.map((item, index) => ({
-            id: index + 1,
-            ...item
-          }));
+          if (allChannels.length > 0) {
+            // إعادة بناء الكائنات لإضافة ID في البداية
+            const finalData = allChannels.map((item, index) => ({
+              id: index + 1,
+              ...item
+            }));
 
-          fs.writeFileSync('all_channels.json', JSON.stringify(indexedData, null, 2), 'utf8');
-          console.log('Successfully merged ' + indexedData.length + ' channels.');
+            fs.writeFileSync(outputFile, JSON.stringify(finalData, null, 2), 'utf8');
+            console.log('🚀 نجاح: تم دمج ' + finalData.length + ' قناة في ' + outputFile);
+          } else {
+            console.log('🛑 فشل: لم يتم العثور على أي بيانات لدمجها.');
+            // نترك الملف كما هو أو ننشئ مصفوفة فارغة إذا كنت تفضل ذلك
+            if (!fs.existsSync(outputFile)) fs.writeFileSync(outputFile, '[]', 'utf8');
+          }
           "
 
-      - name: Commit and Push Changes
+      - name: Commit and Push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add all_channels.json
-          # لن يقوم بعمل commit إذا لم تتغير البيانات لتجنب الأخطاء
-          git commit -m "Auto-update: Merged channels with IDs ($(date +'%Y-%m-%d'))" || exit 0
+          # لن يفشل الأكشن إذا لم تكن هناك تغييرات جديدة
+          git commit -m "Auto-update: Merged channels ($(date +'%Y-%m-%d'))" || exit 0
           git push
