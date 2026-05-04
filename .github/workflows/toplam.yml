@@ -1,30 +1,63 @@
-steps:
+name: تجميع الملفات 
+
+on:
+  schedule:
+    # يشتغل السكريبت يومياً الساعة 12 صباحاً بتوقيت UTC
+    # يمكنك تغيير الوقت عبر موقع crontab.guru
+    - cron: '0 0 * * *'
+  
+  # للسماح بتشغيل الكود يدوياً أيضاً للتجربة
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
-      - name: Merge JSON and Add IDs
+      - name: Merge JSON Files and Add ID
         run: |
-          # يمكنك كتابة الكود هنا مباشرة أو استدعاء ملف .js
           node -e "
           const fs = require('fs');
+          // ضع أسماء ملفاتك هنا بدقة
           const files = ['file1.json', 'file2.json', 'file3.json'];
-          let all = [];
-          files.forEach(f => {
-            if(fs.existsSync(f)) all = all.concat(JSON.parse(fs.readFileSync(f, 'utf8')));
+          let allChannels = [];
+
+          files.forEach(file => {
+            if (fs.existsSync(file)) {
+              try {
+                const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+                if (Array.isArray(data)) {
+                  allChannels = allChannels.concat(data);
+                }
+              } catch (e) {
+                console.error('Error reading ' + file, e);
+              }
+            }
           });
-          const result = all.map((item, i) => ({ id: i + 1, ...item }));
-          fs.writeFileSync('all_channels.json', JSON.stringify(result, null, 4), 'utf8');
+
+          // إضافة ID لكل قناة وإعادة الهيكلة
+          const indexedData = allChannels.map((item, index) => ({
+            id: index + 1,
+            ...item
+          }));
+
+          fs.writeFileSync('all_channels.json', JSON.stringify(indexedData, null, 2), 'utf8');
+          console.log('Successfully merged ' + indexedData.length + ' channels.');
           "
 
-      - name: Commit Changes
+      - name: Commit and Push Changes
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add all_channels.json
-          git commit -m "Update channels with IDs" || exit 0
+          # لن يقوم بعمل commit إذا لم تتغير البيانات لتجنب الأخطاء
+          git commit -m "Auto-update: Merged channels with IDs ($(date +'%Y-%m-%d'))" || exit 0
           git push
