@@ -18,15 +18,13 @@ if (!fs.existsSync(IMAGE_DIR)) {
 
 /**
  * وظيفة فحص دفق الفيديو (Stream Check)
- * تستخدم ffprobe للتأكد من أن الرابط يرسل بيانات فيديو حقيقية
  */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
         ffmpeg.ffprobe(streamUrl, (err, metadata) => {
             if (err) {
-                resolve(false); // الرابط لا يعمل أو ليس رابط فيديو
+                resolve(false); 
             } else {
-                // التأكد من وجود تراكم بيانات فيديو (Video Stream)
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
                 resolve(hasVideo);
             }
@@ -43,7 +41,6 @@ async function getStreamUrl(pageUrl) {
             timeout: 10000, 
             headers: { 'User-Agent': 'Mozilla/5.0' } 
         });
-        // البحث عن روابط m3u8 داخل كود الصفحة
         const match = data.match(/["'](https?:\/\/[^"']+\.m3u8[^"']*)["']/);
         return match ? match[1] : null;
     } catch {
@@ -65,7 +62,7 @@ async function processImage(imgUrl, channelName) {
 
         return `${GITHUB_RAW_BASE}image1/${fileName}`;
     } catch {
-        return imgUrl; // في حال الفشل نعود للرابط الأصلي
+        return imgUrl;
     }
 }
 
@@ -103,9 +100,9 @@ async function startScraping() {
                             name,
                             category: $(el).closest('.channels').prev('.section-title').text().trim() || "غير مصنف",
                             url: streamUrl,
-                            local_img: "", // سيتم تعبئته لاحقاً
+                            local_img: "", 
                             original_img: img,
-                            status: "online",
+                            status: "ArabStream", // تم التغيير هنا بناءً على طلبك
                             last_update: new Date().toLocaleString('ar-EG')
                         });
                     } else {
@@ -122,7 +119,6 @@ async function startScraping() {
             channel.local_img = await processImage(channel.original_img, channel.name);
         }
 
-        // حفظ ملف الـ JSON النهائي
         fs.writeFileSync(JSON_FILE, JSON.stringify(workingChannels, null, 2), 'utf-8');
         console.log(`\n✨ انتهى العمل! تم تحديث ${JSON_FILE} بالقنوات الشغالة فقط.`);
 
