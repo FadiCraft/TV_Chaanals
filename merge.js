@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-// ترتيب الملفات مهم جداً هنا: الأول لـ steem1، الثاني لـ steem2، الثالث لـ steem3
 const files = ['channels1.json', 'channels2.json', 'channels.json'];
 const outputFile = 'All_channels.json';
 
-// كائن لتخزين القنوات النهائية (المفتاح هو اسم القناة)
 const mergedChannels = {};
+// مجموعة لتتبع الروابط المستخدمة لمنع تكرار نفس الرابط لقنوات مختلفة
+const seenUrls = new Set();
 
 files.forEach((fileName, index) => {
     if (fs.existsSync(fileName)) {
@@ -14,34 +14,33 @@ files.forEach((fileName, index) => {
             let data = JSON.parse(content);
 
             if (Array.isArray(data)) {
-                // 1. حذف التكرار داخل نفس الملف بناءً على الاسم (تأخذ أول ظهور فقط)
-                const uniqueInFile = [];
-                const seenInFile = new Set();
-                
                 data.forEach(ch => {
-                    if (!seenInFile.has(ch.name)) {
-                        uniqueInFile.push(ch);
-                        seenInFile.add(ch.name);
-                    }
-                });
+                    // --- شرط التحقق الجديد ---
+                    // التأكد من وجود الاسم، وجود رابط الصورة الأصلية، ووجود رابط السيرفر
+                    if (ch.name && ch.original_img && ch.original_img.trim() !== "" && ch.server_url) {
+                        
+                        // التأكد من أن الرابط (url) لم يسبق استخدامه مع قناة أخرى
+                        if (!seenUrls.has(ch.server_url)) {
+                            
+                            if (!mergedChannels[ch.name]) {
+                                // إنشاء سجل القناة إذا كانت تظهر لأول مرة
+                                mergedChannels[ch.name] = {
+                                    ...ch,
+                                    steem1: "",
+                                    steem2: "",
+                                    steem3: ""
+                                };
+                                delete mergedChannels[ch.name].server_url;
+                            }
 
-                // 2. توزيع الروابط على steem1, steem2, steem3 بناءً على ترتيب الملف
-                uniqueInFile.forEach(ch => {
-                    if (!mergedChannels[ch.name]) {
-                        // إذا كانت القناة تظهر لأول مرة، ننشئ الكائن ونصفر السيرفرات
-                        mergedChannels[ch.name] = {
-                            ...ch,
-                            steem1: "",
-                            steem2: "",
-                            steem3: ""
-                        };
-                        // حذف الحقل الأصلي server_url كما طلبت
-                        delete mergedChannels[ch.name].server_url;
+                            // إضافة الرابط في الخانة المناسبة بناءً على ترتيب الملف
+                            const serverKey = `steem${index + 1}`;
+                            mergedChannels[ch.name][serverKey] = ch.server_url;
+                            
+                            // تسجيل الرابط كـ "مستخدم" حتى لا يتكرر
+                            seenUrls.add(ch.server_url);
+                        }
                     }
-
-                    // وضع الرابط في الخانة المناسبة حسب ترتيب الملف (0, 1, 2)
-                    const serverKey = `steem${index + 1}`;
-                    mergedChannels[ch.name][serverKey] = ch.server_url;
                 });
             }
         } catch (error) {
@@ -50,18 +49,17 @@ files.forEach((fileName, index) => {
     }
 });
 
-// 3. تحويل الكائن إلى مصفوفة وإضافة الـ ID مع التأكد من أولويات السيرفرات
+// تحويل الكائن إلى مصفوفة وإعادة ترتيب السيرفرات (steem1, steem2, steem3)
 const finalResult = Object.values(mergedChannels).map((ch, idx) => {
-    
-    // منطق الأولوية: إذا كانت القناة موجودة في ملف واحد فقط (مثلاً الملف الثالث) 
-    // ولم تكن موجودة في الأول، ننقل الرابط ليكون في steem1
-    let servers = [ch.steem1, ch.steem2, ch.steem3].filter(s => s !== "");
+    // تجميع الروابط الموجودة فقط وحذف الفراغات
+    let servers = [ch.steem1, ch.steem2, ch.steem3].filter(s => s && s.trim() !== "");
     
     return {
         id: idx + 1,
         name: ch.name,
         category: ch.category,
         local_img: ch.local_img,
+        original_img: ch.original_img, // سيبقى متاحاً في الملف النهائي
         status: ch.status,
         last_update: ch.last_update,
         steem1: servers[0] || "",
@@ -70,10 +68,12 @@ const finalResult = Object.values(mergedChannels).map((ch, idx) => {
     };
 });
 
-// 4. حفظ النتيجة
+// حفظ الملف النهائي
 try {
     fs.writeFileSync(outputFile, JSON.stringify(finalResult, null, 4), 'utf8');
-    console.log(`تم الدمج بنجاح! عدد القنوات الفريدة: ${finalResult.length}`);
+    console.log(`✅ تم الدمج بنجاح!`);
+    console.log(`📺 عدد القنوات الفريدة: ${finalResult.length}`);
+    console.log(`🔗 تم استبعاد الروابط المكررة والصور الناقصة.`);
 } catch (error) {
-    console.error('خطأ أثناء حفظ الملف:', error);
+    console.error('❌ خطأ أثناء حفظ الملف:', error);
 }
