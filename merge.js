@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 // أسماء الملفات الثلاثة - قم بتعديلها لتطابق أسماء ملفاتك
-const files = ['channels1.json', 'channels2.json', 'channels3.json'];
+const files = ['channels1.json', 'channels2.json', 'channels.json'];
 const outputFile = 'All_channels.json';
 
 let allChannels = [];
