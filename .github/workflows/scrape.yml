@@ -1,4 +1,4 @@
-name: TV Channels Auto Scraper
+name: استخراج موقع akamaized
 
 on:
   schedule:
