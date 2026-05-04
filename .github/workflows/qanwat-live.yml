@@ -1,0 +1,59 @@
+name: تشغيل موقع qanwat-live
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # تحديث تلقائي كل 12 ساعة
+  workflow_dispatch: # زر للتشغيل اليدوي
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # مهم لجلب كامل السجل وتجنب مشاكل الـ pull
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Dependencies
+        run: |
+          if [ ! -f package.json ]; then npm init -y; fi
+          npm install axios cheerio sharp fluent-ffmpeg
+
+      - name: Run Scraper
+        run: node qanwat-live.js
+
+      - name: Commit and Push changes
+        run: |
+          # إعدادات المستخدم
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # منع Git من تشفير الأسماء العربية في السجلات (اختياري لتحسين الشكل)
+          git config --global core.quotePath false
+
+          # إضافة الملفات
+          git add channels.json image/*.jpg
+          
+          # التحقق من وجود تغييرات قبل الـ commit
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "لا توجد تغييرات جديدة للمزامنة."
+          else
+            git commit -m "Auto-update channels: $(date)"
+            
+            # الحل السحري: سحب التغييرات الأخيرة قبل الرفع لمنع خطأ Rejected
+            git pull --rebase origin main
+            
+            git push origin main
+          fi
