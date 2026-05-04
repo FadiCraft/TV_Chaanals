@@ -128,10 +128,10 @@ async function startScraping() {
                         name: item.name,
                         category: item.cat,
                         url: streamUrl,
-                        server_url: fullPageUrl, // رابط السيرفر الأصلي (صفحة القناة)
+                        server_url: fullPageUrl, 
                         local_img: localImg,
                         original_img: item.img || "",
-                        status: "online",
+                        status: "QanwatLive", // تم التعديل هنا بناءً على طلبك
                         last_update: currentTime
                     });
                 } else {
@@ -141,7 +141,6 @@ async function startScraping() {
         } catch (e) { console.log(`❌ خطأ في المصدر: ${e.message}`); }
     }
 
-    // حفظ الملف كـ Array مباشرة بدون Object خارجي
     fs.writeFileSync(JSON_FILE, JSON.stringify(finalChannels, null, 2));
     console.log(`\n✨ تم الانتهاء! تم استخراج ${finalChannels.length} قناة بنجاح.`);
 }
