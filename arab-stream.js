@@ -63,7 +63,7 @@ async function processImage(imgUrl, channelName) {
         const response = await axios({ url: imgUrl, responseType: 'arraybuffer' });
         await sharp(response.data).jpeg({ quality: 85 }).toFile(filePath);
 
-        return `${GITHUB_RAW_BASE}image/${fileName}`;
+        return `${GITHUB_RAW_BASE}image1/${fileName}`;
     } catch {
         return imgUrl; // في حال الفشل نعود للرابط الأصلي
     }
