@@ -44,7 +44,7 @@ jobs:
           git config --global core.quotePath false
 
           # إضافة الملفات
-          git add channels.json image/*.jpg
+          git add channels2.json image2/*.jpg
           
           # التحقق من وجود تغييرات قبل الـ commit
           if git diff --quiet && git diff --staged --quiet; then
