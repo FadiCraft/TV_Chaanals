@@ -20,74 +20,46 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Merge JSON Files (Advanced Logic)
+      - name: Merge JSON Files
         run: |
           node -e "
           const fs = require('fs');
-          const files = ['channels1.json', 'channels2.json', 'channels.json'];
+          const inputFiles = ['channels1.json', 'channels2.json', 'channels.json'];
           const outputFile = 'all_channels.json';
-          const mergedChannels = {};
-          const seenUrls = new Set();
-
-          console.log('--- بدء عملية الدمج المتقدمة ---');
-
-          files.forEach((fileName, index) => {
-              if (fs.existsSync(fileName)) {
+          
+          let rawData = [];
+          
+          // 1. جمع كل البيانات من كل الملفات أولاً
+          inputFiles.forEach(file => {
+              if (fs.existsSync(file)) {
                   try {
-                      const content = fs.readFileSync(fileName, 'utf8').trim();
-                      if (!content) return;
-                      let data = JSON.parse(content);
-
-                      if (Array.isArray(data)) {
-                          data.forEach(ch => {
-                              // التحقق من الاسم، الصورة الأصلية، والارتباط
-                              if (ch.name && ch.original_img && ch.original_img.trim() !== '' && ch.server_url) {
-                                  // التحقق من عدم تكرار الرابط (URL)
-                                  if (!seenUrls.has(ch.server_url)) {
-                                      if (!mergedChannels[ch.name]) {
-                                          mergedChannels[ch.name] = {
-                                              ...ch,
-                                              steem1: '',
-                                              steem2: '',
-                                              steem3: ''
-                                          };
-                                          delete mergedChannels[ch.name].server_url;
-                                      }
-                                      const serverKey = 'steem' + (index + 1);
-                                      mergedChannels[ch.name][serverKey] = ch.server_url;
-                                      seenUrls.add(ch.server_url);
-                                  }
-                              }
-                          });
-                      }
-                  } catch (error) {
-                      console.error('❌ خطأ في ' + fileName + ': ' + error.message);
-                  }
+                      const content = JSON.parse(fs.readFileSync(file, 'utf8'));
+                      if (Array.isArray(content)) rawData = rawData.concat(content);
+                  } catch (e) {}
               }
           });
 
-          const finalResult = Object.values(mergedChannels).map((ch, idx) => {
-              let servers = [ch.steem1, ch.steem2, ch.steem3].filter(s => s && s.trim() !== '');
-              return {
-                  id: idx + 1,
-                  name: ch.name,
-                  category: ch.category,
-                  local_img: ch.local_img,
-                  original_img: ch.original_img,
-                  status: ch.status,
-                  last_update: ch.last_update,
-                  steem1: servers[0] || '',
-                  steem2: servers[1] || '',
-                  steem3: servers[2] || ''
-              };
+          // 2. منطق الفلترة: المفتاح هو الـ server_url
+          const uniqueByUrl = {};
+
+          rawData.forEach(ch => {
+              const url = ch.server_url;
+              if (!url) return;
+
+              // إذا كان الرابط جديداً، أو الرابط موجوداً لكن القناة الحالية لديها صورة والقديمة لا
+              if (!uniqueByUrl[url] || (!uniqueByUrl[url].original_img && ch.original_img)) {
+                  uniqueByUrl[url] = ch;
+              }
           });
 
-          if (finalResult.length > 0) {
-              fs.writeFileSync(outputFile, JSON.stringify(finalResult, null, 4), 'utf8');
-              console.log('🚀 نجاح: تم دمج ' + finalResult.length + ' قناة فريدة.');
-          } else {
-              console.log('🛑 لم يتم العثور على بيانات صالحة للدمج.');
-          }
+          // 3. تحويل النتائج لمصفوفة وإضافة الـ ID
+          const finalResult = Object.values(uniqueByUrl).map((ch, idx) => ({
+              id: idx + 1,
+              ...ch
+          }));
+
+          fs.writeFileSync(outputFile, JSON.stringify(finalResult, null, 4), 'utf8');
+          console.log('🚀 تم الحفظ! القنوات النهائية: ' + finalResult.length);
           "
 
       - name: Commit and Push changes
@@ -95,5 +67,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add all_channels.json
-          git commit -m "Auto-update: Smart Merge and Deduplicate ($(date +'%Y-%m-%d'))" || exit 0
+          git commit -m "Auto-update: Merge and Deduplicate by URL ($(date +'%Y-%m-%d'))" || exit 0
           git push
