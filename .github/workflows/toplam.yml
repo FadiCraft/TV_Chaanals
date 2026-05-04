@@ -1,18 +1,13 @@
-name: تجميع الملفات
+name: تجميع الملفات المطور
 
 on:
   schedule:
-    # سيتم التشغيل يومياً الساعة 12 منتصف الليل بتوقيت UTC
     - cron: '0 0 * * *'
-  
-  # يتيح لك تشغيل السكريبت يدوياً من صفحة Actions
   workflow_dispatch:
 
 jobs:
   merge-job:
     runs-on: ubuntu-latest
-    
-    # للتأكد من أن الـ Action لديه صلاحية الكتابة في المستودع
     permissions:
       contents: write
 
@@ -25,54 +20,73 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Merge JSON Files and Add ID
+      - name: Merge JSON Files (Advanced Logic)
         run: |
           node -e "
           const fs = require('fs');
-          
-          // أسماء الملفات كما تظهر في صورتك
-          const inputFiles = ['channels1.json', 'channels2.json', 'channels.json'];
+          const files = ['channels1.json', 'channels2.json', 'channels.json'];
           const outputFile = 'all_channels.json';
-          let allChannels = [];
+          const mergedChannels = {};
+          const seenUrls = new Set();
 
-          console.log('--- بدء عملية الدمج ---');
+          console.log('--- بدء عملية الدمج المتقدمة ---');
 
-          inputFiles.forEach(file => {
-            if (fs.existsSync(file)) {
-              try {
-                const rawData = fs.readFileSync(file, 'utf8').trim();
-                if (rawData) {
-                  const jsonData = JSON.parse(rawData);
-                  if (Array.isArray(jsonData)) {
-                    console.log('✅ تم العثور على ' + jsonData.length + ' قناة في: ' + file);
-                    allChannels = allChannels.concat(jsonData);
-                  } else {
-                    console.log('⚠️ الملف ' + file + ' ليس مصفوفة (Array).');
+          files.forEach((fileName, index) => {
+              if (fs.existsSync(fileName)) {
+                  try {
+                      const content = fs.readFileSync(fileName, 'utf8').trim();
+                      if (!content) return;
+                      let data = JSON.parse(content);
+
+                      if (Array.isArray(data)) {
+                          data.forEach(ch => {
+                              // التحقق من الاسم، الصورة الأصلية، والارتباط
+                              if (ch.name && ch.original_img && ch.original_img.trim() !== '' && ch.server_url) {
+                                  // التحقق من عدم تكرار الرابط (URL)
+                                  if (!seenUrls.has(ch.server_url)) {
+                                      if (!mergedChannels[ch.name]) {
+                                          mergedChannels[ch.name] = {
+                                              ...ch,
+                                              steem1: '',
+                                              steem2: '',
+                                              steem3: ''
+                                          };
+                                          delete mergedChannels[ch.name].server_url;
+                                      }
+                                      const serverKey = 'steem' + (index + 1);
+                                      mergedChannels[ch.name][serverKey] = ch.server_url;
+                                      seenUrls.add(ch.server_url);
+                                  }
+                              }
+                          });
+                      }
+                  } catch (error) {
+                      console.error('❌ خطأ في ' + fileName + ': ' + error.message);
                   }
-                } else {
-                  console.log('⚠️ الملف ' + file + ' فارغ تماماً.');
-                }
-              } catch (err) {
-                console.error('❌ خطأ في قراءة ' + file + ': ' + err.message);
               }
-            } else {
-              console.log('❌ الملف غير موجود: ' + file);
-            }
           });
 
-          if (allChannels.length > 0) {
-            // إعادة بناء الكائنات لإضافة ID في البداية
-            const finalData = allChannels.map((item, index) => ({
-              id: index + 1,
-              ...item
-            }));
+          const finalResult = Object.values(mergedChannels).map((ch, idx) => {
+              let servers = [ch.steem1, ch.steem2, ch.steem3].filter(s => s && s.trim() !== '');
+              return {
+                  id: idx + 1,
+                  name: ch.name,
+                  category: ch.category,
+                  local_img: ch.local_img,
+                  original_img: ch.original_img,
+                  status: ch.status,
+                  last_update: ch.last_update,
+                  steem1: servers[0] || '',
+                  steem2: servers[1] || '',
+                  steem3: servers[2] || ''
+              };
+          });
 
-            fs.writeFileSync(outputFile, JSON.stringify(finalData, null, 2), 'utf8');
-            console.log('🚀 نجاح: تم دمج ' + finalData.length + ' قناة في ' + outputFile);
+          if (finalResult.length > 0) {
+              fs.writeFileSync(outputFile, JSON.stringify(finalResult, null, 4), 'utf8');
+              console.log('🚀 نجاح: تم دمج ' + finalResult.length + ' قناة فريدة.');
           } else {
-            console.log('🛑 فشل: لم يتم العثور على أي بيانات لدمجها.');
-            // نترك الملف كما هو أو ننشئ مصفوفة فارغة إذا كنت تفضل ذلك
-            if (!fs.existsSync(outputFile)) fs.writeFileSync(outputFile, '[]', 'utf8');
+              console.log('🛑 لم يتم العثور على بيانات صالحة للدمج.');
           }
           "
 
@@ -81,6 +95,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add all_channels.json
-          # لن يفشل الأكشن إذا لم تكن هناك تغييرات جديدة
-          git commit -m "Auto-update: Merged channels ($(date +'%Y-%m-%d'))" || exit 0
+          git commit -m "Auto-update: Smart Merge and Deduplicate ($(date +'%Y-%m-%d'))" || exit 0
           git push
