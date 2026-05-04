@@ -5,8 +5,8 @@ const path = require('path');
 const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
-const IMAGE_DIR = './image';
-const JSON_FILE = 'channels.json';
+const IMAGE_DIR = './image2';
+const JSON_FILE = 'channels2.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
 
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
