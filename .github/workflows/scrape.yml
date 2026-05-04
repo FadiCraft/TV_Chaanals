@@ -1,9 +1,9 @@
-name: TV Channels Auto Scraper
+name: TV Channels Auto Scraper & Merger
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # تحديث تلقائي كل 12 ساعة
-  workflow_dispatch: # زر للتشغيل اليدوي
+    - cron: '0 */12 * * *' # كل 12 ساعة
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # مهم لجلب كامل السجل وتجنب مشاكل الـ pull
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -34,26 +34,37 @@ jobs:
       - name: Run Scraper
         run: node scraper.js
 
+      - name: Run Merger (Add IDs)
+        run: |
+          node -e "
+          const fs = require('fs');
+          const files = ['channels1.json', 'channels2.json', 'channels3.json'];
+          let all = [];
+          files.forEach(f => {
+            if(fs.existsSync(f)) {
+              const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+              if(Array.isArray(d)) all = all.concat(d);
+            }
+          });
+          const result = all.map((item, i) => ({ id: i + 1, ...item }));
+          fs.writeFileSync('all_channels.json', JSON.stringify(result, null, 2), 'utf8');
+          "
+
       - name: Commit and Push changes
         run: |
-          # إعدادات المستخدم
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          # منع Git من تشفير الأسماء العربية في السجلات (اختياري لتحسين الشكل)
           git config --global core.quotePath false
 
-          # إضافة الملفات
-          git add channels.json image/*.jpg
+          # سحب أي تغييرات خارجية أولاً بأمان
+          git pull origin main --rebase
+
+          # إضافة كل الملفات الناتجة (الصور والملف المدمج)
+          git add image/*.jpg all_channels.json channels1.json channels2.json channels3.json
           
-          # التحقق من وجود تغييرات قبل الـ commit
           if git diff --quiet && git diff --staged --quiet; then
-            echo "لا توجد تغييرات جديدة للمزامنة."
+            echo "لا توجد تغييرات جديدة."
           else
-            git commit -m "Auto-update channels: $(date)"
-            
-            # الحل السحري: سحب التغييرات الأخيرة قبل الرفع لمنع خطأ Rejected
-            git pull --rebase origin main
-            
+            git commit -m "Auto-update & Merge: $(date)"
             git push origin main
           fi
