@@ -31,7 +31,7 @@ jobs:
           const fs = require('fs');
           
           // أسماء الملفات كما تظهر في صورتك
-          const inputFiles = ['channels1.json', 'channels2.json', 'channels3.json'];
+          const inputFiles = ['channels1.json', 'channels2.json', 'channels.json'];
           const outputFile = 'all_channels.json';
           let allChannels = [];
 
