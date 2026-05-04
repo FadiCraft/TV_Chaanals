@@ -155,7 +155,7 @@ async function startScraping() {
                         url: streamUrl,
                         server_url: item.page,
                         local_img: localImg,
-                        status: "online",
+                        status: "Akamaized",
                         last_update: currentTime
                     });
                 } else {
