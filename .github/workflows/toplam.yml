@@ -1,0 +1,30 @@
+steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Merge JSON and Add IDs
+        run: |
+          # يمكنك كتابة الكود هنا مباشرة أو استدعاء ملف .js
+          node -e "
+          const fs = require('fs');
+          const files = ['file1.json', 'file2.json', 'file3.json'];
+          let all = [];
+          files.forEach(f => {
+            if(fs.existsSync(f)) all = all.concat(JSON.parse(fs.readFileSync(f, 'utf8')));
+          });
+          const result = all.map((item, i) => ({ id: i + 1, ...item }));
+          fs.writeFileSync('all_channels.json', JSON.stringify(result, null, 4), 'utf8');
+          "
+
+      - name: Commit Changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add all_channels.json
+          git commit -m "Update channels with IDs" || exit 0
+          git push
