@@ -1,79 +1,54 @@
 const fs = require('fs');
 
+// أسماء الملفات الثلاثة
 const files = ['channels1.json', 'channels2.json', 'channels.json'];
 const outputFile = 'All_channels.json';
 
-const mergedChannels = {};
-// مجموعة لتتبع الروابط المستخدمة لمنع تكرار نفس الرابط لقنوات مختلفة
+let allChannels = [];
+// مجموعة لتتبع الروابط المستخدمة لمنع التكرار
 const seenUrls = new Set();
 
-files.forEach((fileName, index) => {
-    if (fs.existsSync(fileName)) {
+files.forEach(file => {
+    if (fs.existsSync(file)) {
         try {
-            const content = fs.readFileSync(fileName, 'utf8');
-            let data = JSON.parse(content);
-
+            const data = JSON.parse(fs.readFileSync(file, 'utf8'));
             if (Array.isArray(data)) {
-                data.forEach(ch => {
-                    // --- شرط التحقق الجديد ---
-                    // التأكد من وجود الاسم، وجود رابط الصورة الأصلية، ووجود رابط السيرفر
-                    if (ch.name && ch.original_img && ch.original_img.trim() !== "" && ch.server_url) {
-                        
-                        // التأكد من أن الرابط (url) لم يسبق استخدامه مع قناة أخرى
-                        if (!seenUrls.has(ch.server_url)) {
-                            
-                            if (!mergedChannels[ch.name]) {
-                                // إنشاء سجل القناة إذا كانت تظهر لأول مرة
-                                mergedChannels[ch.name] = {
-                                    ...ch,
-                                    steem1: "",
-                                    steem2: "",
-                                    steem3: ""
-                                };
-                                delete mergedChannels[ch.name].server_url;
-                            }
+                data.forEach(channel => {
+                    // --- شروط التحقق قبل الإضافة ---
+                    // 1. التأكد من وجود اسم للقناة
+                    // 2. التأكد من وجود رابط الصورة الأصلية (original_img) وأنها ليست فارغة
+                    // 3. التأكد من وجود رابط السيرفر (server_url)
+                    // 4. التأكد من أن رابط السيرفر لم يسبق إضافته (منع تكرار الـ URL)
+                    
+                    const hasName = channel.name && channel.name.trim() !== "";
+                    const hasImg = channel.original_img && channel.original_img.trim() !== "";
+                    const hasUrl = channel.server_url && channel.server_url.trim() !== "";
+                    const isNotDuplicateUrl = !seenUrls.has(channel.server_url);
 
-                            // إضافة الرابط في الخانة المناسبة بناءً على ترتيب الملف
-                            const serverKey = `steem${index + 1}`;
-                            mergedChannels[ch.name][serverKey] = ch.server_url;
-                            
-                            // تسجيل الرابط كـ "مستخدم" حتى لا يتكرر
-                            seenUrls.add(ch.server_url);
-                        }
+                    if (hasName && hasImg && hasUrl && isNotDuplicateUrl) {
+                        allChannels.push(channel);
+                        seenUrls.add(channel.server_url); // تسجيل الرابط لمنع تكراره لاحقاً
                     }
                 });
             }
         } catch (error) {
-            console.error(`خطأ في قراءة الملف ${fileName}:`, error);
+            console.error(`Error reading ${file}:`, error);
         }
     }
 });
 
-// تحويل الكائن إلى مصفوفة وإعادة ترتيب السيرفرات (steem1, steem2, steem3)
-const finalResult = Object.values(mergedChannels).map((ch, idx) => {
-    // تجميع الروابط الموجودة فقط وحذف الفراغات
-    let servers = [ch.steem1, ch.steem2, ch.steem3].filter(s => s && s.trim() !== "");
-    
-    return {
-        id: idx + 1,
-        name: ch.name,
-        category: ch.category,
-        local_img: ch.local_img,
-        original_img: ch.original_img, // سيبقى متاحاً في الملف النهائي
-        status: ch.status,
-        last_update: ch.last_update,
-        steem1: servers[0] || "",
-        steem2: servers[1] || "",
-        steem3: servers[2] || ""
-    };
-});
+// إضافة الـ ID لكل قناة بعد التصفية وإعادة ترتيب الخصائص
+const indexedChannels = allChannels.map((channel, index) => ({
+    id: index + 1,
+    ...channel
+}));
 
-// حفظ الملف النهائي
+// حفظ الملف النهائي بتنسيق JSON مرتب
 try {
-    fs.writeFileSync(outputFile, JSON.stringify(finalResult, null, 4), 'utf8');
-    console.log(`✅ تم الدمج بنجاح!`);
-    console.log(`📺 عدد القنوات الفريدة: ${finalResult.length}`);
-    console.log(`🔗 تم استبعاد الروابط المكررة والصور الناقصة.`);
+    fs.writeFileSync(outputFile, JSON.stringify(indexedChannels, null, 4), 'utf8');
+    console.log(`✅ تم بنجاح!`);
+    console.log(`📺 عدد القنوات الصالحة والفريدة: ${indexedChannels.length}`);
+    console.log(`📁 تم حفظ النتيجة في: ${outputFile}`);
 } catch (error) {
-    console.error('❌ خطأ أثناء حفظ الملف:', error);
+    console.error('Error writing output file:', error);
 }
