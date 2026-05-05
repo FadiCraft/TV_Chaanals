@@ -23,15 +23,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-
       - name: Install Dependencies
         run: |
           if [ ! -f package.json ]; then npm init -y; fi
-          npm install axios cheerio sharp fluent-ffmpeg puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth cheerio axios sharp
 
       - name: Install Chrome Browser for Puppeteer
         run: npx puppeteer browsers install chrome
@@ -45,8 +40,11 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --global core.quotePath false
 
-          # تأكد من إضافة الملف الصحيح الناتج عن السكريبت
-          git add channels_yalla.json image/*.webp || true
+          # إضافة ملف النتائج
+          git add channels_yalla.json
+          
+          # إضافة الصور إذا وُجدت وتجاهل الخطأ إذا كان المجلد فارغاً
+          git add image/*.webp || echo "No images to add"
           
           if git diff --quiet && git diff --staged --quiet; then
             echo "لا توجد تغييرات جديدة للمزامنة."
