@@ -6,18 +6,18 @@ const sharp = require('sharp');
 const ffmpeg = require('fluent-ffmpeg');
 
 const IMAGE_DIR = './image';
-const JSON_FILE = 'channels.json';
+const JSON_FILE = 'channels_yalla.json';
 const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/';
-const BASE_URL = 'http://www.azrotv.com';
+const BASE_URL = 'https://www.yallatv.online'; // الدومين الجديد
 
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
 /**
- * فحص دفق الفيديو باستخدام ffprobe مع مهلة زمنية قصيرة للسرعة
+ * فحص دفق الفيديو باستخدام ffprobe
  */
 async function verifyVideo(streamUrl) {
     return new Promise((resolve) => {
-        ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "3", "-timeout", "3000000"], (err, metadata) => {
+        ffmpeg.ffprobe(streamUrl, ["-connect_timeout", "5", "-timeout", "5000000"], (err, metadata) => {
             if (err) resolve(false);
             else {
                 const hasVideo = metadata.streams.some(s => s.codec_type === 'video');
@@ -28,72 +28,72 @@ async function verifyVideo(streamUrl) {
 }
 
 /**
- * استخراج رابط m3u8 من صفحة القناة مع دعم الـ iframes المتعددة
+ * استخراج رابط m3u8 من صفحة المشاهدة
  */
 async function getStreamUrl(pageUrl) {
     try {
         const { data } = await axios.get(pageUrl, { 
-            timeout: 8000, 
-            headers: { 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)' } 
+            timeout: 10000, 
+            headers: { 
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Referer': BASE_URL
+            } 
         });
 
         const $ = cheerio.load(data);
-        let m3u8Links = [];
-
-        // 1. البحث عن روابط m3u8 مباشرة في السكريبتات
-        const scripts = $('script').text();
-        const m3u8Matches = scripts.match(/https?:\/\/[^"']+\.m3u8[^"']*/g);
-        if (m3u8Matches) m3u8Links.push(...m3u8Matches);
-
-        // 2. البحث داخل جميع الـ iframes الموجودة (لأنك قلت قد تجد سيرفرين)
-        const iframes = $('iframe').toArray();
-        for (const iframe of iframes) {
-            let src = $(iframe).attr('src');
-            if (src) {
-                // معالجة الروابط التي تبدأ بـ /
-                if (src.startsWith('/')) src = BASE_URL + src;
-                
-                // إذا كان الرابط يحتوي على id=http... (كما في مثالك)
-                if (src.includes('id=')) {
-                    const potentialUrl = src.split('id=')[1].split('&')[0];
-                    if (potentialUrl.includes('.m3u8')) m3u8Links.push(potentialUrl);
-                }
-
-                // محاولة جلب محتوى الـ iframe إذا لم نجد الرابط في العنوان
-                try {
-                    const iframeRes = await axios.get(src, { timeout: 5000, headers: { 'User-Agent': 'Mozilla/5.0' } });
-                    const innerMatches = iframeRes.data.match(/https?:\/\/[^"']+\.m3u8[^"']*/g);
-                    if (innerMatches) m3u8Links.push(...innerMatches);
-                } catch (e) {}
-            }
+        
+        // البحث عن الـ iframe الخاص بالفيديو
+        const iframeSrc = $('.iframevideo').attr('src');
+        if (!iframeSrc) {
+            console.log(`   ⚠️ لم يتم العثور على وسام iframe في هذه الصفحة.`);
+            return null;
         }
 
-        // تنظيف الروابط وتكرارها
-        const uniqueLinks = [...new Set(m3u8Links)].map(l => l.replace(/\\/g, ''));
+        // بناء رابط الـ iframe الكامل
+        const fullIframeUrl = iframeSrc.startsWith('http') ? iframeSrc : BASE_URL + iframeSrc;
+        console.log(`   📡 جاري فحص سيرفر المشاهدة: ${fullIframeUrl}`);
+
+        // جلب محتوى السيرفر للبحث عن ملف m3u8
+        const iframeRes = await axios.get(fullIframeUrl, { 
+            timeout: 8000, 
+            headers: { 
+                'User-Agent': 'Mozilla/5.0', 
+                'Referer': pageUrl 
+            } 
+        });
+
+        const m3u8Matches = iframeRes.data.match(/https?:\/\/[^"']+\.m3u8[^"']*/g);
         
-        // فحص الروابط المستخرجة واختيار أول واحد يعمل
-        for (const link of uniqueLinks) {
-            if (await verifyVideo(link)) return link;
+        if (m3u8Matches) {
+            const uniqueLinks = [...new Set(m3u8Matches)].map(l => l.replace(/\\/g, ''));
+            for (const link of uniqueLinks) {
+                console.log(`   🔍 فحص الرابط المباشر: ${link.substring(0, 50)}...`);
+                if (await verifyVideo(link)) return link;
+            }
         }
         
         return null;
-    } catch { return null; }
+    } catch (e) { 
+        console.log(`   ❌ خطأ أثناء استخراج السيرفر: ${e.message}`);
+        return null; 
+    }
 }
 
+/**
+ * معالجة وتصغير الشعار
+ */
 async function processImage(imgUrl, channelName) {
     if (!imgUrl) return "";
     try {
         const safeName = channelName.replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_').toLowerCase();
-        const fileName = `${safeName}.jpg`;
+        const fileName = `${safeName}.webp`; // الموقع يستخدم webp
         const filePath = path.join(IMAGE_DIR, fileName);
 
-        let finalImgUrl = imgUrl.startsWith('..') ? imgUrl.replace('..', BASE_URL) : imgUrl;
-        if (finalImgUrl.startsWith('/')) finalImgUrl = BASE_URL + finalImgUrl;
+        let finalImgUrl = imgUrl.startsWith('http') ? imgUrl : BASE_URL + imgUrl;
 
         const response = await axios({ url: finalImgUrl, responseType: 'arraybuffer', timeout: 5000 });
         await sharp(response.data)
             .resize(400, 225)
-            .jpeg({ quality: 85 })
             .toFile(filePath);
 
         return `${GITHUB_RAW_BASE}image/${fileName}`;
@@ -104,69 +104,59 @@ async function startScraping() {
     const finalChannels = [];
     const currentTime = new Date().toLocaleString('ar-EG');
     
-    // قائمة الصفحات المطلوب كشطها من الموقع
-    const pages = [
-        'http://www.azrotv.com/iphone/arabic/',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_2.php',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_3.php',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_4.php',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_5.php',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_6.php',
-        'http://www.azrotv.com/iphone/arabic/mobi_arabic_7.php',
-        'http://www.azrotv.com/iphone/arabic/iraq.php',
-        'http://www.azrotv.com/iphone/arabic/tn.php'
+    // يمكنك إضافة المزيد من الروابط هنا (أقسام الموقع)
+    const sections = [
+        'https://www.yallatv.online/amp/'
     ];
 
-    for (const pageUrl of pages) {
-        console.log(`\n🌐 جاري استخراج القنوات من: ${pageUrl}`);
+    for (const sectionUrl of sections) {
+        console.log(`\n🌐 جاري استخراج القنوات من القسم: ${sectionUrl}`);
         try {
-            const { data } = await axios.get(pageUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-            const $ = cheerio.load(data);
-            
-            const items = [];
-            $('.BlockCha').each((i, el) => {
-                const linkTag = $(el).find('a.Azrotv-ChUrl');
-                const imgTag = $(el).find('img.oui9img');
-                
-                let pageLink = linkTag.attr('href');
-                if (pageLink && pageLink.startsWith('/')) pageLink = BASE_URL + pageLink;
-
-                items.push({
-                    name: imgTag.attr('alt') ? imgTag.attr('alt').replace(' بث مباشر', '').trim() : "قناة غير معروفة",
-                    page: pageLink,
-                    img: imgTag.attr('src'),
-                    cat: "عربي"
-                });
+            const { data } = await axios.get(sectionUrl, { 
+                headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0' } 
             });
+            
+            const $ = cheerio.load(data);
+            const channelElements = $('.channels-grid a.channel').toArray();
 
-            for (const item of items) {
-                if (!item.page) continue;
-                console.log(`🔍 فحص قناة: ${item.name}`);
-                
-                const streamUrl = await getStreamUrl(item.page);
+            console.log(`✅ تم العثور على ${channelElements.length} قناة محتملة.`);
+
+            for (const el of channelElements) {
+                const name = $(el).find('.channel-name').text().trim();
+                let pageLink = $(el).attr('href');
+                let imgPath = $(el).find('amp-img img').attr('src') || $(el).find('amp-img').attr('src');
+
+                if (!pageLink) continue;
+                if (!pageLink.startsWith('http')) pageLink = BASE_URL + pageLink;
+
+                console.log(`\n📺 [${name}]`);
+                console.log(`   🔗 صفحة القناة: ${pageLink}`);
+
+                const streamUrl = await getStreamUrl(pageLink);
                 
                 if (streamUrl) {
-                    console.log(`✅ تم العثور على سيرفر شغال!`);
-                    const localImg = await processImage(item.img, item.name);
+                    console.log(`   ✅ تم العثور على رابط مباشر شغال!`);
+                    const localImg = await processImage(imgPath, name);
                     
                     finalChannels.push({
-                        name: item.name,
-                        category: item.cat,
+                        name: name,
                         url: streamUrl,
-                        server_url: item.page,
-                        local_img: localImg,
-                        status: "Akamaized",
+                        img: localImg,
+                        server: pageLink,
                         last_update: currentTime
                     });
                 } else {
-                    console.log(`❌ لا يوجد سيرفر متاح`);
+                    console.log(`   ❌ لا يوجد رابط m3u8 يعمل حالياً.`);
                 }
             }
-        } catch (e) { console.log(`❌ خطأ في الصفحة: ${e.message}`); }
+        } catch (e) { 
+            console.log(`❌ فشل الوصول للموقع: ${e.message}`);
+            console.log(`💡 نصيحة: إذا استمرت المشكلة، قد تحتاج لاستخدام puppeteer لتخطي Cloudflare.`);
+        }
     }
 
     fs.writeFileSync(JSON_FILE, JSON.stringify(finalChannels, null, 2));
-    console.log(`\n✨ انتهى البحث! تم حفظ ${finalChannels.length} قناة.`);
+    console.log(`\n✨ العمل اكتمل! تم حفظ ${finalChannels.length} قناة في ملف ${JSON_FILE}`);
 }
 
 startScraping();
