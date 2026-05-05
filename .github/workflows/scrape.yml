@@ -1,9 +1,9 @@
-name: استخراج قنوات Yalla TV المطور
+name: استخراج موقع akamaized
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
-  workflow_dispatch:
+    - cron: '0 */12 * * *' # تحديث تلقائي كل 12 ساعة
+  workflow_dispatch: # زر للتشغيل اليدوي
 
 permissions:
   contents: write
@@ -16,42 +16,50 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # مهم جداً لجلب السجل كاملاً وتفادي مشاكل الـ Push
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
       - name: Install Dependencies
         run: |
           if [ ! -f package.json ]; then npm init -y; fi
-          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth cheerio axios sharp
-
-      - name: Install Chrome Browser
-        run: npx puppeteer browsers install chrome
+          npm install axios cheerio sharp fluent-ffmpeg
 
       - name: Run Scraper
         run: node scraper.js
 
-      - name: Upload Debug Screenshot (If Failed)
-        if: failure() || always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: debug-screenshots
-          path: debug-*.png
-
       - name: Commit and Push changes
         run: |
+          # إعدادات المستخدم للـ Git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          
+          # منع Git من تشفير الأسماء العربية في السجلات
           git config --global core.quotePath false
-          git add channels_yalla.json
-          git add image/*.webp || echo "No images"
+
+          # إضافة الملفات المحددة (JSON والصور)
+          git add channels.json image/*.jpg
+          
+          # التحقق إذا كان هناك تغييرات فعلاً لتجنب الخطأ عند عمل commit فارغ
           if git diff --quiet && git diff --staged --quiet; then
-            echo "لا توجد تغييرات."
+            echo "لا توجد تغييرات جديدة للمزامنة."
             exit 0
           fi
-          git commit -m "Auto-update: $(date)"
+
+          git commit -m "Auto-update channels: $(date)"
+
+          # التعامل مع التعارضات:
+          # نستخدم rebase مع استراتيجية 'ours' لإعطاء الأولوية للملفات التي تم إنشاؤها الآن
+          # هذا يحل مشكلة الـ Conflict في ملفات الـ JSON تلقائياً
           git pull --rebase -X ours origin main
+          
+          # الرفع إلى المستودع
           git push origin main
