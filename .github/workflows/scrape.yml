@@ -1,9 +1,9 @@
-name: استخراج قنوات Yalla TV
+name: استخراج قنوات Yalla TV المطور
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # تحديث تلقائي كل 12 ساعة
-  workflow_dispatch: # زر للتشغيل اليدوي
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -28,29 +28,30 @@ jobs:
           if [ ! -f package.json ]; then npm init -y; fi
           npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth cheerio axios sharp
 
-      - name: Install Chrome Browser for Puppeteer
+      - name: Install Chrome Browser
         run: npx puppeteer browsers install chrome
 
       - name: Run Scraper
         run: node scraper.js
+
+      - name: Upload Debug Screenshot (If Failed)
+        if: failure() || always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-screenshots
+          path: debug-*.png
 
       - name: Commit and Push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git config --global core.quotePath false
-
-          # إضافة ملف النتائج
           git add channels_yalla.json
-          
-          # إضافة الصور إذا وُجدت وتجاهل الخطأ إذا كان المجلد فارغاً
-          git add image/*.webp || echo "No images to add"
-          
+          git add image/*.webp || echo "No images"
           if git diff --quiet && git diff --staged --quiet; then
-            echo "لا توجد تغييرات جديدة للمزامنة."
+            echo "لا توجد تغييرات."
             exit 0
           fi
-
-          git commit -m "Auto-update YallaTV channels: $(date)"
+          git commit -m "Auto-update: $(date)"
           git pull --rebase -X ours origin main
           git push origin main
