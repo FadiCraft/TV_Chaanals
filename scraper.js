@@ -6,7 +6,7 @@ const path = require('path');
 const axios = require('axios');
 const sharp = require('sharp');
 
-// استخدام إضافة التخفي لتجاوز Cloudflare
+// تفعيل ميزة التخفي لتجاوز Cloudflare
 puppeteer.use(StealthPlugin());
 
 const IMAGE_DIR = './image';
@@ -16,41 +16,44 @@ const BASE_URL = 'https://www.yallatv.online';
 if (!fs.existsSync(IMAGE_DIR)) fs.mkdirSync(IMAGE_DIR, { recursive: true });
 
 /**
- * استخراج رابط m3u8 من خلال مراقبة حركة الشبكة
+ * دالة استخراج الرابط المباشر عبر مراقبة الشبكة
  */
 async function getStreamFromNetwork(pageUrl) {
     const browser = await puppeteer.launch({ 
-        headless: true, // يجب أن يكون true في GitHub Actions
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+        headless: true, 
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1920,1080'] 
     });
     
     const page = await browser.newPage();
     let streamUrl = null;
 
     try {
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+        await page.setViewport({ width: 1920, height: 1080 });
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
 
-        // تفعيل اعتراض الطلبات
+        // تفعيل اعتراض طلبات الشبكة للبحث عن روابط البث
         await page.setRequestInterception(true);
         page.on('request', request => {
             const url = request.url();
-            // البحث عن روابط m3u8 التي تحتوي على "chunklist" أو "index" أو تنتهي بـ m3u8
+            // البحث عن الروابط التي تنتهي بـ m3u8 أو تحتوي على دومين akamaized المعروف للبث
             if (url.includes('.m3u8') || url.includes('akamaized.net')) {
-                console.log(`   🎯 تم العثور على رابط في الشبكة: ${url.substring(0, 70)}...`);
+                console.log(`   🎯 تم التقاط رابط بث: ${url.substring(0, 60)}...`);
                 streamUrl = url;
             }
             request.continue();
         });
 
-        console.log(`   🌐 جاري فتح: ${pageUrl}`);
-        // ننتظر حتى استقرار الشبكة لضمان تحميل المشغل
-        await page.goto(pageUrl, { waitUntil: 'networkidle2', timeout: 45000 });
+        console.log(`   🌐 جاري فحص صفحة البث: ${pageUrl}`);
+        await page.goto(pageUrl, { waitUntil: 'networkidle2', timeout: 60000 });
         
-        // مهلة إضافية للتأكد من التقاط الرابط
-        await new Promise(r => setTimeout(r, 6000));
+        // الانتظار للتأكد من تشغيل المشغل (Iframe)
+        await page.waitForSelector('.iframevideo', { timeout: 15000 }).catch(() => {});
+        
+        // مهلة إضافية لضمان خروج طلب الـ m3u8 من المشغل
+        await new Promise(r => setTimeout(r, 10000)); 
 
     } catch (e) {
-        console.log(`   ❌ خطأ في الصفحة: ${e.message}`);
+        console.log(`   ❌ فشل استخراج الرابط من الشبكة: ${e.message}`);
     } finally {
         await browser.close();
     }
@@ -58,7 +61,7 @@ async function getStreamFromNetwork(pageUrl) {
 }
 
 /**
- * تحميل ومعالجة صورة القناة
+ * معالجة وحفظ شعار القناة
  */
 async function processImage(imgUrl, channelName) {
     if (!imgUrl) return "";
@@ -69,18 +72,32 @@ async function processImage(imgUrl, channelName) {
 
         const response = await axios({ url: imgUrl, responseType: 'arraybuffer', timeout: 5000 });
         await sharp(response.data).resize(400, 225).toFile(filePath);
+        
+        // تأكد من تغيير اسم المستخدم والمستودع هنا إذا لزم الأمر
         return `https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/main/image/${fileName}`;
-    } catch { return ""; }
+    } catch (e) {
+        return imgUrl; // في حال الفشل نستخدم الرابط الأصلي
+    }
 }
 
 async function startScraping() {
+    console.log("🚀بدء عملية الاستخراج...");
     const finalChannels = [];
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const browser = await puppeteer.launch({ 
+        headless: true, 
+        args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    });
     const page = await browser.newPage();
 
     try {
-        console.log(`\n🚀 جاري فحص الصفحة الرئيسية: ${BASE_URL}/amp/`);
-        await page.goto(`${BASE_URL}/amp/`, { waitUntil: 'networkidle2' });
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
+        
+        console.log(`\n🔎 جاري سحب قائمة القنوات من: ${BASE_URL}/amp/`);
+        await page.goto(`${BASE_URL}/amp/`, { waitUntil: 'networkidle2', timeout: 60000 });
+        
+        // الانتظار حتى تظهر الشبكة التي تحتوي على القنوات
+        await page.waitForSelector('.channels-grid', { timeout: 20000 });
+
         const content = await page.content();
         const $ = cheerio.load(content);
         
@@ -88,9 +105,9 @@ async function startScraping() {
         $('.channels-grid a.channel').each((i, el) => {
             const name = $(el).find('.channel-name').text().trim();
             const href = $(el).attr('href');
-            let img = $(el).find('amp-img img').attr('src') || $(el).find('amp-img').attr('src');
+            let img = $(el).find('amp-img img').attr('src') || $(el).find('amp-img').attr('src') || $(el).find('img').attr('src');
 
-            if (href) {
+            if (href && name) {
                 items.push({
                     name,
                     page: href.startsWith('http') ? href : BASE_URL + href,
@@ -99,35 +116,39 @@ async function startScraping() {
             }
         });
 
-        console.log(`✅ تم استخراج ${items.length} قناة. بدأ فحص السيرفرات المباشرة...`);
+        console.log(`✅ تم العثور على ${items.length} قناة.`);
         await browser.close();
 
+        // فحص كل قناة لاستخراج الرابط المباشر
         for (const item of items) {
-            console.log(`\n📺 جاري فحص: ${item.name}`);
-            const directUrl = await getStreamFromNetwork(item.page);
+            console.log(`\n📺 جاري العمل على القناة: ${item.name}`);
+            const streamUrl = await getStreamFromNetwork(item.page);
 
-            if (directUrl) {
-                console.log(`   ✅ تم الحصول على الرابط المباشر.`);
+            if (streamUrl) {
+                console.log(`   ✅ تم العثور على البث بنجاح.`);
                 const localImg = await processImage(item.img, item.name);
                 
                 finalChannels.push({
                     name: item.name,
-                    url: directUrl,
-                    local_img: localImg,
-                    source: item.page,
-                    last_update: new Date().toLocaleString('ar-EG')
+                    url: streamUrl,
+                    logo: localImg,
+                    source_page: item.page,
+                    category: "Yalla TV",
+                    timestamp: new Date().toLocaleString('ar-EG')
                 });
             } else {
-                console.log(`   ❌ لم يتم العثور على بث يعمل لهذه القناة.`);
+                console.log(`   ❌ القناة لا تعمل أو البث محمي بشكل متقدم.`);
             }
         }
 
     } catch (e) {
-        console.log(`❌ خطأ عام: ${e.message}`);
+        console.log(`❌ خطأ عام أثناء التشغيل: ${e.message}`);
+        await browser.close();
     }
 
+    // حفظ النتائج النهائية في ملف JSON
     fs.writeFileSync(JSON_FILE, JSON.stringify(finalChannels, null, 2));
-    console.log(`\n✨ تم الانتهاء! تم حفظ ${finalChannels.length} قناة في ${JSON_FILE}`);
+    console.log(`\n✨ اكتملت العملية! إجمالي القنوات الشغالة: ${finalChannels.length}`);
 }
 
 startScraping();
