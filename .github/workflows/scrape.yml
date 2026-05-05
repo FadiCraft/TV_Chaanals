@@ -1,4 +1,4 @@
-name: استخراج موقع akamaized
+name: استخراج قنوات Yalla TV
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # مهم جداً لجلب السجل كاملاً وتفادي مشاكل الـ Push
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -31,35 +31,28 @@ jobs:
       - name: Install Dependencies
         run: |
           if [ ! -f package.json ]; then npm init -y; fi
-          npm install axios cheerio sharp fluent-ffmpeg
+          npm install axios cheerio sharp fluent-ffmpeg puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
+
+      - name: Install Chrome Browser for Puppeteer
+        run: npx puppeteer browsers install chrome
 
       - name: Run Scraper
         run: node scraper.js
 
       - name: Commit and Push changes
         run: |
-          # إعدادات المستخدم للـ Git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          # منع Git من تشفير الأسماء العربية في السجلات
           git config --global core.quotePath false
 
-          # إضافة الملفات المحددة (JSON والصور)
-          git add channels.json image/*.jpg
+          # تأكد من إضافة الملف الصحيح الناتج عن السكريبت
+          git add channels_yalla.json image/*.webp || true
           
-          # التحقق إذا كان هناك تغييرات فعلاً لتجنب الخطأ عند عمل commit فارغ
           if git diff --quiet && git diff --staged --quiet; then
             echo "لا توجد تغييرات جديدة للمزامنة."
             exit 0
           fi
 
-          git commit -m "Auto-update channels: $(date)"
-
-          # التعامل مع التعارضات:
-          # نستخدم rebase مع استراتيجية 'ours' لإعطاء الأولوية للملفات التي تم إنشاؤها الآن
-          # هذا يحل مشكلة الـ Conflict في ملفات الـ JSON تلقائياً
+          git commit -m "Auto-update YallaTV channels: $(date)"
           git pull --rebase -X ours origin main
-          
-          # الرفع إلى المستودع
           git push origin main
