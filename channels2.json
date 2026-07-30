@@ -1,5 +1,35 @@
 [
   {
+    "name": "الحياة دراما",
+    "category": "قنوات ترفيهية",
+    "url": "https://fastly.live.brightcove.com/1843521635140662966/eu-west-1/6057955906001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiZGd4MWQ4LmVncmVzcy5mZDJ2eHIiLCJhY2NvdW50X2lkIjoiNjA1Nzk1NTkwNjAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MDU3OTU1OTA2MDAxIl0sImp0aSI6IjE4NDM1MjE2MzUxNDA2NjI5NjYifQ.3f6Ek99wdZf_GSaWnd7hHgbJOSa2zbyqt2cUoxyTHzk/playlist-hls.m3u8",
+    "server_url": "https://play.arab-stream.live/p/hayat-drama.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/الحياة_دراما.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiAsVHchLp5k_8TW7KWYZJmiz5MKIPPyAAY01LCaQl041uow1JiyeQL_ksQPRHStGltTcmaYBAyPNnm1o6bXJ_dM_LR37QjIupYxQZzn3O9_cGbsuU3pQdHTMsaOvG0FDWqzQQHaKRDuKPd23nQ66k91R6ejuIHqYQiu69Uyyq1lehQnciEYxpp764yw/s1600/hayah-drama.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC 1",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-1-ksa.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_1.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOnIjmwD8VsEWTnTzjb_RlGMKGDGMe_iyMCN4pLLPW_mGJbZvNn0le34TQrHSTKIryBczyS85Yn9x4MjhCDjwAwvsuPD9CFvMxepl0QG6iKhJAMdtDdv8A_AITaj8EREEBcc-uUh724o0qNKGvkjXwDZ0fQe_yGtRGjJQmDh1VC0iBOdeEErXutvqJTg/s320/mbc-1-live.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC 3",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-3.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_3.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJQbE6YzPxk9fyFY5riMGZonsHYscjswml2wLTIcl-VYS0q1dC4LYeCUDGtV1LNtlcaWsWgjmQeCBw8rEUkGZdidMX36DDwVcTfH4OXGld2CrhRa0N1cwGZhN8Vo-CGpPgj8MBP7Dw8hFhhGhkoPUra8gpLobkvNt62P39Bb_XhsDELnefR09smJnSoQ/s1024/mbc-3-live-1.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
     "name": "MBC 4",
     "category": "قنوات mbc",
     "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8",
@@ -7,6 +37,76 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_4.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTA19AyyGdXgOq2ZHQAq_NkFibQ4PwlMB2FjPbLRCgCa8rliSOObTwqj_gs-UDG9wcudq5Ch07c3ZJQ498LKMUnj5PC8aZ51pjHOKhD0EbJdqXFZQaaXSzGsbvhBpyb2yvC5X3Conh9Sj4sPrI416ksluzA_hn8dqNqVKqmpTy1ebhERhtrQxpUD60Dg/s1024/mbc-4-live-1.webp",
     "status": "QanwatLive",
-    "last_update": "٢٩‏/٧‏/٢٠٢٦، ٢:٢٠:١٨ م"
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC 5",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-5.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_5.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivpQaVYwHu14R1bHouONTNTpcSdTYyMcBWB0IAelU9rmDeiUpNcSsJuCcbHAbvN1qk9G63LIwJLlDoz-Xxu9TfRl2ieqQ05x0akqrOaY7X7LkvX3ZHHXJLdqJcuPCJKNquagj-uETb3FlGY8r3P7OKDXB96hzq59RmkqxLeCUE-miQUVIs192sL0IyWg/s1024/mbc-5-live.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC-Bollywood",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-bollywood.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_bollywood.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRdweCG_sHyTAHQAnCKdb0KGba7bFeK6MT_Oggrp7-3PXXRwrBnI-NPes2cPgo0sc09PKgGv_B0TpIRGAZXavKiHFhyaVrAnVAaUQJsqKmdhSgQRQ8-sBVd_Z9lPqQ6ysFitzg2o_99fX_ZkvArfIbv_V38TNo35HpO-O5dswtWW4tAvX-q_jVJDfRnw/s1024/mbc-bollywood-live-1.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC masr",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-masr-1.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_masr.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhw9gn6zlar48GggEpdnheo0FL_y1yETmJBIKseBIE357jKf3OJLTZsdxA2wseYllHWYqsqzLvwRUvARGf0h_LxTRSZvSxYvVFmn_E8_MRJOycuDnum4GQeOnwEdxrbAlaYJCvQ0sLkCoocOG1T_XAxh-Ks9EHlxnddQ545fAkIyXojhQkBE-HCscs7Jw/s1024/mbc-masr-live.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC masr 2",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-2/754931856515075b0aabf0e583495c68/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-masr-2.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_masr_2.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3BIZ6ulGCd9Q8Sk3GuRPy8svOHipEnBDVRWI7Bulz6jh0Gzo5iqCCew6opnSs4gzUYZlWu9Tihnw6rq_Quh1psTut1LZh6aJiMOIq-OTFD6YZVvGVrugeYDUlYJJyTGJQAMBXqF2kztIh2fUkm1LdQ4clthaA2K8aUEkJ5ZJBqXumFR-2d-8gX4ZH4g/s1024/mbc-masr-2-live-1.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC drama",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-drama-ksa.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_drama.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6fmDw4qTs7wouYVdGZV_28Oz0RTY5i-stUHXqe8i6R316Y6Ps-zipl8O8ovY8bX_h-X-qzCPv7T1iMFWr980yMF-hLh5KDWOSt1I0nYu4QZEU5G_cLTN7tglhCoHPP5fxomLGosXcb21EYHSQzCTb6XI9dXxOEzmslkRr1vmUIo59P-3NFHx15WmCWg/s1024/mbc-drama-live.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC masr drama",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-misr-drama.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_masr_drama.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjef4jxkhK2C3F5QT8_rzlKX9Ggz85Yikm3cYYOq4LZ3plZyiY2H_awoyPnqIhKmqaSKj4wugHAGdyNsUjTQIWaesinJI0ganpnjDhbOqOzdfyRlDTpurBJPZKD8UO0UtMtpdmkfeWFDqCbBjZUJ6URSziLZgUIF5kNlCa8wZcu_v6wMpSAbPmuONcsIA/s1024/mbc-masr-drama-live-4.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
+  },
+  {
+    "name": "MBC 3",
+    "category": "قنوات الأطفال",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/mbc-3.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/mbc_3.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJQbE6YzPxk9fyFY5riMGZonsHYscjswml2wLTIcl-VYS0q1dC4LYeCUDGtV1LNtlcaWsWgjmQeCBw8rEUkGZdidMX36DDwVcTfH4OXGld2CrhRa0N1cwGZhN8Vo-CGpPgj8MBP7Dw8hFhhGhkoPUra8gpLobkvNt62P39Bb_XhsDELnefR09smJnSoQ/s1024/mbc-3-live-1.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٧‏/٢٠٢٦، ٢:٤١:٠٣ ص"
   }
 ]
