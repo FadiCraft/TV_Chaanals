@@ -1,21 +1,12 @@
 [
   {
-    "name": "OTV",
-    "category": "قنوات ترفيهية",
-    "url": "https://flu.systemnet.tv/OTV/index.m3u8",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/otv.jpg",
-    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaGgOsOQpu_5MPukonZTkbVYhYwIoYoWlA1sw3GcE_QyGwjyk373g9l1zcxCP8OfUahAhvecxqboY1Gzchm9vq9oi5cyY4S_DD2swW5E1w64G3bWzYoiDi866enx9uog93baGf_idZRDkl6OkzCKUWZhgSBUpThIrVIxDaCa3a0nU4Mb3IuKGfTv5r4A/s600/otv.webp",
-    "status": "ArabStream",
-    "last_update": "٧‏/٨‏/٢٠٢٦، ١٢:٥٦:٥١ م"
-  },
-  {
     "name": "الحياة دراما",
     "category": "قنوات ترفيهية",
     "url": "https://fastly.live.brightcove.com/1843521635140662966/eu-west-1/6057955906001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiZGd4MWQ4LmVncmVzcy5mZDJ2eHIiLCJhY2NvdW50X2lkIjoiNjA1Nzk1NTkwNjAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MDU3OTU1OTA2MDAxIl0sImp0aSI6IjE4NDM1MjE2MzUxNDA2NjI5NjYifQ.3f6Ek99wdZf_GSaWnd7hHgbJOSa2zbyqt2cUoxyTHzk/playlist-hls.m3u8",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/الحياة_دراما.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiAsVHchLp5k_8TW7KWYZJmiz5MKIPPyAAY01LCaQl041uow1JiyeQL_ksQPRHStGltTcmaYBAyPNnm1o6bXJ_dM_LR37QjIupYxQZzn3O9_cGbsuU3pQdHTMsaOvG0FDWqzQQHaKRDuKPd23nQ66k91R6ejuIHqYQiu69Uyyq1lehQnciEYxpp764yw/s1600/hayah-drama.webp",
     "status": "ArabStream",
-    "last_update": "٧‏/٨‏/٢٠٢٦، ١٢:٥٦:٥٥ م"
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠١:١١ م"
   },
   {
     "name": "MBC 1",
@@ -24,7 +15,16 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_1.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOnIjmwD8VsEWTnTzjb_RlGMKGDGMe_iyMCN4pLLPW_mGJbZvNn0le34TQrHSTKIryBczyS85Yn9x4MjhCDjwAwvsuPD9CFvMxepl0QG6iKhJAMdtDdv8A_AITaj8EREEBcc-uUh724o0qNKGvkjXwDZ0fQe_yGtRGjJQmDh1VC0iBOdeEErXutvqJTg/s320/mbc-1-live.webp",
     "status": "ArabStream",
-    "last_update": "٧‏/٨‏/٢٠٢٦، ١٢:٥٧:١٤ م"
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠١:٢٨ م"
+  },
+  {
+    "name": "MBC 3",
+    "category": "قنوات mbc",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_3.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJQbE6YzPxk9fyFY5riMGZonsHYscjswml2wLTIcl-VYS0q1dC4LYeCUDGtV1LNtlcaWsWgjmQeCBw8rEUkGZdidMX36DDwVcTfH4OXGld2CrhRa0N1cwGZhN8Vo-CGpPgj8MBP7Dw8hFhhGhkoPUra8gpLobkvNt62P39Bb_XhsDELnefR09smJnSoQ/s1024/mbc-3-live-1.webp",
+    "status": "ArabStream",
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠١:٤١ م"
   },
   {
     "name": "MBC 4",
@@ -33,15 +33,24 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_4.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTA19AyyGdXgOq2ZHQAq_NkFibQ4PwlMB2FjPbLRCgCa8rliSOObTwqj_gs-UDG9wcudq5Ch07c3ZJQ498LKMUnj5PC8aZ51pjHOKhD0EbJdqXFZQaaXSzGsbvhBpyb2yvC5X3Conh9Sj4sPrI416ksluzA_hn8dqNqVKqmpTy1ebhERhtrQxpUD60Dg/s1024/mbc-4-live-1.webp",
     "status": "ArabStream",
-    "last_update": "٧‏/٨‏/٢٠٢٦، ١٢:٥٧:٢٣ م"
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠١:٤٧ م"
   },
   {
-    "name": "MBC masr drama",
+    "name": "MBC 5",
     "category": "قنوات mbc",
-    "url": "https://shd-gcp-live-orng.shahid.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_masr_drama.jpg",
-    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjef4jxkhK2C3F5QT8_rzlKX9Ggz85Yikm3cYYOq4LZ3plZyiY2H_awoyPnqIhKmqaSKj4wugHAGdyNsUjTQIWaesinJI0ganpnjDhbOqOzdfyRlDTpurBJPZKD8UO0UtMtpdmkfeWFDqCbBjZUJ6URSziLZgUIF5kNlCa8wZcu_v6wMpSAbPmuONcsIA/s1024/mbc-masr-drama-live-4.webp",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_5.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivpQaVYwHu14R1bHouONTNTpcSdTYyMcBWB0IAelU9rmDeiUpNcSsJuCcbHAbvN1qk9G63LIwJLlDoz-Xxu9TfRl2ieqQ05x0akqrOaY7X7LkvX3ZHHXJLdqJcuPCJKNquagj-uETb3FlGY8r3P7OKDXB96hzq59RmkqxLeCUE-miQUVIs192sL0IyWg/s1024/mbc-5-live.webp",
     "status": "ArabStream",
-    "last_update": "٧‏/٨‏/٢٠٢٦، ١٢:٥٧:٤٢ م"
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠٢:٠١ م"
+  },
+  {
+    "name": "الكأس 2",
+    "category": "قنوات الكأس",
+    "url": "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/الكأس_2.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE0i5hQPy2T1n9QKerzODw6U09wB6TbyheMJnO3MMJ5U0jquxrOd3Q99vT2rXrrLur9CSfYNLratOcxRkBY1Mis4QwAIbHbLUA2MeKgGHktx5NYqjgPWKzr8NfBKaDN9j6LvkZ7KNDrN284fu-pRjneWNLiVu0L46xQvcOw_g9C-wnoC8pzJmGBLaVRw/s1024/Al-Kass-2.webp",
+    "status": "ArabStream",
+    "last_update": "١٠‏/٨‏/٢٠٢٦، ١:٠٢:١٧ م"
   }
 ]
