@@ -6,7 +6,7 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/otv.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaGgOsOQpu_5MPukonZTkbVYhYwIoYoWlA1sw3GcE_QyGwjyk373g9l1zcxCP8OfUahAhvecxqboY1Gzchm9vq9oi5cyY4S_DD2swW5E1w64G3bWzYoiDi866enx9uog93baGf_idZRDkl6OkzCKUWZhgSBUpThIrVIxDaCa3a0nU4Mb3IuKGfTv5r4A/s600/otv.webp",
     "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٢:٠١ م"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٠٦:٥٦ ص"
   },
   {
     "name": "الحياة دراما",
@@ -15,7 +15,7 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/الحياة_دراما.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiAsVHchLp5k_8TW7KWYZJmiz5MKIPPyAAY01LCaQl041uow1JiyeQL_ksQPRHStGltTcmaYBAyPNnm1o6bXJ_dM_LR37QjIupYxQZzn3O9_cGbsuU3pQdHTMsaOvG0FDWqzQQHaKRDuKPd23nQ66k91R6ejuIHqYQiu69Uyyq1lehQnciEYxpp764yw/s1600/hayah-drama.webp",
     "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٢:٠٦ م"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٠٧:٠٢ ص"
   },
   {
     "name": "MBC 1",
@@ -24,33 +24,15 @@
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_1.jpg",
     "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOnIjmwD8VsEWTnTzjb_RlGMKGDGMe_iyMCN4pLLPW_mGJbZvNn0le34TQrHSTKIryBczyS85Yn9x4MjhCDjwAwvsuPD9CFvMxepl0QG6iKhJAMdtDdv8A_AITaj8EREEBcc-uUh724o0qNKGvkjXwDZ0fQe_yGtRGjJQmDh1VC0iBOdeEErXutvqJTg/s320/mbc-1-live.webp",
     "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٢:٢٥ م"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٠٧:٢٣ ص"
   },
   {
-    "name": "MBC 5",
+    "name": "MBC 3",
     "category": "قنوات mbc",
-    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-5/ee6b000cee0629411b666ab26cb13e9b/index.m3u8",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_5.jpg",
-    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivpQaVYwHu14R1bHouONTNTpcSdTYyMcBWB0IAelU9rmDeiUpNcSsJuCcbHAbvN1qk9G63LIwJLlDoz-Xxu9TfRl2ieqQ05x0akqrOaY7X7LkvX3ZHHXJLdqJcuPCJKNquagj-uETb3FlGY8r3P7OKDXB96hzq59RmkqxLeCUE-miQUVIs192sL0IyWg/s1024/mbc-5-live.webp",
+    "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-3-usa/5d58265a862a476dc7f97694addb5ded/index.m3u8",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/mbc_3.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJQbE6YzPxk9fyFY5riMGZonsHYscjswml2wLTIcl-VYS0q1dC4LYeCUDGtV1LNtlcaWsWgjmQeCBw8rEUkGZdidMX36DDwVcTfH4OXGld2CrhRa0N1cwGZhN8Vo-CGpPgj8MBP7Dw8hFhhGhkoPUra8gpLobkvNt62P39Bb_XhsDELnefR09smJnSoQ/s1024/mbc-3-live-1.webp",
     "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٢:٣٥ م"
-  },
-  {
-    "name": "الكأس 6",
-    "category": "قنوات الكأس",
-    "url": "https://liveeu-gcp.alkassdigital.net/alkass6-p/main.m3u8",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/الكأس_6.jpg",
-    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDodQhUBcut7I__ywInypsszu3cL6cdKcHQ06d5Q8DUs0lHC70SO3fCBC-F-uM9wsbR9SMtMlCE3aDnpRW5gVWC1fi-55-Ne6TGArJdkSU_d9FM3TSgmqwGDVS8ZUz7CkzIV0Lx-fmoGybl6-huv5Fgz-ickpfyhZgNS76mo3-SNKQ3DZbfVDV8IhhLQ/s1024/Al-Kass-6.webp",
-    "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٢:٥٥ م"
-  },
-  {
-    "name": "تايم سبورت 2",
-    "category": "قنوات رياضية",
-    "url": "https://fastly.live.brightcove.com/6386027187112/us-east-1/6416013238001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoieWN3Ymx1LmVncmVzcy5zenkzeHgiLCJhY2NvdW50X2lkIjoiNjQxNjAxMzIzODAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2NDE2MDEzMjM4MDAxIl0sImp0aSI6IjYzODYwMjcxODcxMTIifQ.o9bQYbACQ386kDSKbOPBVYlIhCz3WFgEHI3A8Pcw3qg/playlist-hls.m3u8",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image1/تايم_سبورت_2.jpg",
-    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje3gdfe3ccmajqEAqGmV3rvZp4DDpWTbEWUkxLl1RtiI7iycW-lu_3C5BFgNUUFKs7PpJ_2fOFPk-FZ8Halk4h5pM8vlZuejEtH2zAhZhSptftOsW9iyx7rlCQt4tAEntqmOc-YsN93fOzBn9frZ9RQhtT3Jxi1Bd3PMaDpSYwfsblhhjyr_iBp0Jk-g/s1536/on-time-sport-2.webp",
-    "status": "ArabStream",
-    "last_update": "٢٠‏/٨‏/٢٠٢٦، ١٢:٤٣:٠٥ م"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٠٧:٣٨ ص"
   }
 ]
