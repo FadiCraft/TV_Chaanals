@@ -6,7 +6,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/qatar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_قطر_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة قطر اليوم",
@@ -15,16 +15,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/qatar-today.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_قطر_اليوم.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
-  },
-  {
-    "name": "قناة الجزيرة مباشر",
-    "category": "عربي",
-    "url": "https://live-hls-web-ajm.getaj.net/AJM/04.m3u8",
-    "server_url": "http://www.azrotv.com/iphone/news/ch/aljazeera_mubashir.php",
-    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الجزيرة_مباشر.jpg",
-    "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الجزيرة",
@@ -33,7 +24,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/aljazeera_ar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الجزيرة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Al jazeera english",
@@ -42,7 +33,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/aljazeera_english.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/al_jazeera_english.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Al Jazeera America live",
@@ -51,7 +42,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/aljazeera_amri.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/al_jazeera_america_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Al jazeera Balkans Live",
@@ -60,7 +51,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/aljazeera_balkans.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/al_jazeera_balkans_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الريان 2",
@@ -69,7 +60,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/AlRayyan2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الريان_2.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الريان",
@@ -78,7 +69,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/ryan.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الريان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الكاس",
@@ -87,7 +78,7 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/alkass1.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الكاس.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "شوف لايف - Shoof live TV",
@@ -96,25 +87,25 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/chooflive.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/شوف_لايف___shoof_live_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الكاس 2",
     "category": "عربي",
-    "url": "https://liveeu-gcps.alkassdigital.net/alkass2-p/main.m3u8?hdnts=exp=1787277535~hmac=bdce4b92c04064fda9b8ac2ad0f69fae490f0f5ac5a2d0c9cd3c87034ccefafa",
+    "url": "https://liveeu-gcps.alkassdigital.net/alkass2-p/main.m3u8?hdnts=exp=1787318119~hmac=a17153c9684c08e863ecb13235daf6ba7da5d38014586f2aea8ee15ed2acf32c",
     "server_url": "http://www.azrotv.com/iphone/srt/ch/Kass-tow.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الكاس_2.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الكاس 3",
     "category": "عربي",
-    "url": "https://liveeu-gcps.alkassdigital.net/alkass3-p/main.m3u8?hdnts=exp=1787277535~hmac=adb9dce27d0dae23e98b4a1a5351efa65d9da1dea49385e82caac638812f205d",
+    "url": "https://liveeu-gcps.alkassdigital.net/alkass3-p/main.m3u8?hdnts=exp=1787318119~hmac=048ac07724eb7df0ef68e8d1f96bfc960f744e191d1973af8fc1807a62d12dde",
     "server_url": "http://www.azrotv.com/iphone/srt/ch/Kass3.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الكاس_3.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الكاس 6",
@@ -123,7 +114,7 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/kass6.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الكاس_6.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة العربي 2",
@@ -132,7 +123,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/alaraby-2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_العربي_2.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "شبكة التلفزيون العربي",
@@ -141,7 +132,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/Alaraby.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/شبكة_التلفزيون_العربي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Turck",
@@ -150,7 +141,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/Atourkia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/turck.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Turck",
@@ -159,7 +150,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/iflm.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/turck.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Kuwait 1 Tv",
@@ -168,7 +159,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Kuwait1.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/kuwait_1_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Kuwait 2 TV",
@@ -177,16 +168,16 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Kuwait2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/kuwait_2_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الراي مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/alraimedialive/alraitv.smil/playlist.m3u8?hdnts=exp=1787276754~acl=/alraimedialive/alraitv.smil/*~hmac=ab7be4880ef126043e68d215bd6efcd38c6f244ea762e5ef5628de1667b1aa55",
+    "url": "https://live.kwikmotion.com/alraimedialive/alraitv.smil/playlist.m3u8?hdnts=exp=1787317358~acl=/alraimedialive/alraitv.smil/*~hmac=0ca91aade3d1b9bf8137f39c210e0cf56919e3daba1b22adc95ec922fe9df516",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Rai.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الراي_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "اذاعة مارينة",
@@ -195,7 +186,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/MarinaFM.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/اذاعة_مارينة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "KSA1 live",
@@ -204,16 +195,16 @@
     "server_url": "http://www.azrotv.com/iphone/f/sa-1/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ksa1_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة السعودية الآن",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports4live/ksasports4.smil/playlist_dvr.m3u8?hdnts=exp=1787276783~acl=/ksasports4live/ksasports4.smil/*~hmac=d5d189b930519dd8c6165cd980727ae052ff60fbe3a4d5822b30c416eaff362c",
+    "url": "https://live.kwikmotion.com/ksasports4live/ksasports4.smil/playlist_dvr.m3u8?hdnts=exp=1787317389~acl=/ksasports4live/ksasports4.smil/*~hmac=1a6e345844051b4d63f7ef7c9544601649375864f366e1ec9c8822022f3f2505",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saoudianowtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_السعودية_الآن.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة  الثقافية بث",
@@ -222,88 +213,88 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/thaqafeyyah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة__الثقافية_بث.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "السعودية الرياضية مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports1live/ksasports1.smil/playlist_dvr.m3u8?hdnts=exp=1787276801~acl=/ksasports1live/ksasports1.smil/*~hmac=eb69e4d0711c928fb8b764bf7d6c792a31974399d3651f3f77636710d1158fe9",
+    "url": "https://live.kwikmotion.com/ksasports1live/ksasports1.smil/playlist_dvr.m3u8?hdnts=exp=1787317414~acl=/ksasports1live/ksasports1.smil/*~hmac=8f2a40d055872745f95ea8dfcce61eb79d8650c00f6704693cdbed1b42440050",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saouditv_sport1.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/السعودية_الرياضية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "السعودية الرياضية 2 السعودية مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports2live/ksasports2.smil/playlist_dvr.m3u8?hdnts=exp=1787276807~acl=/ksasports2live/ksasports2.smil/*~hmac=2d7881bdb30c1d3a4414b773084a6463bff1cf01a86511169c9fada5a6309701",
+    "url": "https://live.kwikmotion.com/ksasports2live/ksasports2.smil/playlist_dvr.m3u8?hdnts=exp=1787317423~acl=/ksasports2live/ksasports2.smil/*~hmac=3dfdaac1a2236d0f72a603071b852f818a25ae706f4f794f86b40116cc788470",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saoudi_sport2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/السعودية_الرياضية_2_السعودية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "السعودية الرياضية 3 السعودية مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports3live/ksasports3.smil/playlist_dvr.m3u8?hdnts=exp=1787276813~acl=/ksasports3live/ksasports3.smil/*~hmac=265e410281159e7adf2118119b9cfd05f44da32141fc32e6d2306892a17bd658",
+    "url": "https://live.kwikmotion.com/ksasports3live/ksasports3.smil/playlist_dvr.m3u8?hdnts=exp=1787317431~acl=/ksasports3live/ksasports3.smil/*~hmac=ecf672583c2c355f6510439b8f861fb90f487919cbf1007a25ee5d57955ba95e",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saoudi_sport3.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/السعودية_الرياضية_3_السعودية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "السعودية الرياضية 4 السعودية مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports4live/ksasports4.smil/playlist_dvr.m3u8?hdnts=exp=1787276819~acl=/ksasports4live/ksasports4.smil/*~hmac=b51b62a5b7031b3b388a17c9873f7e3f8f80dfb36b49c87709fde7c576cf09e2",
+    "url": "https://live.kwikmotion.com/ksasports4live/ksasports4.smil/playlist_dvr.m3u8?hdnts=exp=1787317440~acl=/ksasports4live/ksasports4.smil/*~hmac=84bce390a110f2e44e7c0c4c3bec674073a63795e989b7a1d65265247d8f9700",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saoudi_sport4.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/السعودية_الرياضية_4_السعودية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الرياضية السعودية",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksasports1live/ksasports1.smil/playlist_dvr.m3u8?hdnts=exp=1787276824~acl=/ksasports1live/ksasports1.smil/*~hmac=35384ac1119e9fe76e4becfc0b46b3341bb42eb49aa91c957d62d01f024486e2",
+    "url": "https://live.kwikmotion.com/ksasports1live/ksasports1.smil/playlist_dvr.m3u8?hdnts=exp=1787317447~acl=/ksasports1live/ksasports1.smil/*~hmac=54421a4cea6f741531685daf5ac2bb15f839b19121f2e93c62c9e12a246eae71",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/saoudisport.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الرياضية_السعودية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "الاخبارية مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ikhbariyalive/ikhbariya.smil/playlist_dvr.m3u8?hdnts=exp=1787276830~acl=/ikhbariyalive/ikhbariya.smil/*~hmac=96f163c44869462f2de2d145fd2211e327397dc9970e4b87f54ff6054db09714",
+    "url": "https://live.kwikmotion.com/ikhbariyalive/ikhbariya.smil/playlist_dvr.m3u8?hdnts=exp=1787317455~acl=/ikhbariyalive/ikhbariya.smil/*~hmac=9d51f8567fc5aeb05ec7296e85027e7ff3687cba2343973d31c4543893d0e998",
     "server_url": "http://www.azrotv.com/iphone/news/ch/Al-ikhbaria.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الاخبارية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ذكريات",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/zikrayatlive/zikrayat.smil/playlist_dvr.m3u8?hdnts=exp=1787276836~acl=/zikrayatlive/zikrayat.smil/*~hmac=c15e474f5e1446d205869e3d032ec42e8851e652339452d3f732af245d142907",
+    "url": "https://live.kwikmotion.com/zikrayatlive/zikrayat.smil/playlist_dvr.m3u8?hdnts=exp=1787317464~acl=/zikrayatlive/zikrayat.smil/*~hmac=cc1bf047482b34f5164d0def65abfc2027d4de3ef3649e9eb607a7d2b8b52001",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/thikrayat_tv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ذكريات.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة SBC مباشر",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/sbclive/sbc.smil/playlist_dvr.m3u8?hdnts=exp=1787276842~acl=/sbclive/sbc.smil/*~hmac=1e968c778edb36710e5cc3902c8053e2209a5e18ca931393e23e1c7e3ee299bb",
+    "url": "https://live.kwikmotion.com/sbclive/sbc.smil/playlist_dvr.m3u8?hdnts=exp=1787317473~acl=/sbclive/sbc.smil/*~hmac=f9b0fe71e16e7491dcd15dbccfa4fd8da57bccd9cee212ccc6eae7873ee0fc4c",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/sbc.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_sbc_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Quran Tv live",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/ksaquranlive/ksaquran.smil/playlist_dvr.m3u8?hdnts=exp=1787276849~acl=/ksaquranlive/ksaquran.smil/*~hmac=6735d05fbf717db3c9c68906d04bcbc5129d5a1e6c3984d0cba6fe86edcb1184",
+    "url": "https://live.kwikmotion.com/ksaquranlive/ksaquran.smil/playlist_dvr.m3u8?hdnts=exp=1787317484~acl=/ksaquranlive/ksaquran.smil/*~hmac=187baf7364f62ca02a58dff8796d5c420fe1f639f137306177f4ab75515449f3",
     "server_url": "http://www.azrotv.com/iphone/f/sa-qu/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/quran_tv_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مكة الفضائية مباشر",
@@ -312,7 +303,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Makkah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مكة_الفضائية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اقرأ مباشر",
@@ -321,7 +312,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Iqraa.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اقرأ_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Iqraa Europe Direct",
@@ -330,7 +321,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/iqraaeurope.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/iqraa_europe_direct.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "iqraa international live",
@@ -339,7 +330,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/iqraa_int.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/iqraa_international_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "iqra bangala live",
@@ -348,7 +339,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/iqrabangala.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/iqra_bangala_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "IQRA TV URDU",
@@ -357,7 +348,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/iqratvurdu.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/iqra_tv_urdu.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة رقة الفضائية",
@@ -366,7 +357,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/Athaqafiyah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_رقة_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اطفال و مواهب",
@@ -375,7 +366,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/atfalwamwaheb.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اطفال_و_مواهب.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الخليج",
@@ -384,7 +375,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/al_khalij.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الخليج.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اهدى",
@@ -393,7 +384,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/huda.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اهدى.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون الشرق",
@@ -402,7 +393,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/asharq_news.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_الشرق.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق NOW",
@@ -411,7 +402,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/asharq_now.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق_now.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Asharq Documentary الشرق الوثائقية",
@@ -420,7 +411,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqdoc.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/asharq_documentary_الشرق_الوثائقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق discovery",
@@ -429,7 +420,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqdiscovery.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق_discovery.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Radio Asharq",
@@ -438,7 +429,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqradio.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/radio_asharq.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "روتانا افلام",
@@ -447,7 +438,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/egy-Raf/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روتانا_افلام.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "روتانا مصرية",
@@ -456,7 +447,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/egy-Rms/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روتانا_مصرية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "رتونا مسيقى",
@@ -465,7 +456,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/egy-Rmz/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رتونا_مسيقى.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -474,7 +465,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/mb1/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -483,7 +474,7 @@
     "server_url": "http://www.azrotv.com/iphone/e/mb4/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -492,7 +483,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mb_4.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -501,7 +492,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/cbm5.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -510,7 +501,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mbiraq.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -519,7 +510,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/Mmsr.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -528,7 +519,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/m-masr2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "ام بي سي مصر دراما  - Mbc masr drama",
@@ -537,7 +528,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mbmd.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ام_بي_سي_مصر_دراما____mbc_masr_drama.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -546,7 +537,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mdr.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -555,7 +546,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mdplus.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "فاريتي",
@@ -564,7 +555,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mbvar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/فاريتي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الميادين",
@@ -573,7 +564,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/almayadeen.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الميادين.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المنار مباشر",
@@ -582,7 +573,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/almanar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المنار_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المستقبل",
@@ -591,7 +582,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/Almustaqbal.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المستقبل.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "LBC LIVE",
@@ -600,7 +591,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/lb-cbl/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/lbc_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "NNA LIVE",
@@ -609,7 +600,7 @@
     "server_url": "http://www.azrotv.com/iphone/e/ann-tv-live/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/nna_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة هدهد",
@@ -618,7 +609,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/hodhodtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_هدهد.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "وكالة يونيوز للاخبار",
@@ -627,7 +618,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/unews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/وكالة_يونيوز_للاخبار.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق السورية",
@@ -636,7 +627,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/orient-tv-live.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق_السورية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الصراط البنانية",
@@ -645,7 +636,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/assirat.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الصراط_البنانية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "البث المباشر - Voice of Lebanon - صوت لبنان",
@@ -654,7 +645,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/vld.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/البث_المباشر___voice_of_lebanon___صوت_لبنان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Senses TV Arabia Direct",
@@ -663,7 +654,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/sensesar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/senses_tv_arabia_direct.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Senses TV International Live",
@@ -672,7 +663,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/sensesint.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/senses_tv_international_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ليبيا الإخبارية",
@@ -681,7 +672,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/libya_news.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ليبيا_الإخبارية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة القناة 9",
@@ -690,7 +681,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/alqanat9.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_القناة_9.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ليبيا الاخبارية",
@@ -699,7 +690,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/libianews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ليبيا_الاخبارية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المسار الليبية",
@@ -708,7 +699,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/almasartv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المسار_الليبية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة هلا لندن",
@@ -717,7 +708,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/halalondon.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_هلا_لندن.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "بث مباشر قناة تناصح",
@@ -726,7 +717,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/tanasuh.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/بث_مباشر_قناة_تناصح.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ليبيا الجديدة new libya",
@@ -735,7 +726,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/nc.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ليبيا_الجديدة_new_libya.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة سوريا بث حي",
@@ -744,7 +735,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/Syrie1.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_سوريا_بث_حي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة نور الشام بث حي",
@@ -753,7 +744,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/noor.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نور_الشام_بث_حي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة التربوية مباشر",
@@ -762,7 +753,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/SEdu.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_التربوية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة سورية الاولى",
@@ -771,7 +762,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/Aloulasuria.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_سورية_الاولى.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفيزيون سوريا مباشر",
@@ -780,7 +771,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/television_syria.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفيزيون_سوريا_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة القناة 9",
@@ -789,7 +780,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/alqanat9.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_القناة_9.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "روسيا اليوم",
@@ -798,7 +789,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/rt.arabic.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روسيا_اليوم.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "سكي نيوز",
@@ -807,7 +798,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/SkyNews_ar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/سكي_نيوز.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة العالم",
@@ -816,7 +807,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/alam.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_العالم.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة العربية مباشر",
@@ -825,7 +816,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/alarabia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_العربية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Al Arabiya Business - الأسواق العربية",
@@ -834,7 +825,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/alarabiyabusness.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/al_arabiya_business___الأسواق_العربية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "البث المباشر لبرامج العربية على مدار الساعة",
@@ -843,7 +834,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/alarabia-programs.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/البث_المباشر_لبرامج_العربية_على_مدار_الساعة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة العربية الحدث مباشر",
@@ -852,7 +843,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/alarabia_alhadath.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_العربية_الحدث_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "DW ARABIC LIVE",
@@ -861,7 +852,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/dw_arabic.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/dw_arabic_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "CNBC ARABIC LIVE",
@@ -870,7 +861,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/cnb_arabia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/cnbc_arabic_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "France 24 en direct",
@@ -879,7 +870,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/France24ar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/france_24_en_direct.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "ابو ظبي الرياضية",
@@ -888,7 +879,7 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/abudhabisport-1.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ابو_ظبي_الرياضية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "2 ابو ظبي الرياضية",
@@ -897,7 +888,7 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/abudhabisport-2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/2_ابو_ظبي_الرياضية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "3 ابو ظبي الرياضية",
@@ -906,7 +897,7 @@
     "server_url": "http://www.azrotv.com/iphone/srt/ch/abudhabisport-3.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/3_ابو_ظبي_الرياضية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشارقة 2",
@@ -915,7 +906,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/sharjahtv2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشارقة_2.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرقية",
@@ -924,7 +915,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/SharjahShar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الوسطى",
@@ -933,7 +924,16 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/al-wousta.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الوسطى.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
+  },
+  {
+    "name": "اذاعة الشارقة للقران الكريم",
+    "category": "عربي",
+    "url": "https://svs.itworkscdn.net/smcquranlive/quranradiolive/chunks.m3u8",
+    "server_url": "http://www.azrotv.com/iphone/arabic/ch4/Sharjahquran.php",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/اذاعة_الشارقة_للقران_الكريم.jpg",
+    "status": "Akamaized",
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Orient",
@@ -942,7 +942,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/orient-tv-live.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/orient.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الاتحاد",
@@ -951,7 +951,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/alittihad.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الاتحاد.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون البحرين مباشر",
@@ -960,7 +960,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/bahrain.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_البحرين_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون البحرين لول",
@@ -969,7 +969,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/bahrainlawal.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_البحرين_لول.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة بحرين انترناشيونال",
@@ -978,7 +978,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/bahrain_int.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_بحرين_انترناشيونال.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -987,7 +987,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/bahrainStv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -996,7 +996,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/bahrainS2tv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة بحرين قران",
@@ -1005,7 +1005,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/Bahrain_Quran.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_بحرين_قران.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عجمان",
@@ -1014,7 +1014,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/ajman/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عجمان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -1023,7 +1023,7 @@
     "server_url": "http://www.azrotv.com/iphone/En/p2/ic.php/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون الشرق",
@@ -1032,7 +1032,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/asharq_news.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_الشرق.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق NOW",
@@ -1041,7 +1041,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch2/asharq_now.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق_now.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Asharq Documentary الشرق الوثائقية",
@@ -1050,7 +1050,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqdoc.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/asharq_documentary_الشرق_الوثائقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق discovery",
@@ -1059,7 +1059,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqdiscovery.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق_discovery.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Radio Asharq",
@@ -1068,7 +1068,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/asharqradio.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/radio_asharq.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة هلا لندن",
@@ -1077,7 +1077,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/halalondon.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_هلا_لندن.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Hala London Production live",
@@ -1086,7 +1086,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/halaproduction.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/hala_london_production_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Hala London Movies live",
@@ -1095,7 +1095,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/halaaflam.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/hala_london_movies_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "المشهد مباشر",
@@ -1104,7 +1104,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/al-mashhad-live.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/المشهد_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشلال",
@@ -1113,7 +1113,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch4/ashallaltv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشلال.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -1122,7 +1122,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/Mmsr.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -1131,7 +1131,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/m-masr2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "ام بي سي مصر دراما  - Mbc masr drama",
@@ -1140,7 +1140,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mbmd.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ام_بي_سي_مصر_دراما____mbc_masr_drama.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة التغيير مباشر",
@@ -1149,7 +1149,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/taghyeer.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_التغيير_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الشرق",
@@ -1158,7 +1158,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/esharq.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الشرق.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الغد العربي",
@@ -1167,7 +1167,7 @@
     "server_url": "http://www.azrotv.com/iphone/e/egy-elghad-alarabi/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الغد_العربي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "روتانا افلام",
@@ -1176,7 +1176,16 @@
     "server_url": "http://www.azrotv.com/iphone/f/egy-Raf/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روتانا_افلام.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
+  },
+  {
+    "name": "روتانا مصرية",
+    "category": "عربي",
+    "url": "https://cdn1.iptvcdn.tv/mcnc/ROTANA_AFLAMPLUS/playlist.m3u8?token=demo",
+    "server_url": "http://www.azrotv.com/iphone/f/egy-Rms/",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/روتانا_مصرية.jpg",
+    "status": "Akamaized",
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "رتونا مسيقى",
@@ -1185,7 +1194,7 @@
     "server_url": "http://www.azrotv.com/iphone/f/egy-Rmz/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رتونا_مسيقى.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مكملين مباشر",
@@ -1194,7 +1203,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/makmalyn.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مكملين_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة نايل سنيما مباشر",
@@ -1203,7 +1212,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/nile_c.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نايل_سنيما_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة نايل الثقافية مباشر",
@@ -1212,7 +1221,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/nile_tha.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نايل_الثقافية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة وطن",
@@ -1221,7 +1230,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/watane.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_وطن.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "اذاعة 9090 اف ام",
@@ -1230,7 +1239,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/9090fm.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/اذاعة_9090_اف_ام.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة MIX",
@@ -1239,7 +1248,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/mx.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_mix.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ميكس بالعربي",
@@ -1248,7 +1257,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/mixaraby.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ميكس_بالعربي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "ميكس وان",
@@ -1257,7 +1266,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/mixone.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ميكس_وان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة شوف ماكس",
@@ -1266,7 +1275,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/shoofmax.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_شوف_ماكس.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المسيرة",
@@ -1275,7 +1284,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/almasirah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المسيرة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المسيرة مباشر",
@@ -1284,7 +1293,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/almasirah_mubashir.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المسيرة_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المهر الفضائية",
@@ -1293,7 +1302,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/almahrahtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المهر_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المهرية الفضائية",
@@ -1302,7 +1311,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/almahriah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المهرية_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الساحة",
@@ -1311,7 +1320,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/assahatv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الساحة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عمان",
@@ -1320,7 +1329,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/oman.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عمان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة السودانية",
@@ -1329,7 +1338,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/sudantv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_السودانية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "DABANGA TV LIVE",
@@ -1338,7 +1347,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/dabanga.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/dabanga_tv_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون الحرية من فلسطين",
@@ -1347,7 +1356,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/huriyahtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_الحرية_من_فلسطين.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الوطن من فلسطين",
@@ -1356,7 +1365,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/wattan.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الوطن_من_فلسطين.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة فلسطين مباشر",
@@ -1365,7 +1374,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/PalestineToday.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_فلسطين_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة تلفزيون فلسطين",
@@ -1374,7 +1383,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/palestine.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_تلفزيون_فلسطين.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة تلفزيون فلسطين مباشر",
@@ -1383,7 +1392,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/palestine_mubashir.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_تلفزيون_فلسطين_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة المدينة / التلفزيون المدينة",
@@ -1392,7 +1401,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/almadinatv_palestine.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_المدينة___التلفزيون_المدينة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة حكاية الفضائية الفلسطينية",
@@ -1401,7 +1410,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/hekayahtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_حكاية_الفضائية_الفلسطينية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة النجاح الاخباري - NBC TV",
@@ -1410,7 +1419,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/annajah.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_النجاح_الاخباري___nbc_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة وتر",
@@ -1419,7 +1428,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/radiowatar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_وتر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة فلسطيني - falastini TV",
@@ -1428,7 +1437,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/falastini.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_فلسطيني___falastini_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة فلسطين مباشر",
@@ -1437,7 +1446,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/Alfalastinia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_فلسطين_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مسواة مباشر",
@@ -1446,7 +1455,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/musawa.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مسواة_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "راديو اورينت 98.7 أف أم بيت لحم",
@@ -1455,7 +1464,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/orient-tv-live.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/راديو_اورينت_98_7_أف_أم_بيت_لحم.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اجيال الفلسطينية",
@@ -1464,7 +1473,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/ajyal-tv-palestine.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اجيال_الفلسطينية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة نابلس لايف 2",
@@ -1473,7 +1482,16 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/nabluslive2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نابلس_لايف_2.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
+  },
+  {
+    "name": "قناة نابلس الان",
+    "category": "عربي",
+    "url": "http://streaming.zaytonatube.com:8080/NablusMix3/NablusMix3/tracks-v1a1/mono.m3u8",
+    "server_url": "http://www.azrotv.com/iphone/arabic/ch3/nabluslive3.php",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نابلس_الان.jpg",
+    "status": "Akamaized",
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة نابلس الان",
@@ -1482,7 +1500,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/nabluslive4.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_نابلس_الان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة  القدس التعليمية الفضائية",
@@ -1491,7 +1509,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/qouchannel.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة__القدس_التعليمية_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة فلسطين الرياضية",
@@ -1500,7 +1518,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/palestinesports.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_فلسطين_الرياضية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "تلفزيون نورس",
@@ -1509,7 +1527,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/alnawrastv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/تلفزيون_نورس.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة فلسطين التعليمية",
@@ -1518,7 +1536,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/palestine_educ.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_فلسطين_التعليمية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة هلا مباشر - تلفزيون بلادنا",
@@ -1527,16 +1545,16 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/halatv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_هلا_مباشر___تلفزيون_بلادنا.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة رؤيا",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/royatvlive/royatv.smil/playlist.m3u8?hdnts=exp=1787281502~acl=/royatvlive/royatv.smil/*~hmac=d7fa89eb46bfbe12c285ad8200e2cfad1cfae4d03bc11ef66235dfb7e635c606",
+    "url": "https://live.kwikmotion.com/royatvlive/royatv.smil/playlist.m3u8?hdnts=exp=1787322464~acl=/royatvlive/royatv.smil/*~hmac=309371ce063ca9f5c669f1f391a51b1adf302d27d0855a783fc99333f1d663cd",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/roya.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_رؤيا.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة رؤيا للأطفال",
@@ -1545,7 +1563,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/royakids.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_رؤيا_للأطفال.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "رؤيا دراما",
@@ -1554,7 +1572,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/royadrama.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رؤيا_دراما.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "رؤيا كوميدي",
@@ -1563,7 +1581,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/royacomedy.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رؤيا_كوميدي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "رؤيا فلسطين",
@@ -1572,7 +1590,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/royapalestine.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/رؤيا_فلسطين.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عَمَّان",
@@ -1581,7 +1599,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/ammantv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عَمَّان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الاردنية",
@@ -1590,7 +1608,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/Al-ordonia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الاردنية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الاردنية الرياضية",
@@ -1599,7 +1617,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_sports.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الاردنية_الرياضية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مناصير الاردن",
@@ -1608,7 +1626,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/manaseertv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مناصير_الاردن.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "طيور بيبي مباشر",
@@ -1617,7 +1635,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/baby.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/طيور_بيبي_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة التغيير مباشر",
@@ -1626,7 +1644,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/taghyeer.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_التغيير_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اليرموك الفضائية",
@@ -1635,7 +1653,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/yarmouktv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اليرموك_الفضائية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة دراما الاردنية مباشر",
@@ -1644,7 +1662,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_drama.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_دراما_الاردنية_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة السياحة ميباشر",
@@ -1653,7 +1671,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_tourism.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_السياحة_ميباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة كوميدي مباشر",
@@ -1662,7 +1680,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_comedy.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_كوميدي_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ارشيف التلفزيون الاردني مباشر",
@@ -1671,7 +1689,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_archive.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ارشيف_التلفزيون_الاردني_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مطبخنا",
@@ -1680,7 +1698,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_cooking.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مطبخنا.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اغانينا - التلفزيون الاردني",
@@ -1689,7 +1707,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/jordan_song.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اغانينا___التلفزيون_الاردني.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة شباب سبورت",
@@ -1698,7 +1716,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/shabab_sp.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_شباب_سبورت.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "الشرقية نيوز",
@@ -1707,7 +1725,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/sharqiyaNwes.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الشرقية_نيوز.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "الشرقية",
@@ -1716,7 +1734,7 @@
     "server_url": "http://www.azrotv.com/iphone/news/ch/sharqiya.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الشرقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قنوات دجلة",
@@ -1725,7 +1743,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/Dajla.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قنوات_دجلة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قنوات الاستقامة مباشر",
@@ -1734,16 +1752,16 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/istiqama.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قنوات_الاستقامة_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "السومرية",
     "category": "عربي",
-    "url": "https://live.kwikmotion.com/alsumariatvlive/sumariamob.smil/playlist.m3u8?hdnts=exp=1787278099~acl=/alsumariatvlive/sumariamob.smil/*~hmac=c979acc026c27bea01081b5bf7d04739b4231046007471b57d58be79b2ce04ad",
+    "url": "https://live.kwikmotion.com/alsumariatvlive/sumariamob.smil/playlist.m3u8?hdnts=exp=1787319142~acl=/alsumariatvlive/sumariamob.smil/*~hmac=37400b981397e96b7bf142590e0c8b85b70f50860f6aa1d014c7eabf057e0ee2",
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/alsumaria.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/السومرية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قنوات العربي",
@@ -1752,7 +1770,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/Alaraby.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قنوات_العربي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "2 قنوات العربي",
@@ -1761,7 +1779,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/alarabytv2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/2_قنوات_العربي.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "العراق",
@@ -1770,7 +1788,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mbiraq.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/العراق.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة التغيير مباشر",
@@ -1779,7 +1797,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/taghyeer.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_التغيير_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة اي نيوز",
@@ -1788,7 +1806,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/inews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_اي_نيوز.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الاشراق العراقية",
@@ -1797,7 +1815,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/aleshraq.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الاشراق_العراقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عراق 24",
@@ -1806,7 +1824,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/iraq24.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عراق_24.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة القناة 9",
@@ -1815,7 +1833,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch3/alqanat9.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_القناة_9.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "turkmeneli TV | Live",
@@ -1824,7 +1842,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/zagrostv-live.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/turkmeneli_tv___live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "ronahi tv live",
@@ -1833,7 +1851,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch8/ronahitv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/ronahi_tv_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة التغيير مباشر",
@@ -1842,7 +1860,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch5/taghyeer.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_التغيير_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "نواة نيوز مباشر",
@@ -1851,7 +1869,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/nawatnews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/نواة_نيوز_مباشر.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة 1 عراق",
@@ -1860,7 +1878,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/1iraqtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_1_عراق.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الاولى العراقية",
@@ -1869,7 +1887,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/1tviraq.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الاولى_العراقية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عراقي HD TV",
@@ -1878,7 +1896,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/iraqihdtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عراقي_hd_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "MMN QURAN LIVE",
@@ -1887,7 +1905,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/mmn-quaran-tv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mmn_quran_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "MMN Kids",
@@ -1896,7 +1914,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/mmnkids.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mmn_kids.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "Mmn Sports",
@@ -1905,7 +1923,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/mmnsports.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mmn_sports.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "MMN NEWS",
@@ -1914,7 +1932,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/mmnnews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mmn_news.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "MMN Documentary",
@@ -1923,7 +1941,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/mmndoc.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/mmn_documentary.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة شمس",
@@ -1932,7 +1950,7 @@
     "server_url": "http://www.azrotv.com/iphone/kurdistan/ch/shams.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_شمس.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الثانية",
@@ -1941,7 +1959,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/ma-2.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الثانية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "2M Monde En direct",
@@ -1950,7 +1968,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/2mmonde.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/2m_monde_en_direct.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "اعادة لنشرة الظهيرة و المسائية لقناة دوزيم",
@@ -1959,7 +1977,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/2mnews.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/اعادة_لنشرة_الظهيرة_و_المسائية_لقناة_دوزيم.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة مي دي 1",
@@ -1968,7 +1986,7 @@
     "server_url": "http://www.azrotv.com/iphone//e/ma-md1/",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_مي_دي_1.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة ميدي 1 العربية",
@@ -1977,7 +1995,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/medi1_arabic.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_ميدي_1_العربية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "medi1tv afrique Live",
@@ -1986,7 +2004,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/medi1tv_afrique.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/medi1tv_afrique_live.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة غير معروفة",
@@ -1995,7 +2013,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/cbm5.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_غير_معروفة.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "alhiwar tv",
@@ -2004,7 +2022,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/alhiwar.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/alhiwar_tv.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة الجزائر الدولية Al24news",
@@ -2013,7 +2031,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/al24news.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_الجزائر_الدولية_al24news.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "قناة عمو يزيد الان",
@@ -2022,7 +2040,7 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch6/amouyazidtv.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/قناة_عمو_يزيد_الان.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   },
   {
     "name": "الاذاعة الوطنية التونسية",
@@ -2031,6 +2049,6 @@
     "server_url": "http://www.azrotv.com/iphone/arabic/ch/radio_nationale_tunisia.php",
     "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image/الاذاعة_الوطنية_التونسية.jpg",
     "status": "Akamaized",
-    "last_update": "٢١‏/٨‏/٢٠٢٦، ١:٤٣:١٦ ص"
+    "last_update": "٢١‏/٨‏/٢٠٢٦، ١٢:٥٩:٢٣ م"
   }
 ]
