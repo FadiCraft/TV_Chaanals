@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "name": "OTV",
+    "category": "قنوات ترفيهية",
+    "url": "https://flu.systemnet.tv/OTV/index.m3u8",
+    "server_url": "https://play.arab-stream.live/p/otv.html",
+    "local_img": "https://raw.githubusercontent.com/FadiCraft/TV_Chaanals/refs/heads/main/image2/otv.jpg",
+    "original_img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaGgOsOQpu_5MPukonZTkbVYhYwIoYoWlA1sw3GcE_QyGwjyk373g9l1zcxCP8OfUahAhvecxqboY1Gzchm9vq9oi5cyY4S_DD2swW5E1w64G3bWzYoiDi866enx9uog93baGf_idZRDkl6OkzCKUWZhgSBUpThIrVIxDaCa3a0nU4Mb3IuKGfTv5r4A/s600/otv.webp",
+    "status": "QanwatLive",
+    "last_update": "٣٠‏/٨‏/٢٠٢٦، ٤:٢١:٥١ م"
+  }
+]
