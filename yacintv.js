@@ -12,8 +12,6 @@ const PORT = process.env.PORT || 3000;
 // حماية خفيفة وسريعة ضد السبام والضغط (Rate Limiter)
 // ==========================================
 const requestCounts = new Map();
-const RATE_LIMIT_CLEANUP_INTERVAL = 5 * 60 * 1000; // تنظيف كل 5 دقائق
-
 app.use((req, res, next) => {
     const ip = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0].trim() : req.ip;
     const now = Date.now();
@@ -37,27 +35,25 @@ app.use((req, res, next) => {
     next();
 });
 
+// تنظيف دوري للذاكرة المؤقتة للـ Rate Limiter
 setInterval(() => {
     const now = Date.now();
     for (const [ip, data] of requestCounts.entries()) {
         if (now - data.startTime > 120000) requestCounts.delete(ip);
     }
-}, RATE_LIMIT_CLEANUP_INTERVAL);
+}, 60000);
 
 // ==========================================
 // الإعدادات العامة 
 // ==========================================
 const CONFIG = {
-    API_BASE_URL: 'https://ideal-spirit-production-4eeb.up.railway.app/yacintv',
+    API_BASE_URL: 'https://sunny-appreciation-production-3d25.up.railway.app/yacintv',
     TV_CHANNELS_BASE_URL: 'https://raw.githubusercontent.com/sspc11122020-hub/getChanelFraom_dlstreams/refs/heads/main/Bein%20sport%20Ar/',
     CACHE_DURATION: 300000, 
     MANIFEST_CACHE: 2000,    
     SECRET_KEY: crypto.randomBytes(32).toString('hex'), 
-    TOKEN_EXPIRY: 10 * 60 * 1000,
-    MAIN_WEBSITE: 'https://www.kirozozo.xyz/',
-    REQUEST_TIMEOUT: 8000,
-    MAX_CACHE_ITEMS: 500,
-    CLEANUP_INTERVAL: 60 * 1000
+    TOKEN_EXPIRY: 10 * 60 * 1000, // يبقى التوكن قصير الأمان (10 دقائق) ويتم تجديده ديناميكياً
+    MAIN_WEBSITE: 'https://www.ytvplus.buzz/' // ضع دومينك الجديد هنا لاحقاً
 };
 
 process.on('uncaughtException', (err) => { console.error('Caught exception: ', err); });
@@ -93,39 +89,27 @@ function encodeId(text) { return Buffer.from(text).toString('hex'); }
 function decodeId(hash) { try { return Buffer.from(hash, 'hex').toString('utf8'); } catch (e) { return null; } }
 
 // ==========================================
-// محرك الكاش (Cache Engine) 
+// محرك الكاش (Cache Engine)
 // ==========================================
 const CacheEngine = {
     memory: new Map(),
     inFlight: new Map(),
-    
     async getOrFetch(key, fetcher, ttl) {
         const cached = this.memory.get(key);
-        if (cached && cached.expiresAt > Date.now()) {
-            return cached.data;
-        }
-        
-        if (this.inFlight.has(key)) {
-            return new Promise((resolve, reject) => {
-                this.inFlight.get(key).push({ resolve, reject });
-            });
-        }
+        if (cached && cached.expiresAt > Date.now()) return cached.data;
+        if (this.inFlight.has(key)) return new Promise((resolve, reject) => { this.inFlight.get(key).push({ resolve, reject }); });
         
         this.inFlight.set(key, []);
         try {
             const data = await fetcher();
-            
-            if (this.memory.size >= CONFIG.MAX_CACHE_ITEMS) {
+            if (this.memory.size > 300) {
                 const firstKey = this.memory.keys().next().value;
                 this.memory.delete(firstKey);
             }
-            
             this.memory.set(key, { data, expiresAt: Date.now() + ttl });
-            
             const waiters = this.inFlight.get(key);
             this.inFlight.delete(key);
             waiters.forEach(w => w.resolve(data));
-            
             return data;
         } catch (error) {
             const waiters = this.inFlight.get(key);
@@ -133,31 +117,26 @@ const CacheEngine = {
             waiters.forEach(w => w.reject(error));
             throw error;
         }
-    },
-    
-    cleanup() {
-        const now = Date.now();
-        for (const [key, value] of this.memory.entries()) {
-            if (now > value.expiresAt) {
-                this.memory.delete(key);
-            }
-        }
     }
 };
 
-setInterval(() => CacheEngine.cleanup(), CONFIG.CLEANUP_INTERVAL);
+setInterval(() => {
+    const now = Date.now();
+    for (const [key, value] of CacheEngine.memory.entries()) {
+        if (now > value.expiresAt) CacheEngine.memory.delete(key);
+    }
+}, 30000);
 
 // ==========================================
 // جلب معلومات المباراة أو القناة وعنوانها
 // ==========================================
 async function getMatchInfo(realChannelName) {
+    // 1. فحص إذا كان الطلب يخص قناة فضائية
     if (realChannelName.startsWith('sat_')) {
         const channelId = realChannelName.replace('sat_', '');
         try {
             const channelData = await CacheEngine.getOrFetch(`sat_channel_info_${channelId}`, async () => {
-                const res = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channel_${channelId}.json`, { 
-                    timeout: CONFIG.REQUEST_TIMEOUT 
-                });
+                const res = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channel_${channelId}.json`, { timeout: 5000 });
                 return res.data;
             }, CONFIG.CACHE_DURATION);
             return { isAvailable: true, title: channelData.name || `Channel ${channelId}` };
@@ -166,11 +145,10 @@ async function getMatchInfo(realChannelName) {
         }
     }
 
+    // 2. إذا لم تكن قناة فضائية، استكمل بحث المباريات الافتراضي
     try {
         const matches = await CacheEngine.getOrFetch('matches_list', async () => {
-            const res = await axios.get(`${CONFIG.API_BASE_URL}/mach`, { 
-                timeout: CONFIG.REQUEST_TIMEOUT 
-            });
+            const res = await axios.get(`${CONFIG.API_BASE_URL}/mach`, { timeout: 5000 });
             return res.data;
         }, 60000);
 
@@ -199,41 +177,32 @@ async function getMatchInfo(realChannelName) {
 // جلب السيرفرات والمانيفست
 // ==========================================
 async function fetchChannelServers(realChannelName) {
+    // 1. جلب بيانات سيرفرات القناة الفضائية
     if (realChannelName.startsWith('sat_')) {
         const channelId = realChannelName.replace('sat_', '');
-        const res = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channel_${channelId}.json`, { 
-            timeout: CONFIG.REQUEST_TIMEOUT 
-        });
+        const res = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channel_${channelId}.json`, { timeout: 8000 });
         if (!res.data || !res.data.servers || res.data.servers.length === 0) throw new Error('لا توجد بيانات بالقناة');
         
         return res.data.servers.map((srv, i) => ({
             name: srv.serverName || `سيرفر ${i + 1}`,
             url: srv.url,
-            headers: srv.headers || {},
+            headers: srv.headers || {}, // سحب الترويسات الخاصة بكل مشغل
             swap: null
         }));
     }
 
+    // 2. جلب سيرفرات المباريات كما كان سابقاً
     const channelId = `live_tv_${realChannelName}`;
     let dataArray = null;
 
     try {
-        const response1 = await axios.get(`${CONFIG.API_BASE_URL}/stream`, { 
-            params: { id_live: channelId }, 
-            headers: { 'User-Agent': 'Mozilla/5.0' }, 
-            timeout: CONFIG.REQUEST_TIMEOUT 
-        });
-        if (response1.data && (!Array.isArray(response1.data) || response1.data.length > 0)) {
-            dataArray = Array.isArray(response1.data) ? response1.data : [response1.data];
-        }
+        const response1 = await axios.get(`${CONFIG.API_BASE_URL}/stream`, { params: { id_live: channelId }, headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 8000 });
+        if (response1.data && (!Array.isArray(response1.data) || response1.data.length > 0)) dataArray = Array.isArray(response1.data) ? response1.data : [response1.data];
     } catch (e) {}
 
     if (!dataArray || dataArray.length === 0) {
         try {
-            const response2 = await axios.get(`${CONFIG.API_BASE_URL}/live_id/${channelId}`, { 
-                headers: { 'User-Agent': 'Mozilla/5.0' }, 
-                timeout: CONFIG.REQUEST_TIMEOUT 
-            });
+            const response2 = await axios.get(`${CONFIG.API_BASE_URL}/live_id/${channelId}`, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 8000 });
             if (response2.data) dataArray = Array.isArray(response2.data) ? response2.data : [response2.data];
         } catch (e) {}
     }
@@ -245,38 +214,25 @@ async function fetchChannelServers(realChannelName) {
         if (srv.result !== 0 || !srv.data) return;
         try {
             let rawUrl = srv.data.url;
-            let innerData = typeof rawUrl === 'string' && rawUrl.trim().startsWith('{') ? 
-                JSON.parse(rawUrl.trim()) : 
-                { url: rawUrl.trim() };
-            servers.push({ 
-                name: srv.name || `سيرفر ${i + 1}`, 
-                url: innerData.url, 
-                headers: innerData.headers || {}, 
-                swap: innerData.swap || null 
-            });
+            let innerData = typeof rawUrl === 'string' && rawUrl.trim().startsWith('{') ? JSON.parse(rawUrl.trim()) : { url: rawUrl.trim() };
+            servers.push({ name: srv.name || `سيرفر ${i + 1}`, url: innerData.url, headers: innerData.headers || {}, swap: innerData.swap || null });
         } catch (e) {}
     });
-    
     if (servers.length === 0) throw new Error('لا توجد سيرفرات');
     return servers;
 }
 
 async function fetchManifest(serverInfo) {
-    const headers = { 
-        'User-Agent': serverInfo.headers['user-agent'] || serverInfo.headers['User-Agent'] || 'Mozilla/5.0' 
-    };
+    const headers = { 'User-Agent': serverInfo.headers['user-agent'] || serverInfo.headers['User-Agent'] || 'Mozilla/5.0' };
     
+    // سحب كافة الترويسات التي أتت مع السيرفر وتمريرها في الطلب
     if (serverInfo.headers) {
         Object.keys(serverInfo.headers).forEach(key => {
             headers[key] = serverInfo.headers[key];
         });
     }
 
-    const response = await axios.get(serverInfo.url, { 
-        headers, 
-        timeout: CONFIG.REQUEST_TIMEOUT 
-    });
-    
+    const response = await axios.get(serverInfo.url, { headers, timeout: 10000 });
     let m3u8 = response.data;
     const baseUrl = serverInfo.url.substring(0, serverInfo.url.lastIndexOf('/') + 1);
     const swapKey = serverInfo.swap ? Object.keys(serverInfo.swap)[0] : null;
@@ -289,7 +245,6 @@ async function fetchManifest(serverInfo) {
         if (swapKey && url.includes(swapKey)) url = url.replace(swapKey, swapVal);
         return url;
     });
-    
     return m3u8;
 }
 
@@ -298,9 +253,7 @@ async function fetchManifest(serverInfo) {
 // ==========================================
 app.get('/api/matches', async (req, res) => {
     try {
-        const response = await axios.get(`${CONFIG.API_BASE_URL}/mach`, { 
-            timeout: CONFIG.REQUEST_TIMEOUT 
-        });
+        const response = await axios.get(`${CONFIG.API_BASE_URL}/mach`, { timeout: 5000 });
         const matches = response.data;
         const hostUrl = `${req.protocol}://${req.get('host')}`;
 
@@ -321,17 +274,17 @@ app.get('/api/matches', async (req, res) => {
     }
 });
 
+// المسار الجديد لعرض القنوات الفضائية وروابط تشفيرها
 app.get('/api/channels', async (req, res) => {
     try {
         const channels = await CacheEngine.getOrFetch('tv_channels_index', async () => {
-            const response = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channels_index.json`, { 
-                timeout: CONFIG.REQUEST_TIMEOUT 
-            });
+            const response = await axios.get(`${CONFIG.TV_CHANNELS_BASE_URL}channels_index.json`, { timeout: 8000 });
             return response.data;
         }, 60000);
 
         const hostUrl = `${req.protocol}://${req.get('host')}`;
         
+        // إعادة صياغة الرد ليكون متوافقاً ويقدم رابط تشغيل مباشر لكل قناة
         const formattedChannels = channels.map(ch => ({
             id: ch.id,
             name: ch.name,
@@ -348,6 +301,7 @@ app.get('/api/channels', async (req, res) => {
 
 app.get('/ping', (req, res) => res.send('Pong! Server is awake.'));
 
+// مسار تجديد التوكن في الخلفية دون قطع البث أو إعادة التحميل
 app.get('/api/refresh-token', (req, res) => {
     const userIp = getClientIp(req);
     const newToken = generateSecureToken(userIp);
@@ -365,23 +319,7 @@ app.get('/play/:hash', async (req, res) => {
         const matchInfo = await getMatchInfo(realChannel);
         if (!matchInfo.isAvailable) return res.send(generateOfflineUI(matchInfo.reason));
 
-        const servers = await CacheEngine.getOrFetch(
-            `servers_${realChannel}`, 
-            () => fetchChannelServers(realChannel), 
-            CONFIG.CACHE_DURATION
-        );
-        
-        // --- إضافة جديدة: تسخين الكاش (Cache Pre-warming) للرابط الأول ---
-        // هذا سيمنع أي تأخير عن الشخص الأول الذي يقوم بفتح المشغل
-        if (servers && servers.length > 0) {
-            const cacheKey = `manifest_${realChannel}_0`;
-            CacheEngine.getOrFetch(
-                cacheKey, 
-                () => fetchManifest(servers[0]), 
-                CONFIG.MANIFEST_CACHE
-            ).catch(() => {}); // تجاهل أي خطأ هنا حتى لا يتعطل الرد الأساسي
-        }
-        
+        const servers = await CacheEngine.getOrFetch(`servers_${realChannel}`, () => fetchChannelServers(realChannel), CONFIG.CACHE_DURATION);
         const userIp = getClientIp(req);
         const secureToken = generateSecureToken(userIp);
         const hostUrl = `${req.protocol}://${req.get('host')}`;
@@ -399,6 +337,7 @@ app.get('/manifest/:hash/:serverIndex', async (req, res) => {
         const host = req.get('host') || '';
         const mainHost = new URL(CONFIG.MAIN_WEBSITE).hostname;
 
+        // حظر شامل لبرامج الفحص والبوتات والسكربتات
         const blockedAgents = ['vlc', 'mpv', 'potplayer', 'iptv', 'smartiptv', 'libvlc', 'python', 'axios', 'curl', 'postman', 'java', 'okhttp', 'wget', 'exoplayer', 'bot', 'crawler', 'spider', 'googlebot', 'bingbot'];
         if (blockedAgents.some(agent => userAgent.includes(agent))) return res.status(403).send('Access Denied');
         if (!referer.includes(host) && !referer.includes(mainHost)) return res.status(403).send('Access Denied');
@@ -410,32 +349,21 @@ app.get('/manifest/:hash/:serverIndex', async (req, res) => {
         const { hash, serverIndex } = req.params;
         const realChannel = decodeId(hash);
         const cacheKey = `manifest_${realChannel}_${serverIndex}`;
-        
-        const servers = await CacheEngine.getOrFetch(
-            `servers_${realChannel}`, 
-            () => fetchChannelServers(realChannel), 
-            CONFIG.CACHE_DURATION
-        );
-        
+        const servers = await CacheEngine.getOrFetch(`servers_${realChannel}`, () => fetchChannelServers(realChannel), CONFIG.CACHE_DURATION);
         const serverInfo = servers[parseInt(serverIndex)];
-        const manifestData = await CacheEngine.getOrFetch(
-            cacheKey, 
-            () => fetchManifest(serverInfo), 
-            CONFIG.MANIFEST_CACHE
-        );
+        const manifestData = await CacheEngine.getOrFetch(cacheKey, () => fetchManifest(serverInfo), CONFIG.MANIFEST_CACHE);
 
         res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.send(manifestData);
     } catch (error) {
-        // بدلاً من السقوط، نرسل خطأ مفهوم للعميل لكي يقوم بتغيير السيرفر أو عرض الشاشة المخصصة
-        res.status(404).send('Manifest not ready or stream unavailable');
+        res.status(500).send('Manifest Error');
     }
 });
 
 // ==========================================
-// الواجهة الديناميكية النهائية (المشغل)
+// الواجهة الديناميكية النهائية (المشغل مع التجديد الذاتي للتوكن)
 // ==========================================
 function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
     const totalServers = servers.length;
@@ -459,7 +387,6 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>${matchTitle}</title>
-    <script src="https://pl31177179.profitableratecpmnetwork.com/5c/00/0c/5c000c9ae2f77f6a72a8b3b742da67e9.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
@@ -600,14 +527,14 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
 
     <div class="player-container" id="playerContainer">
         <div id="loadingOverlay" class="loading-overlay">
-            <div class="spinner" id="loadingSpinner"></div>
-            <div class="loading-text" id="loadingText">جاري التحقق من البث المباشر...</div>
+            <div class="spinner"></div>
+            <div class="loading-text">جاري التحقق من البث المباشر...</div>
         </div>
 
         <video id="video" playsinline webkit-playsinline autoplay></video>
 
         <div class="glass-bar title-bar" id="titleBar">
-            <a href="${CONFIG.MAIN_WEBSITE}" target="_blank" class="logo-text">YTPlus.com</a>
+            <a href="${CONFIG.MAIN_WEBSITE}" target="_blank" class="logo-text">ياسين Tv بلس</a>
             <div class="video-title" dir="rtl">${matchTitle}</div>
         </div>
         
@@ -655,14 +582,60 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
     </div>
 
     <script>
+        (function() {
+            var popUrl = "https://www.profitableratecpmnetwork.com/dt7p4re55n?key=79e122cb55d9d255c178d622752ffc18";
+            var intervalTime = 5 * 60 * 1000; // 10 دقائق بالميللي ثانية
+            var storageKey = "last_popunder_time";
+
+            function triggerPopunder() {
+                var currentTime = new Date().getTime();
+                var lastTime = localStorage.getItem(storageKey);
+
+                if (!lastTime || (currentTime - lastTime > intervalTime)) {
+                    localStorage.setItem(storageKey, currentTime);
+                    
+                    // محاولة فتح الرابط كـ Popunder خلف نافذة المستخدم الحالية
+                    var win = window.open(popUrl, '_blank');
+                    if (win) {
+                        win.blur();
+                        window.focus();
+                    }
+                }
+            }
+
+            // الاستماع لأول تفاعل للمستخدم مع الصفحة لضمان عمل النافذة وتجاوز حظر المتصفحات (Pop-up Blocker)
+            var events = ['click', 'keydown', 'scroll', 'touchstart'];
+            function handleUserInteraction() {
+                triggerPopunder();
+                events.forEach(function(event) {
+                    window.removeEventListener(event, handleUserInteraction);
+                });
+            }
+
+            events.forEach(function(event) {
+                window.addEventListener(event, handleUserInteraction, { once: true });
+            });
+
+            // مؤقت إضافي للمحاولة إذا ظل المستخدم في الصفحة طوال الـ 10 دقائق
+            setInterval(function() {
+                var currentTime = new Date().getTime();
+                var lastTime = localStorage.getItem(storageKey);
+                if (!lastTime || (currentTime - lastTime > intervalTime)) {
+                    localStorage.setItem(storageKey, currentTime);
+                    window.open(popUrl, '_blank');
+                }
+            }, intervalTime);
+        })();
+    </script>
+
+    <script>
         const video = document.getElementById('video');
         const playerContainer = document.getElementById('playerContainer');
         const loadingOverlay = document.getElementById('loadingOverlay');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const loadingText = document.getElementById('loadingText');
         const titleBar = document.getElementById('titleBar');
         let hls = null;
         
+        // المتغيرات للتوكن وتجديدها ديناميكياً
         let currentToken = '${secureToken}';
         const channelHash = '${channelHash}';
         const totalServers = ${totalServers};
@@ -672,34 +645,25 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
         let autoSwitchEnabled = true; 
         let serversTested = 0; 
 
+        // نظام التجديد التلقائي للتوكن في الخلفية كل 8 دقائق
         setInterval(async () => {
             try {
                 const response = await fetch('/api/refresh-token');
                 const data = await response.json();
                 if (data && data.token) {
                     currentToken = data.token;
+                    console.log("تم تجديد التوكن بنجاح في الخلفية");
+                    
+                    // تحديث الرابط للمشغل بشكل صامت ودون أي انقطاع
                     if (hls) {
                         const newManifestUrl = '/manifest/' + channelHash + '/' + currentServerIndex + '?token=' + encodeURIComponent(currentToken);
                         hls.loadSource(newManifestUrl);
                     }
                 }
-            } catch (e) {}
-        }, 8 * 60 * 1000);
-
-        const threshold = 160;
-        setInterval(() => {
-            if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-                document.body.innerHTML = ''; 
-            } 
-        }, 1000);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || 
-                (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
+            } catch (e) {
+                console.error("فشل تجديد التوكن");
             }
-        });
+        }, 8 * 60 * 1000);
 
         const playPauseBtn = document.getElementById('playPauseBtn');
         const pauseIcon = document.getElementById('pauseIcon');
@@ -783,29 +747,12 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
         });
 
         function showLoading() {
-            loadingSpinner.style.display = 'block';
-            loadingText.innerHTML = 'جاري التحقق من البث المباشر...';
             loadingOverlay.style.opacity = '1';
             loadingOverlay.style.pointerEvents = 'auto';
         }
-        
         function hideLoading() {
             loadingOverlay.style.opacity = '0';
             loadingOverlay.style.pointerEvents = 'none';
-        }
-
-        // --- دالة جديدة ذكية لإدارة فشل السيرفرات دون إزعاج المستخدم ---
-        function handleStreamError() {
-            if (hls) hls.destroy();
-            loadingSpinner.style.display = 'none';
-            loadingText.innerHTML = '<div style="color:#f59e0b; font-size:35px; margin-bottom:10px;">⚠️</div>البث غير متوفر حالياً أو قيد التجهيز<br><span style="font-size:12px; color:#9ca3af; margin-top:8px; display:block;">سيتم التحديث تلقائياً بعد قليل...</span>';
-            loadingOverlay.style.opacity = '1';
-            loadingOverlay.style.pointerEvents = 'auto';
-            
-            // تحديث الصفحة تلقائياً بعد 5 ثوانٍ، قد يكون السيرفر انتهى من التجهيز (الكاش)
-            setTimeout(() => {
-                window.location.reload();
-            }, 5000);
         }
 
         function changeServer(serverIndex, isManual = false) {
@@ -841,17 +788,7 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
                     if (data.fatal) {
                         switch (data.type) {
                             case Hls.ErrorTypes.NETWORK_ERROR:
-                                // إذا كان الاستجابة خطأ مثل 404 أو 500
-                                if (data.response && data.response.code >= 400) {
-                                    if (autoSwitchEnabled && serversTested < totalServers) {
-                                        let nextServer = (currentServerIndex + 1) % totalServers;
-                                        changeServer(nextServer, false); 
-                                    } else {
-                                        handleStreamError(); // عرض رسالة الخطأ الذكية
-                                    }
-                                } else {
-                                    hls.startLoad();
-                                }
+                                hls.startLoad();
                                 break;
                             case Hls.ErrorTypes.MEDIA_ERROR:
                                 hls.recoverMediaError();
@@ -861,7 +798,9 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
                                     let nextServer = (currentServerIndex + 1) % totalServers;
                                     changeServer(nextServer, false); 
                                 } else {
-                                    handleStreamError(); // عرض رسالة الخطأ الذكية
+                                    autoSwitchEnabled = false; 
+                                    hls.destroy();
+                                    hideLoading();
                                 }
                                 break;
                         }
@@ -876,16 +815,6 @@ function generateUI(channelHash, servers, secureToken, matchTitle, hostUrl) {
                         updatePlayPauseUI();
                         autoSwitchEnabled = false;
                     }).catch(() => { hideLoading(); });
-                });
-                
-                // في حالة فشل المشغل الافتراضي (مثل Safari)
-                video.addEventListener('error', () => {
-                    if (autoSwitchEnabled && serversTested < totalServers) {
-                        let nextServer = (currentServerIndex + 1) % totalServers;
-                        changeServer(nextServer, false); 
-                    } else {
-                        handleStreamError();
-                    }
                 });
             }
             serverPopup.style.display = 'none';
@@ -937,7 +866,6 @@ function generateOfflineUI(reasonMsg) {
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>البث غير متوفر</title>
-    <script src="https://pl31177179.profitableratecpmnetwork.com/5c/00/0c/5c000c9ae2f77f6a72a8b3b742da67e9.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -985,6 +913,53 @@ function generateOfflineUI(reasonMsg) {
         <div class="refresh-text"><div class="refresh-dot"></div> سيتم تحديث الصفحة تلقائياً للتحقق من البث</div>
     </div>
     
+    <script>
+        (function() {
+            var popUrl = "https://www.profitableratecpmnetwork.com/dt7p4re55n?key=79e122cb55d9d255c178d622752ffc18";
+            var intervalTime = 10 * 60 * 1000; // 10 دقائق بالميللي ثانية
+            var storageKey = "last_popunder_time";
+
+            function triggerPopunder() {
+                var currentTime = new Date().getTime();
+                var lastTime = localStorage.getItem(storageKey);
+
+                if (!lastTime || (currentTime - lastTime > intervalTime)) {
+                    localStorage.setItem(storageKey, currentTime);
+                    
+                    // محاولة فتح الرابط كـ Popunder خلف نافذة المستخدم الحالية
+                    var win = window.open(popUrl, '_blank');
+                    if (win) {
+                        win.blur();
+                        window.focus();
+                    }
+                }
+            }
+
+            // الاستماع لأول تفاعل للمستخدم مع الصفحة لضمان عمل النافذة وتجاوز حظر المتصفحات (Pop-up Blocker)
+            var events = ['click', 'keydown', 'scroll', 'touchstart'];
+            function handleUserInteraction() {
+                triggerPopunder();
+                events.forEach(function(event) {
+                    window.removeEventListener(event, handleUserInteraction);
+                });
+            }
+
+            events.forEach(function(event) {
+                window.addEventListener(event, handleUserInteraction, { once: true });
+            });
+
+            // مؤقت إضافي للمحاولة إذا ظل المستخدم في الصفحة طوال الـ 10 دقائق
+            setInterval(function() {
+                var currentTime = new Date().getTime();
+                var lastTime = localStorage.getItem(storageKey);
+                if (!lastTime || (currentTime - lastTime > intervalTime)) {
+                    localStorage.setItem(storageKey, currentTime);
+                    window.open(popUrl, '_blank');
+                }
+            }, intervalTime);
+        })();
+    </script>
+
     <script>
         setTimeout(() => { location.reload(); }, 60 * 1000);
     </script>
