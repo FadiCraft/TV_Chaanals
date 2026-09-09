@@ -12,19 +12,18 @@ const SECRET_KEY = process.env.SECRET_KEY || 'my-super-secret-streaming-key-2026
 const TOKEN_EXPIRY_HOURS = 2;
 
 // ==========================================
-// 1. نظام الحماية الذكي للاتصالات (Single Socket)
+// 1. نظام الحماية الذكي للاتصالات
 // ==========================================
 const httpAgent = new http.Agent({ keepAlive: true, maxSockets: 1, keepAliveMsecs: 10000 });
 const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 1, keepAliveMsecs: 10000 });
 
-// إخفاء هوية السيرفر وانتحال شخصية مشغل IPTV (VLC) لتجاوز حظر السيرفرات
 const IPTV_USER_AGENT = 'VLC/3.0.18 LibVLC/3.0.18';
 
 const axiosInstance = axios.create({
     httpAgent,
     httpsAgent,
     timeout: 8000,
-    maxRedirects: 10, // مهم جداً للسماح بتحويل orien.live إلى الـ IP
+    maxRedirects: 10,
 });
 
 // ==========================================
@@ -91,7 +90,7 @@ function setCooldown(url, durationMs = 4000) {
 }
 
 // ==========================================
-// 3. دوال مساعدة (توليد الهيدرز والتوكن)
+// 3. دوال مساعدة
 // ==========================================
 app.use(compression());
 
@@ -103,7 +102,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// استخراج الترويسات التي تتخطى الحماية (Referer و Host)
+// تم حذف Host للسماح لـ Axios بالتعامل معه تلقائياً أثناء التحويلات
 function getHeadersForUrl(targetUrl) {
     try {
         const parsedUrl = new URL(targetUrl);
@@ -111,8 +110,7 @@ function getHeadersForUrl(targetUrl) {
             'User-Agent': IPTV_USER_AGENT,
             'Accept': '*/*',
             'Referer': `${parsedUrl.origin}/`,
-            'Origin': parsedUrl.origin,
-            'Host': parsedUrl.host
+            'Origin': parsedUrl.origin
         };
     } catch (e) {
         return { 'User-Agent': IPTV_USER_AGENT };
@@ -146,7 +144,7 @@ function decryptShortToken(token) {
 }
 
 // ==========================================
-// 4. جلب المانفيست (مع تمرير التوكن الذكي)
+// 4. جلب المانفيست
 // ==========================================
 async function fetchAndRewriteManifest(targetUrl, req) {
     const cachedData = manifestCache.get(targetUrl);
@@ -174,28 +172,24 @@ async function fetchAndRewriteManifest(targetUrl, req) {
                 throw new Error(`Origin error HTTP ${response.status}`);
             }
 
-            // استخراج الرابط النهائي بعد التحويل (مهم جداً لأن orien.live يحول إلى IP مع توكن)
-            const finalUrl = response.request.res.responseUrl || targetUrl;
+            // استخدام optional chaining للحماية من الأعطال
+            const finalUrl = response.request?.res?.responseUrl || response.config?.url || targetUrl;
             const parsedFinalUrl = new URL(finalUrl);
             const baseUrl = parsedFinalUrl.origin;
-            const finalSearchParams = parsedFinalUrl.search; // استخراج التوكن المخفي: "?token=..."
 
             let lines = response.data.split('\n');
             let rewrittenLines = lines.map(line => {
                 let trimmed = line.trim();
                 if (trimmed.startsWith('#') || !trimmed) return trimmed;
 
-                // بناء الرابط المطلق لقطعة الـ TS
                 let absoluteLink = trimmed.startsWith('http') ? trimmed 
                                  : trimmed.startsWith('/') ? baseUrl + trimmed 
                                  : new URL(trimmed, finalUrl).href;
 
-                // السحر هنا: إذا كان الرابط النهائي يحتوي على توكن، نلصقه بقطع الفيديو لتجنب حظرها!
-                if (finalSearchParams && !absoluteLink.includes('?')) {
-                    absoluteLink += finalSearchParams;
-                }
+                // تم إزالة إضافة التوكن هنا، سيرفرات Xtream تدمجه مسبقاً في مسار الـ ts
 
-                const hostProtocol = req.protocol;
+                // استخدام x-forwarded-proto لضمان عمل الروابط كـ HTTPS عند الرفع على خوادم الاستضافة
+                const hostProtocol = req.headers['x-forwarded-proto'] || req.protocol;
                 const hostName = req.get('host');
                 return `${hostProtocol}://${hostName}/proxy?url=${encodeURIComponent(absoluteLink)}`;
             });
@@ -272,7 +266,8 @@ app.get('/generate', (req, res) => {
     if (!targetUrl) return res.status(400).send('Please provide a ?url=...');
 
     const token = generateShortToken(targetUrl);
-    const shortLink = `${req.protocol}://${req.get('host')}/play/${token}/manifest.m3u8`;
+    const hostProtocol = req.headers['x-forwarded-proto'] || req.protocol;
+    const shortLink = `${hostProtocol}://${req.get('host')}/play/${token}/manifest.m3u8`;
 
     res.send(`
         <html dir="rtl" style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding-top:50px;">
