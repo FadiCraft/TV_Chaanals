@@ -12,19 +12,19 @@ const SECRET_KEY = process.env.SECRET_KEY || 'my-super-secret-streaming-key-2026
 const TOKEN_EXPIRY_HOURS = 2;
 
 // ==========================================
-// 1. نظام الحماية الذكي للاتصالات
+// 1. نظام الحماية الذكي للاتصالات (Single Socket)
 // ==========================================
-const httpAgent = new http.Agent({ keepAlive: true, maxSockets: 10, keepAliveMsecs: 10000 });
-const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 10, keepAliveMsecs: 10000 });
+const httpAgent = new http.Agent({ keepAlive: true, maxSockets: 1, keepAliveMsecs: 10000 });
+const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 1, keepAliveMsecs: 10000 });
 
+// إخفاء هوية السيرفر وانتحال شخصية مشغل IPTV (VLC) لتجاوز حظر السيرفرات
 const IPTV_USER_AGENT = 'VLC/3.0.18 LibVLC/3.0.18';
-const TURKEY_PROXY_IP = '85.153.45.12'; // IP تركي وهمي لتجاوز الجغرافيا
 
 const axiosInstance = axios.create({
     httpAgent,
     httpsAgent,
-    timeout: 10000,
-    maxRedirects: 10
+    timeout: 8000,
+    maxRedirects: 10, // مهم جداً للسماح بتحويل orien.live إلى الـ IP
 });
 
 // ==========================================
@@ -70,8 +70,10 @@ class SmartCache {
 }
 
 const manifestCache = new SmartCache(50, 3000); 
+const tsCache = new SmartCache(400, 45000);
 
 const manifestPromises = new Map();
+const tsPromises = new Map();
 const cooldowns = new Map();
 
 function isCoolingDown(url) {
@@ -89,7 +91,7 @@ function setCooldown(url, durationMs = 4000) {
 }
 
 // ==========================================
-// 3. دوال مساعدة
+// 3. دوال مساعدة (توليد الهيدرز والتوكن)
 // ==========================================
 app.use(compression());
 
@@ -101,6 +103,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// استخراج الترويسات التي تتخطى الحماية (Referer و Host)
 function getHeadersForUrl(targetUrl) {
     try {
         const parsedUrl = new URL(targetUrl);
@@ -109,16 +112,10 @@ function getHeadersForUrl(targetUrl) {
             'Accept': '*/*',
             'Referer': `${parsedUrl.origin}/`,
             'Origin': parsedUrl.origin,
-            'X-Forwarded-For': TURKEY_PROXY_IP,
-            'X-Real-IP': TURKEY_PROXY_IP,
-            'Client-IP': TURKEY_PROXY_IP
+            'Host': parsedUrl.host
         };
     } catch (e) {
-        return { 
-            'User-Agent': IPTV_USER_AGENT,
-            'X-Forwarded-For': TURKEY_PROXY_IP,
-            'X-Real-IP': TURKEY_PROXY_IP
-        };
+        return { 'User-Agent': IPTV_USER_AGENT };
     }
 }
 
@@ -149,7 +146,7 @@ function decryptShortToken(token) {
 }
 
 // ==========================================
-// 4. جلب المانفيست
+// 4. جلب المانفيست (مع تمرير التوكن الذكي)
 // ==========================================
 async function fetchAndRewriteManifest(targetUrl, req) {
     const cachedData = manifestCache.get(targetUrl);
@@ -177,20 +174,28 @@ async function fetchAndRewriteManifest(targetUrl, req) {
                 throw new Error(`Origin error HTTP ${response.status}`);
             }
 
-            const finalUrl = response.request?.res?.responseUrl || response.config?.url || targetUrl;
+            // استخراج الرابط النهائي بعد التحويل (مهم جداً لأن orien.live يحول إلى IP مع توكن)
+            const finalUrl = response.request.res.responseUrl || targetUrl;
             const parsedFinalUrl = new URL(finalUrl);
             const baseUrl = parsedFinalUrl.origin;
+            const finalSearchParams = parsedFinalUrl.search; // استخراج التوكن المخفي: "?token=..."
 
             let lines = response.data.split('\n');
             let rewrittenLines = lines.map(line => {
                 let trimmed = line.trim();
                 if (trimmed.startsWith('#') || !trimmed) return trimmed;
 
+                // بناء الرابط المطلق لقطعة الـ TS
                 let absoluteLink = trimmed.startsWith('http') ? trimmed 
                                  : trimmed.startsWith('/') ? baseUrl + trimmed 
                                  : new URL(trimmed, finalUrl).href;
 
-                const hostProtocol = req.headers['x-forwarded-proto'] || req.protocol;
+                // السحر هنا: إذا كان الرابط النهائي يحتوي على توكن، نلصقه بقطع الفيديو لتجنب حظرها!
+                if (finalSearchParams && !absoluteLink.includes('?')) {
+                    absoluteLink += finalSearchParams;
+                }
+
+                const hostProtocol = req.protocol;
                 const hostName = req.get('host');
                 return `${hostProtocol}://${hostName}/proxy?url=${encodeURIComponent(absoluteLink)}`;
             });
@@ -214,7 +219,52 @@ async function fetchAndRewriteManifest(targetUrl, req) {
 }
 
 // ==========================================
-// 5. المسارات
+// 5. جلب قطع الفيديو .TS
+// ==========================================
+async function fetchSegment(targetUrl) {
+    const cachedSegment = tsCache.get(targetUrl);
+    if (cachedSegment) return cachedSegment;
+
+    if (tsPromises.has(targetUrl)) return tsPromises.get(targetUrl);
+
+    if (isCoolingDown(targetUrl)) {
+        const stale = tsCache.getStale(targetUrl);
+        if (stale) return stale;
+        throw new Error('Origin segment on cooldown');
+    }
+
+    const promise = (async () => {
+        try {
+            const response = await axiosInstance.get(targetUrl, {
+                headers: getHeadersForUrl(targetUrl),
+                responseType: 'arraybuffer',
+                validateStatus: status => status >= 200 && status < 300
+            });
+
+            const result = {
+                buffer: Buffer.from(response.data),
+                contentType: response.headers['content-type'] || 'video/MP2T'
+            };
+
+            tsCache.set(targetUrl, result, 45000);
+            return result;
+
+        } catch (error) {
+            setCooldown(targetUrl, 3000);
+            const stale = tsCache.getStale(targetUrl);
+            if (stale) return stale;
+            throw error;
+        } finally {
+            tsPromises.delete(targetUrl);
+        }
+    })();
+
+    tsPromises.set(targetUrl, promise);
+    return promise;
+}
+
+// ==========================================
+// 6. المسارات
 // ==========================================
 
 app.get('/generate', (req, res) => {
@@ -222,8 +272,7 @@ app.get('/generate', (req, res) => {
     if (!targetUrl) return res.status(400).send('Please provide a ?url=...');
 
     const token = generateShortToken(targetUrl);
-    const hostProtocol = req.headers['x-forwarded-proto'] || req.protocol;
-    const shortLink = `${hostProtocol}://${req.get('host')}/play/${token}/manifest.m3u8`;
+    const shortLink = `${req.protocol}://${req.get('host')}/play/${token}/manifest.m3u8`;
 
     res.send(`
         <html dir="rtl" style="background:#0f172a;color:#fff;font-family:sans-serif;text-align:center;padding-top:50px;">
@@ -262,20 +311,14 @@ app.get('/direct/manifest.m3u8', async (req, res) => {
     }
 });
 
-// بث التمرير المباشر لقطع TS لمنع استهلاك الرام وسرعة الاستجابة
 app.get('/proxy', async (req, res) => {
     const targetUrl = req.query.url;
     if (!targetUrl) return res.status(400).send('No URL provided');
 
     try {
-        const response = await axiosInstance.get(targetUrl, {
-            headers: getHeadersForUrl(targetUrl),
-            responseType: 'stream',
-            validateStatus: status => status >= 200 && status < 300
-        });
-
-        res.set('Content-Type', response.headers['content-type'] || 'video/MP2T');
-        response.data.pipe(res);
+        const segment = await fetchSegment(targetUrl);
+        res.set('Content-Type', segment.contentType);
+        res.send(segment.buffer);
     } catch (error) {
         res.status(500).send('Proxy Segment Error');
     }
