@@ -3,88 +3,46 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// انتحال شخصية مشغل VLC لتخطي حظر سيرفرات Xtream
+// انتحال شخصية مشغل شرعي لتخطي الحماية المبدئية
 const IPTV_USER_AGENT = 'VLC/3.0.18 LibVLC/3.0.18';
 
-// مسار تشغيل ملف M3U8 مباشرة
-// الاستخدام: /direct?url=http://orien.live/...
-app.get('/direct', async (req, res) => {
+app.get('/play', async (req, res) => {
     const targetUrl = req.query.url;
     if (!targetUrl) return res.status(400).send('Please provide ?url=...');
 
     try {
-        // 1. جلب الرابط الأول، وترك Axios يتبع التحويل (Redirect) تلقائياً للرابط الثاني
+        // 1. الدخول للرابط الأول وتتبع التحويلات تلقائياً
         const response = await axios.get(targetUrl, {
             headers: {
                 'User-Agent': IPTV_USER_AGENT,
                 'Accept': '*/*'
             },
-            maxRedirects: 10 // السماح بتتبع التحويلات
+            maxRedirects: 5, // السماح بتتبع التحويل وصولاً للـ IP
+            responseType: 'stream' // مهم جداً: استخدام stream لمنع تحميل الملف بالكامل على سيرفرك
         });
 
-        // 2. الحصول على الرابط النهائي بعد التحويل (رقم الـ IP مثل 89.33.13.177)
+        // 2. اقتناص الرابط النهائي (الذي يحتوي على Token و IP)
         const finalUrl = response.request.res.responseUrl || response.config.url || targetUrl;
-        const baseUrl = new URL(finalUrl).origin; // النتيجة ستكون السيرفر الأساسي
 
-        // 3. قراءة الملف وتعديل الروابط داخله
-        const lines = response.data.split('\n');
-        const rewrittenLines = lines.map(line => {
-            const trimmed = line.trim();
-            
-            // ترك أسطر الإعدادات كما هي
-            if (!trimmed || trimmed.startsWith('#')) return line; 
+        // 3. إيقاف الاتصال فوراً من طرف سيرفرنا لأننا حصلنا على ما نريد (الرابط النهائي)
+        response.data.destroy();
 
-            // تكوين الرابط المطلق لملف الـ TS بناءً على السيرفر النهائي
-            let absoluteLink = trimmed;
-            if (trimmed.startsWith('/')) {
-                absoluteLink = baseUrl + trimmed;
-            } else if (!trimmed.startsWith('http')) {
-                absoluteLink = new URL(trimmed, finalUrl).href;
-            }
-
-            // توجيه طلبات الفيديو (TS) إلى السيرفر الخاص بنا
-            const hostProtocol = req.headers['x-forwarded-proto'] || req.protocol;
-            return `${hostProtocol}://${req.get('host')}/proxy?url=${encodeURIComponent(absoluteLink)}`;
-        });
-
-        // إرسال الملف للمشغل
-        res.set('Content-Type', 'application/vnd.apple.mpegurl');
-        res.send(rewrittenLines.join('\n'));
+        // 4. توجيه مشغل المستخدم (ExoPlayer) للرابط المباشر
+        // HTTP 302 تعني (Redirect / تحويل مؤقت)
+        res.redirect(302, finalUrl);
 
     } catch (error) {
-        console.error('M3U8 Fetch Error:', error.message);
-        res.status(500).send('Error fetching stream manifest');
-    }
-});
-
-// مسار جلب قطع الفيديو (TS) وتمريرها للمشغل
-app.get('/proxy', async (req, res) => {
-    const targetUrl = req.query.url;
-    if (!targetUrl) return res.status(400).send('No URL provided');
-
-    try {
-        // استخدام تقنية Stream مهم جداً لتجنب استهلاك مساحة الرام وانهيار السيرفر
-        const response = await axios.get(targetUrl, {
-            headers: {
-                'User-Agent': IPTV_USER_AGENT,
-                'Accept': '*/*'
-            },
-            responseType: 'stream'
-        });
-
-        // تمرير نوع الملف الصحيح
-        res.set('Content-Type', response.headers['content-type'] || 'video/MP2T');
+        // في حال كان الرابط محمي جداً أو لا يعمل
+        if (error.response && error.response.status === 302 && error.response.headers.location) {
+            // بعض السيرفرات ترفض تتبع التحويل عبر Axios، فنلتقط مسار التحويل من الـ Header ونحوله
+            return res.redirect(302, error.response.headers.location);
+        }
         
-        // تدفق البيانات (Pipe) مباشرة إلى المشغل (VLC, ExoPlayer, etc)
-        response.data.pipe(res);
-
-    } catch (error) {
-        console.error('TS Segment Error:', error.message);
-        res.status(500).send('Error proxying video segment');
+        console.error('Resolver Error:', error.message);
+        res.status(500).send('Error resolving stream URL');
     }
 });
 
-// تشغيل السيرفر
 app.listen(PORT, () => {
-    console.log(`Direct IPTV Proxy running on port ${PORT}`);
+    console.log(`Smart IPTV Resolver running on port ${PORT}`);
 });
